@@ -1,0 +1,610 @@
+/* http://meyerweb.com/eric/tools/css/reset/ */
+/* v1.0 | 20080212 */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+/* remember to define focus styles! */
+:focus {
+  outline: 0; }
+
+/* remember to highlight inserts somehow! */
+ins {
+  text-decoration: none; }
+
+del {
+  text-decoration: line-through; }
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+html {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(0deg, black, #000032); }
+
+#wrapper {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  /*.negative-layer-5 {
+    .layer-1 {
+      @include center;
+      //animation-name: rotate;
+      animation-duration: $negative-2-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $negative-5-layer-size;
+        height: $negative-5-layer-size;
+        border: 4px solid white;
+        position: absolute;
+      }
+      .square-2 {
+        width: $negative-5-layer-size;
+        height: $negative-5-layer-size;
+        border: 4px solid white;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      //animation-name: rotateOpposite;
+      animation-duration: $negative-5-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $negative-5-layer-size;
+        height: $negative-5-layer-size;
+        border: 4px solid white;
+        position: absolute;
+      }
+      .square-2 {
+        width: $negative-5-layer-size;
+        height: $negative-5-layer-size;
+        border: 4px solid white;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .negative-layer-4 {
+    .layer-1 {
+      @include center;
+      animation-name: rotate;
+      animation-duration: $negative-4-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $negative-4-layer-size;
+        height: $negative-4-layer-size;
+        border: 4px solid white;
+        position: absolute;
+      }
+      .square-2 {
+        width: $negative-4-layer-size;
+        height: $negative-4-layer-size;
+        border: 4px solid white;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      animation-name: rotateOpposite;
+      animation-duration: $negative-4-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $negative-4-layer-size;
+        height: $negative-4-layer-size;
+        border: 4px solid white;
+        position: absolute;
+      }
+      .square-2 {
+        width: $negative-4-layer-size;
+        height: $negative-4-layer-size;
+        border: 4px solid white;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .negative-layer-3 {
+    .layer-1 {
+      @include center;
+      animation-name: rotateOpposite;
+      animation-duration: $negative-3-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $negative-3-layer-size;
+        height: $negative-3-layer-size;
+        border: 4px solid white;
+        position: absolute;
+      }
+      .square-2 {
+        width: $negative-3-layer-size;
+        height: $negative-3-layer-size;
+        border: 4px solid white;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      animation-name: rotate;
+      animation-duration: $negative-3-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $negative-3-layer-size;
+        height: $negative-3-layer-size;
+        border: 4px solid white;
+        position: absolute;
+      }
+      .square-2 {
+        width: $negative-3-layer-size;
+        height: $negative-3-layer-size;
+        border: 4px solid white;
+        transform: rotate(45deg);
+      }
+    }
+  }*/ }
+  #wrapper .negative-layer-2 .layer-1 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotate;
+    animation-duration: 40s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .negative-layer-2 .layer-1 .square-1 {
+      width: 1430px;
+      height: 1430px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .negative-layer-2 .layer-1 .square-2 {
+      width: 1430px;
+      height: 1430px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .negative-layer-2 .layer-2 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotateOpposite;
+    animation-duration: 40s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .negative-layer-2 .layer-2 .square-1 {
+      width: 1430px;
+      height: 1430px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .negative-layer-2 .layer-2 .square-2 {
+      width: 1430px;
+      height: 1430px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .negative-layer-1 .layer-1 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotateOpposite;
+    animation-duration: 50s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .negative-layer-1 .layer-1 .square-1 {
+      width: 1008px;
+      height: 1008px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .negative-layer-1 .layer-1 .square-2 {
+      width: 1008px;
+      height: 1008px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .negative-layer-1 .layer-2 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotate;
+    animation-duration: 50s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .negative-layer-1 .layer-2 .square-1 {
+      width: 1008px;
+      height: 1008px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .negative-layer-1 .layer-2 .square-2 {
+      width: 1008px;
+      height: 1008px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .zero-layer .layer-1 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotate;
+    animation-duration: 60s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .zero-layer .layer-1 .square-1 {
+      width: 710px;
+      height: 710px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .zero-layer .layer-1 .square-2 {
+      width: 710px;
+      height: 710px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .zero-layer .layer-2 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotateOpposite;
+    animation-duration: 60s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .zero-layer .layer-2 .square-1 {
+      width: 710px;
+      height: 710px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .zero-layer .layer-2 .square-2 {
+      width: 710px;
+      height: 710px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .first-layer .layer-1 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotateOpposite;
+    animation-duration: 70s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .first-layer .layer-1 .square-1 {
+      width: 500px;
+      height: 500px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .first-layer .layer-1 .square-2 {
+      width: 500px;
+      height: 500px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .first-layer .layer-2 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotate;
+    animation-duration: 70s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .first-layer .layer-2 .square-1 {
+      width: 500px;
+      height: 500px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .first-layer .layer-2 .square-2 {
+      width: 500px;
+      height: 500px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .second-layer .layer-1 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotate;
+    animation-duration: 80s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .second-layer .layer-1 .square-1 {
+      width: 350px;
+      height: 350px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .second-layer .layer-1 .square-2 {
+      width: 350px;
+      height: 350px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .second-layer .layer-2 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotateOpposite;
+    animation-duration: 80s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .second-layer .layer-2 .square-1 {
+      width: 350px;
+      height: 350px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .second-layer .layer-2 .square-2 {
+      width: 350px;
+      height: 350px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .third-layer .layer-1 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotateOpposite;
+    animation-duration: 90s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .third-layer .layer-1 .square-1 {
+      width: 245px;
+      height: 245px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .third-layer .layer-1 .square-2 {
+      width: 245px;
+      height: 245px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .third-layer .layer-2 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotate;
+    animation-duration: 90s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .third-layer .layer-2 .square-1 {
+      width: 245px;
+      height: 245px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .third-layer .layer-2 .square-2 {
+      width: 245px;
+      height: 245px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .fourth-layer .layer-1 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotate;
+    animation-duration: 100s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .fourth-layer .layer-1 .square-1 {
+      width: 170px;
+      height: 170px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .fourth-layer .layer-1 .square-2 {
+      width: 170px;
+      height: 170px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .fourth-layer .layer-2 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotateOpposite;
+    animation-duration: 100s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .fourth-layer .layer-2 .square-1 {
+      width: 170px;
+      height: 170px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .fourth-layer .layer-2 .square-2 {
+      width: 170px;
+      height: 170px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .fifth-layer .layer-1 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotateOpposite;
+    animation-duration: 110s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .fifth-layer .layer-1 .square-1 {
+      width: 115px;
+      height: 115px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .fifth-layer .layer-1 .square-2 {
+      width: 115px;
+      height: 115px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .fifth-layer .layer-2 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotate;
+    animation-duration: 110s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .fifth-layer .layer-2 .square-1 {
+      width: 115px;
+      height: 115px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .fifth-layer .layer-2 .square-2 {
+      width: 115px;
+      height: 115px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .sixth-layer .layer-1 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotate;
+    animation-duration: 120s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .sixth-layer .layer-1 .square-1 {
+      width: 75px;
+      height: 75px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .sixth-layer .layer-1 .square-2 {
+      width: 75px;
+      height: 75px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .sixth-layer .layer-2 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotateOpposite;
+    animation-duration: 120s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .sixth-layer .layer-2 .square-1 {
+      width: 75px;
+      height: 75px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .sixth-layer .layer-2 .square-2 {
+      width: 75px;
+      height: 75px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .seventh-layer .layer-1 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotateOpposite;
+    animation-duration: 130s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .seventh-layer .layer-1 .square-1 {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .seventh-layer .layer-1 .square-2 {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .seventh-layer .layer-2 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotate;
+    animation-duration: 130s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .seventh-layer .layer-2 .square-1 {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .seventh-layer .layer-2 .square-2 {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .eigth-layer .layer-1 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotate;
+    animation-duration: 140s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .eigth-layer .layer-1 .square-1 {
+      width: 30px;
+      height: 30px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .eigth-layer .layer-1 .square-2 {
+      width: 30px;
+      height: 30px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+  #wrapper .eigth-layer .layer-2 {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation-name: rotateOpposite;
+    animation-duration: 140s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+    #wrapper .eigth-layer .layer-2 .square-1 {
+      width: 30px;
+      height: 30px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      position: absolute; }
+    #wrapper .eigth-layer .layer-2 .square-2 {
+      width: 30px;
+      height: 30px;
+      border: 4px solid rgba(255, 255, 200, 0.8);
+      transform: rotate(45deg); }
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg); }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes rotateOpposite {
+  0% {
+    transform: translate(-50%, -50%) rotate(360deg); }
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg); } }
+
+/*# sourceMappingURL=main.css.map */

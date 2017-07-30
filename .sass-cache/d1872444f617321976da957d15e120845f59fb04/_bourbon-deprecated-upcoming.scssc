@@ -1,0 +1,5300 @@
+3.4.22 (Selective Steve)
+0b922e87aa21e2b1a76e837d93ba74671907f4c6
+o:Sass::Tree::RootNode:@template"»8// The following features have been deprecated and will be removed in the next MAJOR version release
+
+@mixin inline-block {
+  display: inline-block;
+
+  @warn "The inline-block mixin is deprecated and will be removed in the next major version release";
+}
+
+@mixin button ($style: simple, $base-color: #4294f0, $text-size: inherit, $padding: 7px 18px) {
+
+  @if type-of($style) == string and type-of($base-color) == color {
+    @include buttonstyle($style, $base-color, $text-size, $padding);
+  }
+
+  @if type-of($style) == string and type-of($base-color) == number {
+    $padding: $text-size;
+    $text-size: $base-color;
+    $base-color: #4294f0;
+
+    @if $padding == inherit {
+      $padding: 7px 18px;
+    }
+
+    @include buttonstyle($style, $base-color, $text-size, $padding);
+  }
+
+  @if type-of($style) == color and type-of($base-color) == color {
+    $base-color: $style;
+    $style: simple;
+    @include buttonstyle($style, $base-color, $text-size, $padding);
+  }
+
+  @if type-of($style) == color and type-of($base-color) == number {
+    $padding: $text-size;
+    $text-size: $base-color;
+    $base-color: $style;
+    $style: simple;
+
+    @if $padding == inherit {
+      $padding: 7px 18px;
+    }
+
+    @include buttonstyle($style, $base-color, $text-size, $padding);
+  }
+
+  @if type-of($style) == number {
+    $padding: $base-color;
+    $text-size: $style;
+    $base-color: #4294f0;
+    $style: simple;
+
+    @if $padding == #4294f0 {
+      $padding: 7px 18px;
+    }
+
+    @include buttonstyle($style, $base-color, $text-size, $padding);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  @warn "The button mixin is deprecated and will be removed in the next major version release";
+}
+
+// Selector Style Button
+@mixin buttonstyle($type, $b-color, $t-size, $pad) {
+  // Grayscale button
+  @if $type == simple and $b-color == grayscale($b-color) {
+    @include simple($b-color, true, $t-size, $pad);
+  }
+
+  @if $type == shiny and $b-color == grayscale($b-color) {
+    @include shiny($b-color, true, $t-size, $pad);
+  }
+
+  @if $type == pill and $b-color == grayscale($b-color) {
+    @include pill($b-color, true, $t-size, $pad);
+  }
+
+  @if $type == flat and $b-color == grayscale($b-color) {
+    @include flat($b-color, true, $t-size, $pad);
+  }
+
+  // Colored button
+  @if $type == simple {
+    @include simple($b-color, false, $t-size, $pad);
+  }
+
+  @else if $type == shiny {
+    @include shiny($b-color, false, $t-size, $pad);
+  }
+
+  @else if $type == pill {
+    @include pill($b-color, false, $t-size, $pad);
+  }
+
+  @else if $type == flat {
+    @include flat($b-color, false, $t-size, $pad);
+  }
+}
+
+// Simple Button
+@mixin simple($base-color, $grayscale: false, $textsize: inherit, $padding: 7px 18px) {
+  $color:         hsl(0, 0, 100%);
+  $border:        adjust-color($base-color, $saturation:  9%,  $lightness: -14%);
+  $inset-shadow:  adjust-color($base-color, $saturation: -8%,  $lightness:  15%);
+  $stop-gradient: adjust-color($base-color, $saturation:  9%,  $lightness: -11%);
+  $text-shadow:   adjust-color($base-color, $saturation:  15%, $lightness: -18%);
+
+  @if is-light($base-color) {
+    $color:       hsl(0, 0, 20%);
+    $text-shadow: adjust-color($base-color, $saturation: 10%, $lightness: 4%);
+  }
+
+  @if $grayscale == true {
+    $border:        grayscale($border);
+    $inset-shadow:  grayscale($inset-shadow);
+    $stop-gradient: grayscale($stop-gradient);
+    $text-shadow:   grayscale($text-shadow);
+  }
+
+  border: 1px solid $border;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 0 $inset-shadow;
+  color: $color;
+  display: inline-block;
+  font-size: $textsize;
+  font-weight: bold;
+  @include linear-gradient ($base-color, $stop-gradient);
+  padding: $padding;
+  text-decoration: none;
+  text-shadow: 0 1px 0 $text-shadow;
+  background-clip: padding-box;
+
+  &:hover:not(:disabled) {
+    $base-color-hover:    adjust-color($base-color, $saturation: -4%, $lightness: -5%);
+    $inset-shadow-hover:  adjust-color($base-color, $saturation: -7%, $lightness:  5%);
+    $stop-gradient-hover: adjust-color($base-color, $saturation:  8%, $lightness: -14%);
+
+    @if $grayscale == true {
+      $base-color-hover:    grayscale($base-color-hover);
+      $inset-shadow-hover:  grayscale($inset-shadow-hover);
+      $stop-gradient-hover: grayscale($stop-gradient-hover);
+    }
+
+    @include linear-gradient ($base-color-hover, $stop-gradient-hover);
+
+    box-shadow: inset 0 1px 0 0 $inset-shadow-hover;
+    cursor: pointer;
+  }
+
+  &:active:not(:disabled),
+  &:focus:not(:disabled) {
+    $border-active:       adjust-color($base-color, $saturation: 9%, $lightness: -14%);
+    $inset-shadow-active: adjust-color($base-color, $saturation: 7%, $lightness: -17%);
+
+    @if $grayscale == true {
+      $border-active:       grayscale($border-active);
+      $inset-shadow-active: grayscale($inset-shadow-active);
+    }
+
+    border: 1px solid $border-active;
+    box-shadow: inset 0 0 8px 4px $inset-shadow-active, inset 0 0 8px 4px $inset-shadow-active;
+  }
+}
+
+// Shiny Button
+@mixin shiny($base-color, $grayscale: false, $textsize: inherit, $padding: 7px 18px) {
+  $color:         hsl(0, 0, 100%);
+  $border:        adjust-color($base-color, $red: -117, $green: -111, $blue: -81);
+  $border-bottom: adjust-color($base-color, $red: -126, $green: -127, $blue: -122);
+  $fourth-stop:   adjust-color($base-color, $red: -79,  $green: -70,  $blue: -46);
+  $inset-shadow:  adjust-color($base-color, $red:  37,  $green:  29,  $blue:  12);
+  $second-stop:   adjust-color($base-color, $red: -56,  $green: -50,  $blue: -33);
+  $text-shadow:   adjust-color($base-color, $red: -140, $green: -141, $blue: -114);
+  $third-stop:    adjust-color($base-color, $red: -86,  $green: -75,  $blue: -48);
+
+  @if is-light($base-color) {
+    $color:       hsl(0, 0, 20%);
+    $text-shadow: adjust-color($base-color, $saturation: 10%, $lightness: 4%);
+  }
+
+  @if $grayscale == true {
+    $border:        grayscale($border);
+    $border-bottom: grayscale($border-bottom);
+    $fourth-stop:   grayscale($fourth-stop);
+    $inset-shadow:  grayscale($inset-shadow);
+    $second-stop:   grayscale($second-stop);
+    $text-shadow:   grayscale($text-shadow);
+    $third-stop:    grayscale($third-stop);
+  }
+
+  @include linear-gradient(top, $base-color 0%, $second-stop 50%, $third-stop 50%, $fourth-stop 100%);
+
+  border: 1px solid $border;
+  border-bottom: 1px solid $border-bottom;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 0 0 $inset-shadow;
+  color: $color;
+  display: inline-block;
+  font-size: $textsize;
+  font-weight: bold;
+  padding: $padding;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 -1px 1px $text-shadow;
+
+  &:hover:not(:disabled) {
+    $first-stop-hover:  adjust-color($base-color, $red: -13, $green: -15, $blue: -18);
+    $second-stop-hover: adjust-color($base-color, $red: -66, $green: -62, $blue: -51);
+    $third-stop-hover:  adjust-color($base-color, $red: -93, $green: -85, $blue: -66);
+    $fourth-stop-hover: adjust-color($base-color, $red: -86, $green: -80, $blue: -63);
+
+    @if $grayscale == true {
+      $first-stop-hover:  grayscale($first-stop-hover);
+      $second-stop-hover: grayscale($second-stop-hover);
+      $third-stop-hover:  grayscale($third-stop-hover);
+      $fourth-stop-hover: grayscale($fourth-stop-hover);
+    }
+
+    @include linear-gradient(top, $first-stop-hover  0%,
+                                  $second-stop-hover 50%,
+                                  $third-stop-hover  50%,
+                                  $fourth-stop-hover 100%);
+    cursor: pointer;
+  }
+
+  &:active:not(:disabled),
+  &:focus:not(:disabled) {
+    $inset-shadow-active: adjust-color($base-color, $red: -111, $green: -116, $blue: -122);
+
+    @if $grayscale == true {
+      $inset-shadow-active: grayscale($inset-shadow-active);
+    }
+
+    box-shadow: inset 0 0 20px 0 $inset-shadow-active;
+  }
+}
+
+// Pill Button
+@mixin pill($base-color, $grayscale: false, $textsize: inherit, $padding: 7px 18px) {
+  $color:         hsl(0, 0, 100%);
+  $border-bottom: adjust-color($base-color, $hue:  8, $saturation: -11%, $lightness: -26%);
+  $border-sides:  adjust-color($base-color, $hue:  4, $saturation: -21%, $lightness: -21%);
+  $border-top:    adjust-color($base-color, $hue: -1, $saturation: -30%, $lightness: -15%);
+  $inset-shadow:  adjust-color($base-color, $hue: -1, $saturation: -1%,  $lightness:  7%);
+  $stop-gradient: adjust-color($base-color, $hue:  8, $saturation:  14%, $lightness: -10%);
+  $text-shadow:   adjust-color($base-color, $hue:  5, $saturation: -19%, $lightness: -15%);
+
+  @if is-light($base-color) {
+    $color:       hsl(0, 0, 20%);
+    $text-shadow: adjust-color($base-color, $saturation: 10%, $lightness: 4%);
+  }
+
+  @if $grayscale == true {
+    $border-bottom: grayscale($border-bottom);
+    $border-sides:  grayscale($border-sides);
+    $border-top:    grayscale($border-top);
+    $inset-shadow:  grayscale($inset-shadow);
+    $stop-gradient: grayscale($stop-gradient);
+    $text-shadow:   grayscale($text-shadow);
+  }
+
+  border: 1px solid $border-top;
+  border-color: $border-top $border-sides $border-bottom;
+  border-radius: 16px;
+  box-shadow: inset 0 1px 0 0 $inset-shadow;
+  color: $color;
+  display: inline-block;
+  font-size: $textsize;
+  font-weight: normal;
+  line-height: 1;
+  @include linear-gradient ($base-color, $stop-gradient);
+  padding: $padding;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 -1px 1px $text-shadow;
+  background-clip: padding-box;
+
+  &:hover:not(:disabled) {
+    $base-color-hover:    adjust-color($base-color,                                $lightness: -4.5%);
+    $border-bottom:       adjust-color($base-color, $hue:  8, $saturation:  13.5%, $lightness: -32%);
+    $border-sides:        adjust-color($base-color, $hue:  4, $saturation: -2%,    $lightness: -27%);
+    $border-top:          adjust-color($base-color, $hue: -1, $saturation: -17%,   $lightness: -21%);
+    $inset-shadow-hover:  adjust-color($base-color,           $saturation: -1%,    $lightness:  3%);
+    $stop-gradient-hover: adjust-color($base-color, $hue:  8, $saturation: -4%,    $lightness: -15.5%);
+    $text-shadow-hover:   adjust-color($base-color, $hue:  5, $saturation: -5%,    $lightness: -22%);
+
+    @if $grayscale == true {
+      $base-color-hover:    grayscale($base-color-hover);
+      $border-bottom:       grayscale($border-bottom);
+      $border-sides:        grayscale($border-sides);
+      $border-top:          grayscale($border-top);
+      $inset-shadow-hover:  grayscale($inset-shadow-hover);
+      $stop-gradient-hover: grayscale($stop-gradient-hover);
+      $text-shadow-hover:   grayscale($text-shadow-hover);
+    }
+
+    @include linear-gradient ($base-color-hover, $stop-gradient-hover);
+
+    background-clip: padding-box;
+    border: 1px solid $border-top;
+    border-color: $border-top $border-sides $border-bottom;
+    box-shadow: inset 0 1px 0 0 $inset-shadow-hover;
+    cursor: pointer;
+    text-shadow: 0 -1px 1px $text-shadow-hover;
+  }
+
+  &:active:not(:disabled),
+  &:focus:not(:disabled) {
+    $active-color:         adjust-color($base-color, $hue: 4,  $saturation: -12%,  $lightness: -10%);
+    $border-active:        adjust-color($base-color, $hue: 6,  $saturation: -2.5%, $lightness: -30%);
+    $border-bottom-active: adjust-color($base-color, $hue: 11, $saturation:  6%,   $lightness: -31%);
+    $inset-shadow-active:  adjust-color($base-color, $hue: 9,  $saturation:  2%,   $lightness: -21.5%);
+    $text-shadow-active:   adjust-color($base-color, $hue: 5,  $saturation: -12%,  $lightness: -21.5%);
+
+    @if $grayscale == true {
+      $active-color:         grayscale($active-color);
+      $border-active:        grayscale($border-active);
+      $border-bottom-active: grayscale($border-bottom-active);
+      $inset-shadow-active:  grayscale($inset-shadow-active);
+      $text-shadow-active:   grayscale($text-shadow-active);
+    }
+
+    background: $active-color;
+    border: 1px solid $border-active;
+    border-bottom: 1px solid $border-bottom-active;
+    box-shadow: inset 0 0 6px 3px $inset-shadow-active;
+    text-shadow: 0 -1px 1px $text-shadow-active;
+  }
+}
+
+// Flat Button
+@mixin flat($base-color, $grayscale: false, $textsize: inherit, $padding: 7px 18px) {
+  $color:         hsl(0, 0, 100%);
+
+  @if is-light($base-color) {
+    $color:       hsl(0, 0, 20%);
+  }
+
+  background-color: $base-color;
+  border-radius: 3px;
+  border: 0;
+  color: $color;
+  display: inline-block;
+  font-size: $textsize;
+  font-weight: bold;
+  padding: $padding;
+  text-decoration: none;
+  background-clip: padding-box;
+
+  &:hover:not(:disabled){
+    $base-color-hover:    adjust-color($base-color, $saturation: 4%, $lightness: 5%);
+
+    @if $grayscale == true {
+      $base-color-hover: grayscale($base-color-hover);
+    }
+
+    background-color: $base-color-hover;
+    cursor: pointer;
+  }
+
+  &:active:not(:disabled),
+  &:focus:not(:disabled) {
+    $base-color-active: adjust-color($base-color, $saturation: -4%, $lightness: -5%);
+
+    @if $grayscale == true {
+      $base-color-active: grayscale($base-color-active);
+    }
+
+    background-color: $base-color-active;
+    cursor: pointer;
+  }
+}
+
+// Flexible grid
+@function flex-grid($columns, $container-columns: $fg-max-columns) {
+  $width: $columns * $fg-column + ($columns - 1) * $fg-gutter;
+  $container-width: $container-columns * $fg-column + ($container-columns - 1) * $fg-gutter;
+  @return percentage($width / $container-width);
+
+  @warn "The flex-grid function is deprecated and will be removed in the next major version release";
+}
+
+// Flexible gutter
+@function flex-gutter($container-columns: $fg-max-columns, $gutter: $fg-gutter) {
+  $container-width: $container-columns * $fg-column + ($container-columns - 1) * $fg-gutter;
+  @return percentage($gutter / $container-width);
+
+  @warn "The flex-gutter function is deprecated and will be removed in the next major version release";
+}
+
+@function grid-width($n) {
+  @return $n * $gw-column + ($n - 1) * $gw-gutter;
+
+  @warn "The grid-width function is deprecated and will be removed in the next major version release";
+}
+
+@function golden-ratio($value, $increment) {
+  @return modular-scale($increment, $value, $ratio: $golden);
+
+  @warn "The golden-ratio function is deprecated and will be removed in the next major version release. Please use the modular-scale function, instead.";
+}
+
+@mixin box-sizing($box) {
+  @include prefixer(box-sizing, $box, webkit moz spec);
+
+  @warn "The box-sizing mixin is deprecated and will be removed in the next major version release. This property can now be used un-prefixed.";
+}
+:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@linei:@offseti:@start_poso;
+;i;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@options{ :@has_childrenT:@filename0:@children[o:Sass::Tree::CommentNode;o;	;	o;
+;i;ij;o;
+;i;i;@
+;@;@:@value["l/* The following features have been deprecated and will be removed in the next MAJOR version release */;0;[ ;i:
+@type:silento:Sass::Tree::MixinDefNode:
+@name"inline-block;o;	;	o;
+;i;i;o;
+;i;i;@
+;@:@splat0;@;T:
+@args[ ;0;[o:Sass::Tree::PropNode:@name_source_rangeo;	;	o;
+;i	;i;o;
+;i	;i;@
+;@;["display:
+@tabsi ;o;	;	o;
+;i	;i;@#;@
+;@;@;o: Sass::Script::Tree::Literal;o;	;	o;
+;i	;i;o;
+;i	;i;@
+;@;o: Sass::Script::Value::String	;@:"@deprecated_interp_equivalent0;"inline-block;:identifier;i	;0;[ :@prop_syntax:new:@value_source_rangeo;	;	@';o;
+;i	;i;@
+;@;i	o:Sass::Tree::WarnNode;o;	;	o;
+;i;ij;o;
+;i;i;@
+;@;@:
+@expro;%
+;o;	;	o;
+;i;ij;o;
+;i;i;@
+;@;o;&	;@;'0;"_The inline-block mixin is deprecated and will be removed in the next major version release;:string;@:@css_variable_warning0;i;0;[ ;i;io;;"button;o;	;	o;
+;i;id;o;
+;i;i;@
+;@; 0;@;T;![	[o:!Sass::Script::Tree::Variable;"
+style;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;@;@;/0;i:@underscored_name"
+styleo;%
+;o;	;	o;
+;i;i#;o;
+;i;i;@
+;@;o;&	;@;'0;"simple;;(;@;/0;i[o;0;"base-color;o;	;	o;
+;i;i0;o;
+;i;i%;@
+;@;@;@;/0;i;1"base_coloro;%
+;o;	;	o;
+;i;i9;o;
+;i;i2;@
+;@;o:Sass::Script::Value::Color	;@:@representation"#4294f0;0:@attrs{	:rediG:
+greeniî:	bluei:
+alphai;@;/0;i[o;0;"text-size;o;	;	o;
+;i;iE;o;
+;i;i;;@
+;@;@;@;/0;i;1"text_sizeo;%
+;o;	;	o;
+;i;iN;o;
+;i;iG;@
+;@;o;&	;@;'0;"inherit;;(;@;/0;i[o;0;"padding;o;	;	o;
+;i;iX;o;
+;i;iP;@
+;@;@;@;/0;i;1"paddingo:$Sass::Script::Tree::ListLiteral;o;	;	o;
+;i;ib;o;
+;i;iY;@
+;@;@:@separator:
+space;@;/0:@elements[o;%
+;o;	;	o;
+;i;i];o;
+;i;iZ;@
+;@;o: Sass::Script::Value::Number
+:@numerator_units["px:@original"7px;@;i:@denominator_units[ ;@;/0;io;%
+;o;	;	o;
+;i;ib;o;
+;i;i^;@
+;@;o;=
+;>["px;?"	18px;@;i;@[ ;@;/0;i;i;0;[u:Sass::Tree::IfNode[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@linei:@offsetiH:@start_poso;	;
+i;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o; ;o;	;o;	;
+i;iH;o;	;
+i;i*;@
+;@;o: Sass::Script::Tree::Literal
+;o;	;o;	;
+i;iG;o;	;
+i;iB;@
+;@:@valueo: Sass::Script::Value::String	:@options{ :"@deprecated_interp_equivalent0;"
+color:
+@type:identifier:@filename@:@css_variable_warning0;
+i;@;@:@operand1o: Sass::Script::Tree::Funcall:
+@name"type-of;o;	;o;	;
+i;i>;@;@
+;@:@splat0:@kwarg_splat0;@:
+@args[o:!Sass::Script::Tree::Variable;!"base-color;o;	;o;	;
+i;i=;o;	;
+i;i2;@
+;@;@;@;0;
+i:@underscored_name"base_color;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+i;0;
+i:@operator:eq;@;@;o; ;o;	;o;	;
+i;i&;@	;@
+;@;o;
+;o;	;o;	;
+i;i%;o;	;
+i;i;@
+;@;o;	;@;0;"string;;;@;0;
+i;@;@;o; ;!"type-of;o;	;o;	;
+i;i;@	;@
+;@;"0;#0;@;$[o;%;!"
+style;o;	;o;	;
+i;i;o;	;
+i;i;@
+;@;@;@;0;
+i;&"
+style;@;'o;(;)IC;*{ ;+[ ;,{ ;0;
+i;0;
+i;-;.;0;
+i;-:and0[o:Sass::Tree::MixinNode;!"buttonstyle;o;	;o;	;
+i;iI;o;	;
+i;i
+;@
+;@;"0;#0;@;$[	o;%;!"
+style;o;	;o;	;
+i;i%;o;	;
+i;i;@
+;@;@;@;0;
+i;&"
+styleo;%;!"base-color;o;	;o;	;
+i;i2;o;	;
+i;i';@
+;@;@;@;0;
+i;&"base_coloro;%;!"text-size;o;	;o;	;
+i;i>;o;	;
+i;i4;@
+;@;@;@;0;
+i;&"text_sizeo;%;!"padding;o;	;o;	;
+i;iH;o;	;
+i;i@;@
+;@;@;@;0;
+i;&"padding;0:@children[ ;'o;(;)IC;*{ ;+[ ;,{ ;
+iu;AL[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@linei:@offsetiI:@start_poso;	;
+i;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o; ;o;	;o;	;
+i;iI;o;	;
+i;i*;@
+;@;o: Sass::Script::Tree::Literal
+;o;	;o;	;
+i;iH;o;	;
+i;iB;@
+;@:@valueo: Sass::Script::Value::String	:@options{ :"@deprecated_interp_equivalent0;"number:
+@type:identifier:@filename@:@css_variable_warning0;
+i;@;@:@operand1o: Sass::Script::Tree::Funcall:
+@name"type-of;o;	;o;	;
+i;i>;@;@
+;@:@splat0:@kwarg_splat0;@:
+@args[o:!Sass::Script::Tree::Variable;!"base-color;o;	;o;	;
+i;i=;o;	;
+i;i2;@
+;@;@;@;0;
+i:@underscored_name"base_color;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+i;0;
+i:@operator:eq;@;@;o; ;o;	;o;	;
+i;i&;@	;@
+;@;o;
+;o;	;o;	;
+i;i%;o;	;
+i;i;@
+;@;o;	;@;0;"string;;;@;0;
+i;@;@;o; ;!"type-of;o;	;o;	;
+i;i;@	;@
+;@;"0;#0;@;$[o;%;!"
+style;o;	;o;	;
+i;i;o;	;
+i;i;@
+;@;@;@;0;
+i;&"
+style;@;'o;(;)IC;*{ ;+[ ;,{ ;0;
+i;0;
+i;-;.;0;
+i;-:and0[
+o:Sass::Tree::VariableNode;!"padding:@guarded0;o;	;o;	;
+i;i;o;	;
+i;i;@
+;@;@:
+@expro;%;!"text-size;o;	;o;	;
+i;i;o;	;
+i;i;@
+;@;@;@;0;
+i;&"text_size;0:@children[ ;
+i:@global0o;0;!"text-size;10;o;	;o;	;
+i;i!;o;	;
+i;i;@
+;@;@;2o;%;!"base-color;o;	;o;	;
+i;i!;o;	;
+i;i;@
+;@;@;@;0;
+i;&"base_color;0;3[ ;
+i;40o;0;!"base-color;10;o;	;o;	;
+i;i;o;	;
+i;i;@
+;@;@;2o;
+;o;	;o;	;
+i;i;o;	;
+i;i;@
+;@;o:Sass::Script::Value::Color	;@:@representation"#4294f0;0:@attrs{	:rediG:
+greeniî:	bluei:
+alphai;@;0;
+i;0;3[ ;
+i;40u:Sass::Tree::IfNode∫[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@linei:@offseti":@start_poso;	;
+i;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+i;i!;o;	;
+i;i;@
+;@:@valueo: Sass::Script::Value::String	:@options{ :"@deprecated_interp_equivalent0;"inherit:
+@type:identifier:@filename@:@css_variable_warning0;
+i;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"padding;o;	;o;	;
+i;i;@	;@
+;@;@;@;0;
+i:@underscored_name"padding;0;
+i:@operator:eq0[o:Sass::Tree::VariableNode;!"padding:@guarded0;o;	;o;	;
+i;i;o;	;
+i;i;@
+;@;@:
+@expro:$Sass::Script::Tree::ListLiteral;o;	;o;	;
+i;i;o;	;
+i;i;@
+;@;@:@separator:
+space;@;0:@elements[o;
+;o;	;o;	;
+i;i;o;	;
+i;i;@
+;@;o: Sass::Script::Value::Number
+:@numerator_units["px:@original"7px;@;i:@denominator_units[ ;@;0;
+io;
+;o;	;o;	;
+i;i;o;	;
+i;i;@
+;@;o;,
+;-["px;."	18px;@;i;/[ ;@;0;
+i;
+i;0:@children[ ;
+i:@global0o:Sass::Tree::MixinNode;!"buttonstyle;o;	;o;	;
+i;iI;o;	;
+i;i
+;@
+;@;"0;#0;@;$[	o;%;!"
+style;o;	;o;	;
+i;i%;o;	;
+i;i;@
+;@;@;@;0;
+i;&"
+styleo;%;!"base-color;o;	;o;	;
+i;i2;o;	;
+i;i';@
+;@;@;@;0;
+i;&"base_coloro;%;!"text-size;o;	;o;	;
+i;i>;o;	;
+i;i4;@
+;@;@;@;0;
+i;&"text_sizeo;%;!"padding;o;	;o;	;
+i;iH;o;	;
+i;i@;@
+;@;@;@;0;
+i;&"padding;0;3[ ;'o;(;)IC;*{ ;+[ ;,{ ;
+iu;Ap	[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@linei :@offsetiG:@start_poso;	;
+i ;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o; ;o;	;o;	;
+i ;iG;o;	;
+i ;i);@
+;@;o: Sass::Script::Tree::Literal
+;o;	;o;	;
+i ;iF;o;	;
+i ;iA;@
+;@:@valueo: Sass::Script::Value::String	:@options{ :"@deprecated_interp_equivalent0;"
+color:
+@type:identifier:@filename@:@css_variable_warning0;
+i ;@;@:@operand1o: Sass::Script::Tree::Funcall:
+@name"type-of;o;	;o;	;
+i ;i=;@;@
+;@:@splat0:@kwarg_splat0;@:
+@args[o:!Sass::Script::Tree::Variable;!"base-color;o;	;o;	;
+i ;i<;o;	;
+i ;i1;@
+;@;@;@;0;
+i :@underscored_name"base_color;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+i ;0;
+i :@operator:eq;@;@;o; ;o;	;o;	;
+i ;i%;@	;@
+;@;o;
+;o;	;o;	;
+i ;i$;o;	;
+i ;i;@
+;@;o;	;@;0;"
+color;;;@;0;
+i ;@;@;o; ;!"type-of;o;	;o;	;
+i ;i;@	;@
+;@;"0;#0;@;$[o;%;!"
+style;o;	;o;	;
+i ;i;o;	;
+i ;i;@
+;@;@;@;0;
+i ;&"
+style;@;'o;(;)IC;*{ ;+[ ;,{ ;0;
+i ;0;
+i ;-;.;0;
+i ;-:and0[o:Sass::Tree::VariableNode;!"base-color:@guarded0;o;	;o;	;
+i!;i;o;	;
+i!;i;@
+;@;@:
+@expro;%;!"
+style;o;	;o;	;
+i!;i;o;	;
+i!;i;@
+;@;@;@;0;
+i!;&"
+style;0:@children[ ;
+i!:@global0o;0;!"
+style;10;o;	;o;	;
+i";i;o;	;
+i";i;@
+;@;@;2o;
+;o;	;o;	;
+i";i;o;	;
+i";i;@
+;@;o;	;@;0;"simple;;;@;0;
+i";0;3[ ;
+i";40o:Sass::Tree::MixinNode;!"buttonstyle;o;	;o;	;
+i#;iI;o;	;
+i#;i
+;@
+;@;"0;#0;@;$[	o;%;!"
+style;o;	;o;	;
+i#;i%;o;	;
+i#;i;@
+;@;@;@;0;
+i#;&"
+styleo;%;!"base-color;o;	;o;	;
+i#;i2;o;	;
+i#;i';@
+;@;@;@;0;
+i#;&"base_coloro;%;!"text-size;o;	;o;	;
+i#;i>;o;	;
+i#;i4;@
+;@;@;@;0;
+i#;&"text_sizeo;%;!"padding;o;	;o;	;
+i#;iH;o;	;
+i#;i@;@
+;@;@;@;0;
+i#;&"padding;0;3[ ;'o;(;)IC;*{ ;+[ ;,{ ;
+i#u;Aï[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@linei&:@offsetiH:@start_poso;	;
+i&;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o; ;o;	;o;	;
+i&;iH;o;	;
+i&;i);@
+;@;o: Sass::Script::Tree::Literal
+;o;	;o;	;
+i&;iG;o;	;
+i&;iA;@
+;@:@valueo: Sass::Script::Value::String	:@options{ :"@deprecated_interp_equivalent0;"number:
+@type:identifier:@filename@:@css_variable_warning0;
+i&;@;@:@operand1o: Sass::Script::Tree::Funcall:
+@name"type-of;o;	;o;	;
+i&;i=;@;@
+;@:@splat0:@kwarg_splat0;@:
+@args[o:!Sass::Script::Tree::Variable;!"base-color;o;	;o;	;
+i&;i<;o;	;
+i&;i1;@
+;@;@;@;0;
+i&:@underscored_name"base_color;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+i&;0;
+i&:@operator:eq;@;@;o; ;o;	;o;	;
+i&;i%;@	;@
+;@;o;
+;o;	;o;	;
+i&;i$;o;	;
+i&;i;@
+;@;o;	;@;0;"
+color;;;@;0;
+i&;@;@;o; ;!"type-of;o;	;o;	;
+i&;i;@	;@
+;@;"0;#0;@;$[o;%;!"
+style;o;	;o;	;
+i&;i;o;	;
+i&;i;@
+;@;@;@;0;
+i&;&"
+style;@;'o;(;)IC;*{ ;+[ ;,{ ;0;
+i&;0;
+i&;-;.;0;
+i&;-:and0[o:Sass::Tree::VariableNode;!"padding:@guarded0;o;	;o;	;
+i';i;o;	;
+i';i;@
+;@;@:
+@expro;%;!"text-size;o;	;o;	;
+i';i;o;	;
+i';i;@
+;@;@;@;0;
+i';&"text_size;0:@children[ ;
+i':@global0o;0;!"text-size;10;o;	;o;	;
+i(;i!;o;	;
+i(;i;@
+;@;@;2o;%;!"base-color;o;	;o;	;
+i(;i!;o;	;
+i(;i;@
+;@;@;@;0;
+i(;&"base_color;0;3[ ;
+i(;40o;0;!"base-color;10;o;	;o;	;
+i);i;o;	;
+i);i;@
+;@;@;2o;%;!"
+style;o;	;o;	;
+i);i;o;	;
+i);i;@
+;@;@;@;0;
+i);&"
+style;0;3[ ;
+i);40o;0;!"
+style;10;o;	;o;	;
+i*;i;o;	;
+i*;i;@
+;@;@;2o;
+;o;	;o;	;
+i*;i;o;	;
+i*;i;@
+;@;o;	;@;0;"simple;;;@;0;
+i*;0;3[ ;
+i*;40u:Sass::Tree::IfNode∫[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@linei,:@offseti":@start_poso;	;
+i,;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+i,;i!;o;	;
+i,;i;@
+;@:@valueo: Sass::Script::Value::String	:@options{ :"@deprecated_interp_equivalent0;"inherit:
+@type:identifier:@filename@:@css_variable_warning0;
+i,;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"padding;o;	;o;	;
+i,;i;@	;@
+;@;@;@;0;
+i,:@underscored_name"padding;0;
+i,:@operator:eq0[o:Sass::Tree::VariableNode;!"padding:@guarded0;o;	;o;	;
+i-;i;o;	;
+i-;i;@
+;@;@:
+@expro:$Sass::Script::Tree::ListLiteral;o;	;o;	;
+i-;i;o;	;
+i-;i;@
+;@;@:@separator:
+space;@;0:@elements[o;
+;o;	;o;	;
+i-;i;o;	;
+i-;i;@
+;@;o: Sass::Script::Value::Number
+:@numerator_units["px:@original"7px;@;i:@denominator_units[ ;@;0;
+i-o;
+;o;	;o;	;
+i-;i;o;	;
+i-;i;@
+;@;o;,
+;-["px;."	18px;@;i;/[ ;@;0;
+i-;
+i-;0:@children[ ;
+i-:@global0o:Sass::Tree::MixinNode;!"buttonstyle;o;	;o;	;
+i0;iI;o;	;
+i0;i
+;@
+;@;"0;#0;@;$[	o;%;!"
+style;o;	;o;	;
+i0;i%;o;	;
+i0;i;@
+;@;@;@;0;
+i0;&"
+styleo;%;!"base-color;o;	;o;	;
+i0;i2;o;	;
+i0;i';@
+;@;@;@;0;
+i0;&"base_coloro;%;!"text-size;o;	;o;	;
+i0;i>;o;	;
+i0;i4;@
+;@;@;@;0;
+i0;&"text_sizeo;%;!"padding;o;	;o;	;
+i0;iH;o;	;
+i0;i@;@
+;@;@;@;0;
+i0;&"padding;0;3[ ;'o;(;)IC;*{ ;+[ ;,{ ;
+i0u;Ab[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@linei3:@offseti&:@start_poso;	;
+i3;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+i3;i%;o;	;
+i3;i;@
+;@:@valueo: Sass::Script::Value::String	:@options{ :"@deprecated_interp_equivalent0;"number:
+@type:identifier:@filename@:@css_variable_warning0;
+i3;@;@:@operand1o: Sass::Script::Tree::Funcall:
+@name"type-of;o;	;o;	;
+i3;i;@	;@
+;@:@splat0:@kwarg_splat0;@:
+@args[o:!Sass::Script::Tree::Variable;!"
+style;o;	;o;	;
+i3;i;o;	;
+i3;i;@
+;@;@;@;0;
+i3:@underscored_name"
+style;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+i3;0;
+i3:@operator:eq0[o:Sass::Tree::VariableNode;!"padding:@guarded0;o;	;o;	;
+i4;i;o;	;
+i4;i;@
+;@;@:
+@expro;%;!"base-color;o;	;o;	;
+i4;i;o;	;
+i4;i;@
+;@;@;@;0;
+i4;&"base_color;0:@children[ ;
+i4:@global0o;/;!"text-size;00;o;	;o;	;
+i5;i;o;	;
+i5;i;@
+;@;@;1o;%;!"
+style;o;	;o;	;
+i5;i;o;	;
+i5;i;@
+;@;@;@;0;
+i5;&"
+style;0;2[ ;
+i5;30o;/;!"base-color;00;o;	;o;	;
+i6;i;o;	;
+i6;i;@
+;@;@;1o;
+;o;	;o;	;
+i6;i;o;	;
+i6;i;@
+;@;o:Sass::Script::Value::Color	;@:@representation"#4294f0;0:@attrs{	:rediG:
+greeniî:	bluei:
+alphai;@;0;
+i6;0;2[ ;
+i6;30o;/;!"
+style;00;o;	;o;	;
+i7;i;o;	;
+i7;i;@
+;@;@;1o;
+;o;	;o;	;
+i7;i;o;	;
+i7;i;@
+;@;o;	;@;0;"simple;;;@;0;
+i7;0;2[ ;
+i7;30u:Sass::Tree::IfNode≈[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@linei9:@offseti":@start_poso;	;
+i9;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+i9;i!;o;	;
+i9;i;@
+;@:@valueo:Sass::Script::Value::Color	:@options{ :@representation"#4294f0;0:@attrs{	:rediG:
+greeniî:	bluei:
+alphai:@filename@:@css_variable_warning0;
+i9;@; @:@operand1o:!Sass::Script::Tree::Variable:
+@name"padding;o;	;o;	;
+i9;i;@	;@
+;@;@; @;!0;
+i9:@underscored_name"padding;!0;
+i9:@operator:eq0[o:Sass::Tree::VariableNode;$"padding:@guarded0;o;	;o;	;
+i:;i;o;	;
+i:;i;@
+;@;@:
+@expro:$Sass::Script::Tree::ListLiteral;o;	;o;	;
+i:;i;o;	;
+i:;i;@
+;@;@:@separator:
+space; @;!0:@elements[o;
+;o;	;o;	;
+i:;i;o;	;
+i:;i;@
+;@;o: Sass::Script::Value::Number
+:@numerator_units["px:@original"7px;@;i:@denominator_units[ ; @;!0;
+i:o;
+;o;	;o;	;
+i:;i;o;	;
+i:;i;@
+;@;o;/
+;0["px;1"	18px;@;i;2[ ; @;!0;
+i:;
+i:; 0:@children[ ;
+i::@global0o:Sass::Tree::MixinNode;!"buttonstyle;o;	;o;	;
+i=;iI;o;	;
+i=;i
+;@
+;@;"0;#0;@;$[	o;%;!"
+style;o;	;o;	;
+i=;i%;o;	;
+i=;i;@
+;@;@;@;0;
+i=;&"
+styleo;%;!"base-color;o;	;o;	;
+i=;i2;o;	;
+i=;i';@
+;@;@;@;0;
+i=;&"base_coloro;%;!"text-size;o;	;o;	;
+i=;i>;o;	;
+i=;i4;@
+;@;@;@;0;
+i=;&"text_sizeo;%;!"padding;o;	;o;	;
+i=;iH;o;	;
+i=;i@;@
+;@;@;@;0;
+i=;&"padding;0;2[ ;'o;(;)IC;*{ ;+[ ;,{ ;
+i=o:Sass::Tree::RuleNode;$i ;o;	;	o;
+;i@;i;o;
+;i@;i;@
+;@:@parsed_ruleso:"Sass::Selector::CommaSequence:@members[o:Sass::Selector::Sequence;E[o:#Sass::Selector::SimpleSequence;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o:Sass::Selector::Parent:@suffix0;0;i@o:Sass::Selector::Pseudo;"disabled:@selector0:	@arg0;0:@syntactic_type:
+class;i@;0:@subject0;i@:@sourceso;;{ ;i@;0;i@;@:@selector_source_rangeo;	;	o;
+;i@;i;@å;@
+;@;T:
+@rule["&:disabled;0;[o;";#o;	;	o;
+;iA;i;o;
+;iA;i
+;@
+;@;["cursor;$i ;o;	;	o;
+;iA;i;@£;@
+;@;@;o;%;o;	;	o;
+;iA;i;o;
+;iA;i;@
+;@;o;&	;@;'0;"not-allowed;;(;iA;0;[ ;);*;+o;	;	@ß;o;
+;iA;i;@
+;@;iAo;";#o;	;	o;
+;iB;i;o;
+;iB;i
+;@
+;@;["opacity;$i ;o;	;	o;
+;iB;i;@¥;@
+;@;@;o;%;o;	;	o;
+;iB;i;o;
+;iB;i;@
+;@;o;&	;@;'0;"0.5;;(;iB;0;[ ;);*;+o;	;	@∏;o;
+;iB;i;@
+;@;iB;i@o;,;o;	;	o;
+;iE;id;o;
+;iE;i;@
+;@;@;-o;%
+;o;	;	o;
+;iE;id;o;
+;iE;i;@
+;@;o;&	;@;'0;"YThe button mixin is deprecated and will be removed in the next major version release;;.;@;/0;iE;0;[ ;iE;io;;o;	;	o;
+;iH;i;o;
+;iH;i;@
+;@;@;[" /* Selector Style Button */;0;[ ;iH;;o;;"buttonstyle;o;	;	o;
+;iI;i9;o;
+;iI;i;@
+;@; 0;@;T;![	[o;0;"	type;o;	;	o;
+;iI;i;o;
+;iI;i;@
+;@;@;@;/0;iI;1"	type0[o;0;"b-color;o;	;	o;
+;iI;i(;o;
+;iI;i ;@
+;@;@;@;/0;iI;1"b_color0[o;0;"t-size;o;	;	o;
+;iI;i1;o;
+;iI;i*;@
+;@;@;@;/0;iI;1"t_size0[o;0;"pad;o;	;	o;
+;iI;i7;o;
+;iI;i3;@
+;@;@;@;/0;iI;1"pad0;0;[o;;o;	;	o;
+;iJ;i;o;
+;iJ;i;@
+;@;@;["/* Grayscale button */;0;[ ;iJ;;u;Aâ[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@lineiK:@offseti@:@start_poso;	;
+iK;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o; ;o;	;o;	;
+iK;i@;o;	;
+iK;i ;@
+;@;o: Sass::Script::Tree::Funcall:
+@name"grayscale;o;	;o;	;
+iK;i?;o;	;
+iK;i,;@
+;@:@splat0:@kwarg_splat0:@options{ :
+@args[o:!Sass::Script::Tree::Variable;"b-color;o;	;o;	;
+iK;i>;o;	;
+iK;i6;@
+;@;@:@filename@:@css_variable_warning0;
+iK:@underscored_name"b_color;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+iK;@;@:@operand1o;;"b-color;o;	;o;	;
+iK;i(;@;@
+;@;@;@;0;
+iK;"b_color;0;
+iK:@operator:eq;@;@;&o; ;o;	;o;	;
+iK;i;@	;@
+;@;o: Sass::Script::Tree::Literal
+;o;	;o;	;
+iK;i;o;	;
+iK;i;@
+;@:@valueo: Sass::Script::Value::String	;@:"@deprecated_interp_equivalent0;*"simple:
+@type:identifier;@;0;
+iK;@;@;&o;;"	type;o;	;o;	;
+iK;i;@	;@
+;@;@;@;0;
+iK;"	type;0;
+iK;';(;0;
+iK;':and0[o:Sass::Tree::MixinNode;"simple;o;	;o;	;
+iL;i8;o;	;
+iL;i
+;@
+;@;0;0;@;[	o;;"b-color;o;	;o;	;
+iL;i";o;	;
+iL;i;@
+;@;@;@;0;
+iL;"b_coloro;)
+;o;	;o;	;
+iL;i(;o;	;
+iL;i$;@
+;@;*o:Sass::Script::Value::Bool;@;*T;@;0;
+iLo;;"t-size;o;	;o;	;
+iL;i1;o;	;
+iL;i*;@
+;@;@;@;0;
+iL;"t_sizeo;;"pad;o;	;o;	;
+iL;i7;o;	;
+iL;i3;@
+;@;@;@;0;
+iL;"pad;0:@children[ ; o;!;"IC;#{ ;$[ ;%{ ;
+iLu;Aá[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@lineiO:@offseti?:@start_poso;	;
+iO;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o; ;o;	;o;	;
+iO;i?;o;	;
+iO;i;@
+;@;o: Sass::Script::Tree::Funcall:
+@name"grayscale;o;	;o;	;
+iO;i>;o;	;
+iO;i+;@
+;@:@splat0:@kwarg_splat0:@options{ :
+@args[o:!Sass::Script::Tree::Variable;"b-color;o;	;o;	;
+iO;i=;o;	;
+iO;i5;@
+;@;@:@filename@:@css_variable_warning0;
+iO:@underscored_name"b_color;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+iO;@;@:@operand1o;;"b-color;o;	;o;	;
+iO;i';@;@
+;@;@;@;0;
+iO;"b_color;0;
+iO:@operator:eq;@;@;&o; ;o;	;o;	;
+iO;i;@	;@
+;@;o: Sass::Script::Tree::Literal
+;o;	;o;	;
+iO;i;o;	;
+iO;i;@
+;@:@valueo: Sass::Script::Value::String	;@:"@deprecated_interp_equivalent0;*"
+shiny:
+@type:identifier;@;0;
+iO;@;@;&o;;"	type;o;	;o;	;
+iO;i;@	;@
+;@;@;@;0;
+iO;"	type;0;
+iO;';(;0;
+iO;':and0[o:Sass::Tree::MixinNode;"
+shiny;o;	;o;	;
+iP;i7;o;	;
+iP;i
+;@
+;@;0;0;@;[	o;;"b-color;o;	;o;	;
+iP;i!;o;	;
+iP;i;@
+;@;@;@;0;
+iP;"b_coloro;)
+;o;	;o;	;
+iP;i';o;	;
+iP;i#;@
+;@;*o:Sass::Script::Value::Bool;@;*T;@;0;
+iPo;;"t-size;o;	;o;	;
+iP;i0;o;	;
+iP;i);@
+;@;@;@;0;
+iP;"t_sizeo;;"pad;o;	;o;	;
+iP;i6;o;	;
+iP;i2;@
+;@;@;@;0;
+iP;"pad;0:@children[ ; o;!;"IC;#{ ;$[ ;%{ ;
+iPu;AÖ[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@lineiS:@offseti>:@start_poso;	;
+iS;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o; ;o;	;o;	;
+iS;i>;o;	;
+iS;i;@
+;@;o: Sass::Script::Tree::Funcall:
+@name"grayscale;o;	;o;	;
+iS;i=;o;	;
+iS;i*;@
+;@:@splat0:@kwarg_splat0:@options{ :
+@args[o:!Sass::Script::Tree::Variable;"b-color;o;	;o;	;
+iS;i<;o;	;
+iS;i4;@
+;@;@:@filename@:@css_variable_warning0;
+iS:@underscored_name"b_color;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+iS;@;@:@operand1o;;"b-color;o;	;o;	;
+iS;i&;@;@
+;@;@;@;0;
+iS;"b_color;0;
+iS:@operator:eq;@;@;&o; ;o;	;o;	;
+iS;i;@	;@
+;@;o: Sass::Script::Tree::Literal
+;o;	;o;	;
+iS;i;o;	;
+iS;i;@
+;@:@valueo: Sass::Script::Value::String	;@:"@deprecated_interp_equivalent0;*"	pill:
+@type:identifier;@;0;
+iS;@;@;&o;;"	type;o;	;o;	;
+iS;i;@	;@
+;@;@;@;0;
+iS;"	type;0;
+iS;';(;0;
+iS;':and0[o:Sass::Tree::MixinNode;"	pill;o;	;o;	;
+iT;i6;o;	;
+iT;i
+;@
+;@;0;0;@;[	o;;"b-color;o;	;o;	;
+iT;i ;o;	;
+iT;i;@
+;@;@;@;0;
+iT;"b_coloro;)
+;o;	;o;	;
+iT;i&;o;	;
+iT;i";@
+;@;*o:Sass::Script::Value::Bool;@;*T;@;0;
+iTo;;"t-size;o;	;o;	;
+iT;i/;o;	;
+iT;i(;@
+;@;@;@;0;
+iT;"t_sizeo;;"pad;o;	;o;	;
+iT;i5;o;	;
+iT;i1;@
+;@;@;@;0;
+iT;"pad;0:@children[ ; o;!;"IC;#{ ;$[ ;%{ ;
+iTu;AÖ[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@lineiW:@offseti>:@start_poso;	;
+iW;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o; ;o;	;o;	;
+iW;i>;o;	;
+iW;i;@
+;@;o: Sass::Script::Tree::Funcall:
+@name"grayscale;o;	;o;	;
+iW;i=;o;	;
+iW;i*;@
+;@:@splat0:@kwarg_splat0:@options{ :
+@args[o:!Sass::Script::Tree::Variable;"b-color;o;	;o;	;
+iW;i<;o;	;
+iW;i4;@
+;@;@:@filename@:@css_variable_warning0;
+iW:@underscored_name"b_color;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+iW;@;@:@operand1o;;"b-color;o;	;o;	;
+iW;i&;@;@
+;@;@;@;0;
+iW;"b_color;0;
+iW:@operator:eq;@;@;&o; ;o;	;o;	;
+iW;i;@	;@
+;@;o: Sass::Script::Tree::Literal
+;o;	;o;	;
+iW;i;o;	;
+iW;i;@
+;@:@valueo: Sass::Script::Value::String	;@:"@deprecated_interp_equivalent0;*"	flat:
+@type:identifier;@;0;
+iW;@;@;&o;;"	type;o;	;o;	;
+iW;i;@	;@
+;@;@;@;0;
+iW;"	type;0;
+iW;';(;0;
+iW;':and0[o:Sass::Tree::MixinNode;"	flat;o;	;o;	;
+iX;i6;o;	;
+iX;i
+;@
+;@;0;0;@;[	o;;"b-color;o;	;o;	;
+iX;i ;o;	;
+iX;i;@
+;@;@;@;0;
+iX;"b_coloro;)
+;o;	;o;	;
+iX;i&;o;	;
+iX;i";@
+;@;*o:Sass::Script::Value::Bool;@;*T;@;0;
+iXo;;"t-size;o;	;o;	;
+iX;i/;o;	;
+iX;i(;@
+;@;@;@;0;
+iX;"t_sizeo;;"pad;o;	;o;	;
+iX;i5;o;	;
+iX;i1;@
+;@;@;@;0;
+iX;"pad;0:@children[ ; o;!;"IC;#{ ;$[ ;%{ ;
+iXo;;o;	;	o;
+;i[;i;o;
+;i[;i;@
+;@;@;["/* Colored button */;0;[ ;i[;;u;AÀ[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@linei\:@offseti:@start_poso;	;
+i\;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+i\;i;o;	;
+i\;i;@
+;@:@valueo: Sass::Script::Value::String	:@options{ :"@deprecated_interp_equivalent0;"simple:
+@type:identifier:@filename@:@css_variable_warning0;
+i\;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"	type;o;	;o;	;
+i\;i;@	;@
+;@;@;@;0;
+i\:@underscored_name"	type;0;
+i\:@operator:equ:Sass::Tree::IfNode–[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@linei`:@offseti :@start_poso;	;
+i`;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+i`;i;o;	;
+i`;i;@
+;@:@valueo: Sass::Script::Value::String	:@options{ :"@deprecated_interp_equivalent0;"
+shiny:
+@type:identifier:@filename@:@css_variable_warning0;
+i`;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"	type;o;	;o;	;
+i`;i;@	;@
+;@;@;@;0;
+i`:@underscored_name"	type;0;
+i`:@operator:equ:Sass::Tree::IfNode◊[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@lineid:@offseti:@start_poso;	;
+id;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+id;i;o;	;
+id;i;@
+;@:@valueo: Sass::Script::Value::String	:@options{ :"@deprecated_interp_equivalent0;"	pill:
+@type:identifier:@filename@:@css_variable_warning0;
+id;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"	type;o;	;o;	;
+id;i;@	;@
+;@;@;@;0;
+id:@underscored_name"	type;0;
+id:@operator:equ:Sass::Tree::IfNode‡[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@lineih:@offseti:@start_poso;	;
+ih;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+ih;i;o;	;
+ih;i;@
+;@:@valueo: Sass::Script::Value::String	:@options{ :"@deprecated_interp_equivalent0;"	flat:
+@type:identifier:@filename@:@css_variable_warning0;
+ih;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"	type;o;	;o;	;
+ih;i;@	;@
+;@;@;@;0;
+ih:@underscored_name"	type;0;
+ih:@operator:eq0[o:Sass::Tree::MixinNode;!"	flat;o;	;o;	;
+ii;i7;o;	;
+ii;i
+;@
+;@:@splat0:@kwarg_splat0;@:
+@args[	o; ;!"b-color;o;	;o;	;
+ii;i ;o;	;
+ii;i;@
+;@;@;@;0;
+ii;""b_coloro;
+;o;	;o;	;
+ii;i';o;	;
+ii;i";@
+;@;o:Sass::Script::Value::Bool;@;F;@;0;
+iio; ;!"t-size;o;	;o;	;
+ii;i0;o;	;
+ii;i);@
+;@;@;@;0;
+ii;""t_sizeo; ;!"pad;o;	;o;	;
+ii;i6;o;	;
+ii;i2;@
+;@;@;@;0;
+ii;""pad;0:@children[ :@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;
+ii[o:Sass::Tree::MixinNode;!"	pill;o;	;o;	;
+ie;i7;o;	;
+ie;i
+;@
+;@:@splat0:@kwarg_splat0;@:
+@args[	o; ;!"b-color;o;	;o;	;
+ie;i ;o;	;
+ie;i;@
+;@;@;@;0;
+ie;""b_coloro;
+;o;	;o;	;
+ie;i';o;	;
+ie;i";@
+;@;o:Sass::Script::Value::Bool;@;F;@;0;
+ieo; ;!"t-size;o;	;o;	;
+ie;i0;o;	;
+ie;i);@
+;@;@;@;0;
+ie;""t_sizeo; ;!"pad;o;	;o;	;
+ie;i6;o;	;
+ie;i2;@
+;@;@;@;0;
+ie;""pad;0:@children[ :@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;
+ie[o:Sass::Tree::MixinNode;!"
+shiny;o;	;o;	;
+ia;i8;o;	;
+ia;i
+;@
+;@:@splat0:@kwarg_splat0;@:
+@args[	o; ;!"b-color;o;	;o;	;
+ia;i!;o;	;
+ia;i;@
+;@;@;@;0;
+ia;""b_coloro;
+;o;	;o;	;
+ia;i(;o;	;
+ia;i#;@
+;@;o:Sass::Script::Value::Bool;@;F;@;0;
+iao; ;!"t-size;o;	;o;	;
+ia;i1;o;	;
+ia;i*;@
+;@;@;@;0;
+ia;""t_sizeo; ;!"pad;o;	;o;	;
+ia;i7;o;	;
+ia;i3;@
+;@;@;@;0;
+ia;""pad;0:@children[ :@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;
+ia[o:Sass::Tree::MixinNode;!"simple;o;	;o;	;
+i];i9;o;	;
+i];i
+;@
+;@:@splat0:@kwarg_splat0;@:
+@args[	o; ;!"b-color;o;	;o;	;
+i];i";o;	;
+i];i;@
+;@;@;@;0;
+i];""b_coloro;
+;o;	;o;	;
+i];i);o;	;
+i];i$;@
+;@;o:Sass::Script::Value::Bool;@;F;@;0;
+i]o; ;!"t-size;o;	;o;	;
+i];i2;o;	;
+i];i+;@
+;@;@;@;0;
+i];""t_sizeo; ;!"pad;o;	;o;	;
+i];i8;o;	;
+i];i4;@
+;@;@;@;0;
+i];""pad;0:@children[ :@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;
+i];iIo;;o;	;	o;
+;im;i;o;
+;im;i;@
+;@;@;["/* Simple Button */;0;[ ;im;;o;;"simple;o;	;	o;
+;in;i\;o;
+;in;i;@
+;@; 0;@;T;![	[o;0;"base-color;o;	;	o;
+;in;i;o;
+;in;i;@
+;@;@;@;/0;in;1"base_color0[o;0;"grayscale;o;	;	o;
+;in;i+;o;
+;in;i!;@
+;@;@;@;/0;in;1"grayscaleo;%
+;o;	;	o;
+;in;i2;o;
+;in;i-;@
+;@;o:Sass::Script::Value::Bool;@;F;@;/0;in[o;0;"textsize;o;	;	o;
+;in;i=;o;
+;in;i4;@
+;@;@;@;/0;in;1"textsizeo;%
+;o;	;	o;
+;in;iF;o;
+;in;i?;@
+;@;o;&	;@;'0;"inherit;;(;@;/0;in[o;0;"padding;o;	;	o;
+;in;iP;o;
+;in;iH;@
+;@;@;@;/0;in;1"paddingo;9;o;	;	o;
+;in;iZ;o;
+;in;iQ;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;in;iU;o;
+;in;iR;@
+;@;o;=
+;>["px;?"7px;@;i;@[ ;@;/0;ino;%
+;o;	;	o;
+;in;iZ;o;
+;in;iV;@
+;@;o;=
+;>["px;?"	18px;@;i;@[ ;@;/0;in;in;0;[o:Sass::Tree::VariableNode;"
+color:@guarded0;o;	;	o;
+;io;i';o;
+;io;i	;@
+;@;@;-o: Sass::Script::Tree::Funcall;"hsl;o;	;	o;
+;io;i';o;
+;io;i;@
+;@; 0:@kwarg_splat0;@;![o;%
+;o;	;	o;
+;io;i;o;
+;io;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@[ ;@;/0;ioo;%
+;o;	;	o;
+;io;i ;o;
+;io;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;ioo;%
+;o;	;	o;
+;io;i&;o;
+;io;i";@
+;@;o;=
+;>["%;?"	100%;@;ii;@[ ;@;/0;io;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;/0;io;0;[ ;io:@global0o;T;"border;U0;o;	;	o;
+;ip;iV;o;
+;ip;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;ip;iV;o;
+;ip;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;ip;i0;o;
+;ip;i%;@
+;@;@;@;/0;ip;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;ip;iB;o;
+;ip;i@;@
+;@;o;=
+;>["%;?"9%;@;i;@[ ;@;/0;ip"lightnesso;%
+;o;	;	o;
+;ip;iU;o;
+;ip;iQ;@
+;@;o;=
+;>["%;?"	-14%;@;iÌ;@[ ;@;/0;ip;\["saturation"lightness;]{@ë"saturation@õ"lightness;/0;ip;0;[ ;ip;^0o;T;"inset-shadow;U0;o;	;	o;
+;iq;iV;o;
+;iq;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;iq;iV;o;
+;iq;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;iq;i0;o;
+;iq;i%;@
+;@;@;@;/0;iq;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;iq;iB;o;
+;iq;i?;@
+;@;o;=
+;>["%;?"-8%;@;iÛ;@[ ;@;/0;iq"lightnesso;%
+;o;	;	o;
+;iq;iU;o;
+;iq;iR;@
+;@;o;=
+;>["%;?"15%;@;i;@[ ;@;/0;iq;\["saturation"lightness;]{@ø"saturation@…"lightness;/0;iq;0;[ ;iq;^0o;T;"stop-gradient;U0;o;	;	o;
+;ir;iV;o;
+;ir;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;ir;iV;o;
+;ir;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;ir;i0;o;
+;ir;i%;@
+;@;@;@;/0;ir;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;ir;iB;o;
+;ir;i@;@
+;@;o;=
+;>["%;?"9%;@;i;@[ ;@;/0;ir"lightnesso;%
+;o;	;	o;
+;ir;iU;o;
+;ir;iQ;@
+;@;o;=
+;>["%;?"	-11%;@;i;@[ ;@;/0;ir;\["saturation"lightness;]{@Ì"saturation@˜"lightness;/0;ir;0;[ ;ir;^0o;T;"text-shadow;U0;o;	;	o;
+;is;iV;o;
+;is;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;is;iV;o;
+;is;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;is;i0;o;
+;is;i%;@
+;@;@;@;/0;is;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;is;iC;o;
+;is;i@;@
+;@;o;=
+;>["%;?"15%;@;i;@[ ;@;/0;is"lightnesso;%
+;o;	;	o;
+;is;iU;o;
+;is;iQ;@
+;@;o;=
+;>["%;?"	-18%;@;iÈ;@[ ;@;/0;is;\["saturation"lightness;]{@"saturation@%"lightness;/0;is;0;[ ;is;^0u;A’[o: Sass::Script::Tree::Funcall:
+@name"is-light:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@lineiu:@offseti!:@start_poso;
+;iu;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@splat0:@kwarg_splat0:@options{ :
+@args[o:!Sass::Script::Tree::Variable;"base-color;o;	;	o;
+;iu;i ;o;
+;iu;i;@;@;@:@filename@:@css_variable_warning0;iu:@underscored_name"base_color;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;iu0[o:Sass::Tree::VariableNode;"
+color:@guarded0;o;	;	o;
+;iv;i&;o;
+;iv;i;@;@;@:
+@expro; ;"hsl;o;	;	o;
+;iv;i&;o;
+;iv;i;@;@;0;0;@;[o: Sass::Script::Tree::Literal
+;o;	;	o;
+;iv;i;o;
+;iv;i;@;@:@valueo: Sass::Script::Value::Number
+:@numerator_units[ :@original"0;@;(i :@denominator_units[ ;@;0;ivo;'
+;o;	;	o;
+;iv;i ;o;
+;iv;i;@;@;(o;)
+;*[ ;+"0;@;(i ;,@0;@;0;ivo;'
+;o;	;	o;
+;iv;i%;o;
+;iv;i";@;@;(o;)
+;*["%;+"20%;@;(i;,[ ;@;0;iv;@;o;; IC;!{ ;"[ ;#{ ;0;iv;0:@children[ ;iv:@global0o;$;"text-shadow;%0;o;	;	o;
+;iw;iS;o;
+;iw;i;@;@;@;&o; ;"adjust-color;o;	;	o;
+;iw;iS;o;
+;iw;i;@;@;0;0;@;[o;;"base-color;o;	;	o;
+;iw;i0;o;
+;iw;i%;@;@;@;@;0;iw;"base_color;@;o;; IC;!{"saturationo;'
+;o;	;	o;
+;iw;iB;o;
+;iw;i?;@;@;(o;)
+;*["%;+"10%;@;(i;,[ ;@;0;iw"lightnesso;'
+;o;	;	o;
+;iw;iR;o;
+;iw;iP;@;@;(o;)
+;*["%;+"4%;@;(i	;,[ ;@;0;iw;"["saturation"lightness;#{@Y"saturation@c"lightness;0;iw;0;-[ ;iw;.0u;Aê[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@lineiz:@offseti:@start_poso;	;
+iz;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+iz;i;o;	;
+iz;i;@
+;@:@valueo:Sass::Script::Value::Bool:@options{ ;T:@filename@:@css_variable_warning0;
+iz;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"grayscale;o;	;o;	;
+iz;i;@	;@
+;@;@;@;0;
+iz:@underscored_name"grayscale;0;
+iz:@operator:eq0[	o:Sass::Tree::VariableNode;"border:@guarded0;o;	;o;	;
+i{;i,;o;	;
+i{;i;@
+;@;@:
+@expro: Sass::Script::Tree::Funcall;"grayscale;o;	;o;	;
+i{;i,;o;	;
+i{;i;@
+;@:@splat0:@kwarg_splat0;@:
+@args[o;;"border;o;	;o;	;
+i{;i+;o;	;
+i{;i$;@
+;@;@;@;0;
+i{;"border;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+i{;0:@children[ ;
+i{:@global0o;";"inset-shadow;#0;o;	;o;	;
+i|;i2;o;	;
+i|;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i|;i2;o;	;
+i|;i;@
+;@;&0;'0;@;([o;;"inset-shadow;o;	;o;	;
+i|;i1;o;	;
+i|;i$;@
+;@;@;@;0;
+i|;"inset_shadow;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i|;0;/[ ;
+i|;00o;";"stop-gradient;#0;o;	;o;	;
+i};i3;o;	;
+i};i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i};i3;o;	;
+i};i;@
+;@;&0;'0;@;([o;;"stop-gradient;o;	;o;	;
+i};i2;o;	;
+i};i$;@
+;@;@;@;0;
+i};"stop_gradient;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i};0;/[ ;
+i};00o;";"text-shadow;#0;o;	;o;	;
+i~;i1;o;	;
+i~;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i~;i1;o;	;
+i~;i;@
+;@;&0;'0;@;([o;;"text-shadow;o;	;o;	;
+i~;i0;o;	;
+i~;i$;@
+;@;@;@;0;
+i~;"text_shadow;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i~;0;/[ ;
+i~;00o;";#o;	;	o;
+;i|;i;o;
+;i|;i;@
+;@;["border;$i ;o;	;	o;
+;i|;i!;@;;@
+;@;@;o;9;o;	;	o;
+;i|;i!;o;
+;i|;i;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;i|;i;o;
+;i|;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;i|o;%
+;o;	;	o;
+;i|;i;o;
+;i|;i;@
+;@;o;&	;@;'0;"
+solid;;(;@;/0;i|o;0;"border;o;	;	o;
+;i|;i!;o;
+;i|;i;@
+;@;@;@;/0;i|;1"border;i|;0;[ ;);*;+o;	;	@?;o;
+;i|;i;@
+;@;i|o;";#o;	;	o;
+;i};i;o;
+;i};i;@
+;@;["border-radius;$i ;o;	;	o;
+;i};i;@`;@
+;@;@;o;%;o;	;	o;
+;i};i;o;
+;i};i;@
+;@;o;&	;@;'0;"3px;;(;i};0;[ ;);*;+o;	;	@d;o;
+;i};i;@
+;@;i}o;";#o;	;	o;
+;i~;i;o;
+;i~;i;@
+;@;["box-shadow;$i ;o;	;	o;
+;i~;i1;@q;@
+;@;@;o;9;o;	;	o;
+;i~;i1;o;
+;i~;i;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;i~;i;o;
+;i~;i;@
+;@;o;&	;@;'0;"
+inset;;(;@;/0;i~o;%
+;o;	;	o;
+;i~;i;o;
+;i~;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i~o;%
+;o;	;	o;
+;i~;i;o;
+;i~;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;i~o;%
+;o;	;	o;
+;i~;i!;o;
+;i~;i ;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i~o;%
+;o;	;	o;
+;i~;i#;o;
+;i~;i";@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i~o;0;"inset-shadow;o;	;	o;
+;i~;i1;o;
+;i~;i$;@
+;@;@;@;/0;i~;1"inset_shadow;i~;0;[ ;);*;+o;	;	@u;o;
+;i~;i;@
+;@;i~o;";#o;	;	o;
+;i;i;o;
+;i;i;@
+;@;["
+color;$i ;o;	;	o;
+;i;i;@´;@
+;@;@;o;0;"
+color;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;@;@;/0;i;1"
+color;0;[ ;);*;+o;	;	@Ø;o;
+;i;i;@
+;@;io;";#o;	;	o;
+;iÄ;i;o;
+;iÄ;i;@
+;@;["display;$i ;o;	;	o;
+;iÄ;i;@º;@
+;@;@;o;%;o;	;	o;
+;iÄ;i;o;
+;iÄ;i;@
+;@;o;&	;@;'0;"inline-block;;(;iÄ;0;[ ;);*;+o;	;	@¿;o;
+;iÄ;i;@
+;@;iÄo;";#o;	;	o;
+;iÅ;i;o;
+;iÅ;i;@
+;@;["font-size;$i ;o;	;	o;
+;iÅ;i;@Õ;@
+;@;@;o;0;"textsize;o;	;	o;
+;iÅ;i;o;
+;iÅ;i;@
+;@;@;@;/0;iÅ;1"textsize;0;[ ;);*;+o;	;	@—;o;
+;iÅ;i;@
+;@;iÅo;";#o;	;	o;
+;iÇ;i;o;
+;iÇ;i;@
+;@;["font-weight;$i ;o;	;	o;
+;iÇ;i;@ﬁ;@
+;@;@;o;%;o;	;	o;
+;iÇ;i;o;
+;iÇ;i;@
+;@;o;&	;@;'0;"	bold;;(;iÇ;0;[ ;);*;+o;	;	@‚;o;
+;iÇ;i;@
+;@;iÇo:Sass::Tree::MixinNode;"linear-gradient;o;	;	o;
+;iÉ;i>;o;
+;iÉ;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;iÉ;i-;o;
+;iÉ;i";@
+;@;@;@;/0;iÉ;1"base_coloro;0;"stop-gradient;o;	;	o;
+;iÉ;i=;o;
+;iÉ;i/;@
+;@;@;@;/0;iÉ;1"stop_gradient;0;[ ;Xo;Y;ZIC;[{ ;\[ ;]{ ;iÉo;";#o;	;	o;
+;iÑ;i;o;
+;iÑ;i;@
+;@;["padding;$i ;o;	;	o;
+;iÑ;i;@;@
+;@;@;o;0;"padding;o;	;	o;
+;iÑ;i;o;
+;iÑ;i;@
+;@;@;@;/0;iÑ;1"padding;0;[ ;);*;+o;	;	@
+;o;
+;iÑ;i;@
+;@;iÑo;";#o;	;	o;
+;iÖ;i;o;
+;iÖ;i;@
+;@;["text-decoration;$i ;o;	;	o;
+;iÖ;i;@;@
+;@;@;o;%;o;	;	o;
+;iÖ;i;o;
+;iÖ;i;@
+;@;o;&	;@;'0;"	none;;(;iÖ;0;[ ;);*;+o;	;	@;o;
+;iÖ;i;@
+;@;iÖo;";#o;	;	o;
+;iÜ;i;o;
+;iÜ;i;@
+;@;["text-shadow;$i ;o;	;	o;
+;iÜ;i);@(;@
+;@;@;o;9;o;	;	o;
+;iÜ;i);o;
+;iÜ;i;@
+;@;@;:;;;@;/0;<[	o;%
+;o;	;	o;
+;iÜ;i;o;
+;iÜ;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;iÜo;%
+;o;	;	o;
+;iÜ;i;o;
+;iÜ;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;iÜo;%
+;o;	;	o;
+;iÜ;i;o;
+;iÜ;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;iÜo;0;"text-shadow;o;	;	o;
+;iÜ;i);o;
+;iÜ;i;@
+;@;@;@;/0;iÜ;1"text_shadow;iÜ;0;[ ;);*;+o;	;	@,;o;
+;iÜ;i;@
+;@;iÜo;";#o;	;	o;
+;iá;i;o;
+;iá;i;@
+;@;["background-clip;$i ;o;	;	o;
+;iá;i$;@U;@
+;@;@;o;%;o;	;	o;
+;iá;i$;o;
+;iá;i;@
+;@;o;&	;@;'0;"padding-box;;(;iá;0;[ ;);*;+o;	;	@Y;o;
+;iá;i;@
+;@;iáo;B;$i ;o;	;	o;
+;iâ;i;o;
+;iâ;i;@
+;@;Co;D;E[o;F;E[o;G;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;H;I0;0;iâo;J;"
+hover;K0;L0;0;M;N;iâo;J;"not;Ko;D;E[o;F;E[o;G	;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;J	;"disabled;K0;L0;M;N;O0;Po;;{ ;L0;0;M;N;iâ;0;O0;iâ;Po;;{ ;iâ;0;iâ;@;Qo;	;	o;
+;iâ;i;@f;@
+;@;T;R["&:hover:not(:disabled);0;[o;T;"base-color-hover;U0;o;	;	o;
+;iä;i\;o;
+;iä;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;iä;i\;o;
+;iä;i ;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;iä;i8;o;
+;iä;i-;@
+;@;@;@;/0;iä;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;iä;iJ;o;
+;iä;iG;@
+;@;o;=
+;>["%;?"-4%;@;i˜;@[ ;@;/0;iä"lightnesso;%
+;o;	;	o;
+;iä;i[;o;
+;iä;iX;@
+;@;o;=
+;>["%;?"-5%;@;iˆ;@[ ;@;/0;iä;\["saturation"lightness;]{@ú"saturation@¶"lightness;/0;iä;0;[ ;iä;^0o;T;"inset-shadow-hover;U0;o;	;	o;
+;iã;i\;o;
+;iã;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;iã;i\;o;
+;iã;i ;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;iã;i8;o;
+;iã;i-;@
+;@;@;@;/0;iã;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;iã;iJ;o;
+;iã;iG;@
+;@;o;=
+;>["%;?"-7%;@;iÙ;@[ ;@;/0;iã"lightnesso;%
+;o;	;	o;
+;iã;i[;o;
+;iã;iY;@
+;@;o;=
+;>["%;?"5%;@;i
+;@[ ;@;/0;iã;\["saturation"lightness;]{@ "saturation@‘"lightness;/0;iã;0;[ ;iã;^0o;T;"stop-gradient-hover;U0;o;	;	o;
+;iå;i];o;
+;iå;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;iå;i];o;
+;iå;i ;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;iå;i8;o;
+;iå;i-;@
+;@;@;@;/0;iå;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;iå;iJ;o;
+;iå;iH;@
+;@;o;=
+;>["%;?"8%;@;i;@[ ;@;/0;iå"lightnesso;%
+;o;	;	o;
+;iå;i\;o;
+;iå;iX;@
+;@;o;=
+;>["%;?"	-14%;@;iÌ;@[ ;@;/0;iå;\["saturation"lightness;]{@¯"saturation@"lightness;/0;iå;0;[ ;iå;^0u;A€[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@lineié:@offseti!:@start_poso;	;
+ié;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+ié;i ;o;	;
+ié;i;@
+;@:@valueo:Sass::Script::Value::Bool:@options{ ;T:@filename@:@css_variable_warning0;
+ié;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"grayscale;o;	;o;	;
+ié;i;@	;@
+;@;@;@;0;
+ié:@underscored_name"grayscale;0;
+ié:@operator:eq0[o:Sass::Tree::VariableNode;"base-color-hover:@guarded0;o;	;o;	;
+iè;i>;o;	;
+iè;i;@
+;@;@:
+@expro: Sass::Script::Tree::Funcall;"grayscale;o;	;o;	;
+iè;i>;o;	;
+iè;i";@
+;@:@splat0:@kwarg_splat0;@:
+@args[o;;"base-color-hover;o;	;o;	;
+iè;i=;o;	;
+iè;i,;@
+;@;@;@;0;
+iè;"base_color_hover;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+iè;0:@children[ ;
+iè:@global0o;";"inset-shadow-hover;#0;o;	;o;	;
+iê;i@;o;	;
+iê;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+iê;i@;o;	;
+iê;i";@
+;@;&0;'0;@;([o;;"inset-shadow-hover;o;	;o;	;
+iê;i?;o;	;
+iê;i,;@
+;@;@;@;0;
+iê;"inset_shadow_hover;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+iê;0;/[ ;
+iê;00o;";"stop-gradient-hover;#0;o;	;o;	;
+ië;iA;o;	;
+ië;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+ië;iA;o;	;
+ië;i";@
+;@;&0;'0;@;([o;;"stop-gradient-hover;o;	;o;	;
+ië;i@;o;	;
+ië;i,;@
+;@;@;@;0;
+ië;"stop_gradient_hover;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+ië;0;/[ ;
+ië;00o;_;"linear-gradient;o;	;	o;
+;iî;iL;o;
+;iî;i
+;@
+;@; 0;W0;@;![o;0;"base-color-hover;o;	;	o;
+;iî;i5;o;
+;iî;i$;@
+;@;@;@;/0;iî;1"base_color_hovero;0;"stop-gradient-hover;o;	;	o;
+;iî;iK;o;
+;iî;i7;@
+;@;@;@;/0;iî;1"stop_gradient_hover;0;[ ;Xo;Y;ZIC;[{ ;\[ ;]{ ;iîo;";#o;	;	o;
+;iñ;i;o;
+;iñ;i
+;@
+;@;["box-shadow;$i ;o;	;	o;
+;iñ;i9;@.;@
+;@;@;o;9;o;	;	o;
+;iñ;i9;o;
+;iñ;i;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;iñ;i;o;
+;iñ;i;@
+;@;o;&	;@;'0;"
+inset;;(;@;/0;iño;%
+;o;	;	o;
+;iñ;i;o;
+;iñ;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;iño;%
+;o;	;	o;
+;iñ;i!;o;
+;iñ;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;iño;%
+;o;	;	o;
+;iñ;i#;o;
+;iñ;i";@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;iño;%
+;o;	;	o;
+;iñ;i%;o;
+;iñ;i$;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;iño;0;"inset-shadow-hover;o;	;	o;
+;iñ;i9;o;
+;iñ;i&;@
+;@;@;@;/0;iñ;1"inset_shadow_hover;iñ;0;[ ;);*;+o;	;	@2;o;
+;iñ;i;@
+;@;iño;";#o;	;	o;
+;ió;i;o;
+;ió;i
+;@
+;@;["cursor;$i ;o;	;	o;
+;ió;i;@h;@
+;@;@;o;%;o;	;	o;
+;ió;i;o;
+;ió;i;@
+;@;o;&	;@;'0;"pointer;;(;ió;0;[ ;);*;+o;	;	@l;o;
+;ió;i;@
+;@;ió;iâo;B;$i ;o;	;	o;
+;iõ;i;o;
+;iö;i;@
+;@;Co;D;E[o;F;E[o;G;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;H;I0;0;iöo;J;"active;K0;L0;0;M;N;iöo;J;"not;Ko;D;E[o;F;E[o;G	;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;J	;"disabled;K0;L0;M;N;O0;Po;;{ ;L0;0;M;N;iö;0;O0;iö;Po;;{ ;iöo;F;E["
+o;G;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;H;I0;0;iöo;J;"
+focus;K0;L0;0;M;N;iöo;J;"not;Ko;D;E[o;F;E[o;G	;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;J	;"disabled;K0;L0;M;N;O0;Po;;{ ;L0;0;M;N;iö;0;O0;iö;Po;;{ ;iö;0;iö;@;Qo;	;	o;
+;iõ;i;@y;@
+;@;T;R["6&:active:not(:disabled),
+  &:focus:not(:disabled);0;[
+o;T;"border-active;U0;o;	;	o;
+;iú;i\;o;
+;iú;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;iú;i\;o;
+;iú;i ;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;iú;i8;o;
+;iú;i-;@
+;@;@;@;/0;iú;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;iú;iI;o;
+;iú;iG;@
+;@;o;=
+;>["%;?"9%;@;i;@[ ;@;/0;iú"lightnesso;%
+;o;	;	o;
+;iú;i[;o;
+;iú;iW;@
+;@;o;=
+;>["%;?"	-14%;@;iÌ;@[ ;@;/0;iú;\["saturation"lightness;]{@À"saturation@’"lightness;/0;iú;0;[ ;iú;^0o;T;"inset-shadow-active;U0;o;	;	o;
+;iù;i\;o;
+;iù;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;iù;i\;o;
+;iù;i ;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;iù;i8;o;
+;iù;i-;@
+;@;@;@;/0;iù;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;iù;iI;o;
+;iù;iG;@
+;@;o;=
+;>["%;?"7%;@;i;@[ ;@;/0;iù"lightnesso;%
+;o;	;	o;
+;iù;i[;o;
+;iù;iW;@
+;@;o;=
+;>["%;?"	-17%;@;iÍ;@[ ;@;/0;iù;\["saturation"lightness;]{@˘"saturation@"lightness;/0;iù;0;[ ;iù;^0u;Aö[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@lineiü:@offseti!:@start_poso;	;
+iü;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+iü;i ;o;	;
+iü;i;@
+;@:@valueo:Sass::Script::Value::Bool:@options{ ;T:@filename@:@css_variable_warning0;
+iü;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"grayscale;o;	;o;	;
+iü;i;@	;@
+;@;@;@;0;
+iü:@underscored_name"grayscale;0;
+iü:@operator:eq0[o:Sass::Tree::VariableNode;"border-active:@guarded0;o;	;o;	;
+i†;i;;o;	;
+i†;i;@
+;@;@:
+@expro: Sass::Script::Tree::Funcall;"grayscale;o;	;o;	;
+i†;i;;o;	;
+i†;i";@
+;@:@splat0:@kwarg_splat0;@:
+@args[o;;"border-active;o;	;o;	;
+i†;i:;o;	;
+i†;i,;@
+;@;@;@;0;
+i†;"border_active;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+i†;0:@children[ ;
+i†:@global0o;";"inset-shadow-active;#0;o;	;o;	;
+i°;iA;o;	;
+i°;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i°;iA;o;	;
+i°;i";@
+;@;&0;'0;@;([o;;"inset-shadow-active;o;	;o;	;
+i°;i@;o;	;
+i°;i,;@
+;@;@;@;0;
+i°;"inset_shadow_active;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i°;0;/[ ;
+i°;00o;";#o;	;	o;
+;i§;i;o;
+;i§;i
+;@
+;@;["border;$i ;o;	;	o;
+;i§;i*;@;@
+;@;@;o;9;o;	;	o;
+;i§;i*;o;
+;i§;i;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;i§;i;o;
+;i§;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;i§o;%
+;o;	;	o;
+;i§;i;o;
+;i§;i;@
+;@;o;&	;@;'0;"
+solid;;(;@;/0;i§o;0;"border-active;o;	;	o;
+;i§;i*;o;
+;i§;i;@
+;@;@;@;/0;i§;1"border_active;i§;0;[ ;);*;+o;	;	@;o;
+;i§;i;@
+;@;i§o;";#o;	;	o;
+;i•;i;o;
+;i•;i
+;@
+;@;["box-shadow;$i ;o;	;	o;
+;i•;id;@=;@
+;@;@;o;9;o;	;	o;
+;i•;id;o;
+;i•;i;@
+;@;@;::
+comma;@;/0;<[o;9;o;	;	o;
+;i•;i<;o;
+;i•;i;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;i•;i;o;
+;i•;i;@
+;@;o;&	;@;'0;"
+inset;;(;@;/0;i•o;%
+;o;	;	o;
+;i•;i;o;
+;i•;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i•o;%
+;o;	;	o;
+;i•;i;o;
+;i•;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i•o;%
+;o;	;	o;
+;i•;i#;o;
+;i•;i ;@
+;@;o;=
+;>["px;?"8px;@;i;@[ ;@;/0;i•o;%
+;o;	;	o;
+;i•;i';o;
+;i•;i$;@
+;@;o;=
+;>["px;?"4px;@;i	;@[ ;@;/0;i•o;0;"inset-shadow-active;o;	;	o;
+;i•;i<;o;
+;i•;i(;@
+;@;@;@;/0;i•;1"inset_shadow_active;i•o;9;o;	;	@D;o;
+;i•;i>;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;i•;iC;o;
+;i•;i>;@
+;@;o;&	;@;'0;"
+inset;;(;@;/0;i•o;%
+;o;	;	o;
+;i•;iE;o;
+;i•;iD;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i•o;%
+;o;	;	o;
+;i•;iG;o;
+;i•;iF;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i•o;%
+;o;	;	o;
+;i•;iK;o;
+;i•;iH;@
+;@;o;=
+;>["px;?"8px;@;i;@[ ;@;/0;i•o;%
+;o;	;	o;
+;i•;iO;o;
+;i•;iL;@
+;@;o;=
+;>["px;?"4px;@;i	;@[ ;@;/0;i•o;0;"inset-shadow-active;o;	;	o;
+;i•;id;o;
+;i•;iP;@
+;@;@;@;/0;i•;1"inset_shadow_active;i•;i•;0;[ ;);*;+o;	;	@A;o;
+;i•;i;@
+;@;i•;iö;ino;;o;	;	o;
+;i©;i;o;
+;i©;i;@
+;@;@;["/* Shiny Button */;0;[ ;i©;;o;;"
+shiny;o;	;	o;
+;i™;i[;o;
+;i™;i;@
+;@; 0;@;T;![	[o;0;"base-color;o;	;	o;
+;i™;i;o;
+;i™;i;@
+;@;@;@;/0;i™;1"base_color0[o;0;"grayscale;o;	;	o;
+;i™;i*;o;
+;i™;i ;@
+;@;@;@;/0;i™;1"grayscaleo;%
+;o;	;	o;
+;i™;i1;o;
+;i™;i,;@
+;@;@);@;/0;i™[o;0;"textsize;o;	;	o;
+;i™;i<;o;
+;i™;i3;@
+;@;@;@;/0;i™;1"textsizeo;%
+;o;	;	o;
+;i™;iE;o;
+;i™;i>;@
+;@;o;&	;@;'0;"inherit;;(;@;/0;i™[o;0;"padding;o;	;	o;
+;i™;iO;o;
+;i™;iG;@
+;@;@;@;/0;i™;1"paddingo;9;o;	;	o;
+;i™;iY;o;
+;i™;iP;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;i™;iT;o;
+;i™;iQ;@
+;@;o;=
+;>["px;?"7px;@;i;@[ ;@;/0;i™o;%
+;o;	;	o;
+;i™;iY;o;
+;i™;iU;@
+;@;o;=
+;>["px;?"	18px;@;i;@[ ;@;/0;i™;i™;0;[o;T;"
+color;U0;o;	;	o;
+;i´;i';o;
+;i´;i	;@
+;@;@;-o;V;"hsl;o;	;	o;
+;i´;i';o;
+;i´;i;@
+;@; 0;W0;@;![o;%
+;o;	;	o;
+;i´;i;o;
+;i´;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i´o;%
+;o;	;	o;
+;i´;i ;o;
+;i´;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i´o;%
+;o;	;	o;
+;i´;i&;o;
+;i´;i";@
+;@;o;=
+;>["%;?"	100%;@;ii;@[ ;@;/0;i´;@;Xo;Y;ZIC;[{ ;\[ ;]{ ;/0;i´;0;[ ;i´;^0o;T;"border;U0;o;	;	o;
+;i¨;iW;o;
+;i¨;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i¨;iW;o;
+;i¨;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i¨;i0;o;
+;i¨;i%;@
+;@;@;@;/0;i¨;1"base_color;@;Xo;Y;ZIC;[{"redo;%
+;o;	;	o;
+;i¨;i<;o;
+;i¨;i8;@
+;@;o;=
+;>[ ;?"	-117;@;iÜ;@@h;@;/0;i¨"	blueo;%
+;o;	;	o;
+;i¨;iV;o;
+;i¨;iS;@
+;@;o;=
+;>[ ;?"-81;@;i™;@@h;@;/0;i¨"
+greeno;%
+;o;	;	o;
+;i¨;iJ;o;
+;i¨;iF;@
+;@;o;=
+;>[ ;?"	-111;@;iå;@@h;@;/0;i¨;\["red"
+green"	blue;]{@0"red@8"	blue@@"
+green;/0;i¨;0;[ ;i¨;^0o;T;"border-bottom;U0;o;	;	o;
+;i≠;iX;o;
+;i≠;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i≠;iX;o;
+;i≠;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i≠;i0;o;
+;i≠;i%;@
+;@;@;@;/0;i≠;1"base_color;@;Xo;Y;ZIC;[{"redo;%
+;o;	;	o;
+;i≠;i<;o;
+;i≠;i8;@
+;@;o;=
+;>[ ;?"	-126;@;iˇÇ;@@h;@;/0;i≠"	blueo;%
+;o;	;	o;
+;i≠;iW;o;
+;i≠;iS;@
+;@;o;=
+;>[ ;?"	-122;@;iÅ;@@h;@;/0;i≠"
+greeno;%
+;o;	;	o;
+;i≠;iJ;o;
+;i≠;iF;@
+;@;o;=
+;>[ ;?"	-127;@;iˇÅ;@@h;@;/0;i≠;\["red"
+green"	blue;]{@d"red@l"	blue@t"
+green;/0;i≠;0;[ ;i≠;^0o;T;"fourth-stop;U0;o;	;	o;
+;iÆ;iW;o;
+;iÆ;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;iÆ;iW;o;
+;iÆ;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;iÆ;i0;o;
+;iÆ;i%;@
+;@;@;@;/0;iÆ;1"base_color;@;Xo;Y;ZIC;[{"redo;%
+;o;	;	o;
+;iÆ;i;;o;
+;iÆ;i8;@
+;@;o;=
+;>[ ;?"-79;@;i¨;@@h;@;/0;iÆ"	blueo;%
+;o;	;	o;
+;iÆ;iV;o;
+;iÆ;iS;@
+;@;o;=
+;>[ ;?"-46;@;iÕ;@@h;@;/0;iÆ"
+greeno;%
+;o;	;	o;
+;iÆ;iI;o;
+;iÆ;iF;@
+;@;o;=
+;>[ ;?"-70;@;iµ;@@h;@;/0;iÆ;\["red"
+green"	blue;]{@ò"red@†"	blue@®"
+green;/0;iÆ;0;[ ;iÆ;^0o;T;"inset-shadow;U0;o;	;	o;
+;iØ;iW;o;
+;iØ;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;iØ;iW;o;
+;iØ;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;iØ;i0;o;
+;iØ;i%;@
+;@;@;@;/0;iØ;1"base_color;@;Xo;Y;ZIC;[{"redo;%
+;o;	;	o;
+;iØ;i;;o;
+;iØ;i9;@
+;@;o;=
+;>[ ;?"37;@;i*;@@h;@;/0;iØ"	blueo;%
+;o;	;	o;
+;iØ;iV;o;
+;iØ;iT;@
+;@;o;=
+;>[ ;?"12;@;i;@@h;@;/0;iØ"
+greeno;%
+;o;	;	o;
+;iØ;iI;o;
+;iØ;iG;@
+;@;o;=
+;>[ ;?"29;@;i";@@h;@;/0;iØ;\["red"
+green"	blue;]{@Ã"red@‘"	blue@‹"
+green;/0;iØ;0;[ ;iØ;^0o;T;"second-stop;U0;o;	;	o;
+;i∞;iW;o;
+;i∞;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i∞;iW;o;
+;i∞;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i∞;i0;o;
+;i∞;i%;@
+;@;@;@;/0;i∞;1"base_color;@;Xo;Y;ZIC;[{"redo;%
+;o;	;	o;
+;i∞;i;;o;
+;i∞;i8;@
+;@;o;=
+;>[ ;?"-56;@;i√;@@h;@;/0;i∞"	blueo;%
+;o;	;	o;
+;i∞;iV;o;
+;i∞;iS;@
+;@;o;=
+;>[ ;?"-33;@;i⁄;@@h;@;/0;i∞"
+greeno;%
+;o;	;	o;
+;i∞;iI;o;
+;i∞;iF;@
+;@;o;=
+;>[ ;?"-50;@;i…;@@h;@;/0;i∞;\["red"
+green"	blue;]{@ "red@"	blue@"
+green;/0;i∞;0;[ ;i∞;^0o;T;"text-shadow;U0;o;	;	o;
+;i±;iX;o;
+;i±;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i±;iX;o;
+;i±;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i±;i0;o;
+;i±;i%;@
+;@;@;@;/0;i±;1"base_color;@;Xo;Y;ZIC;[{"redo;%
+;o;	;	o;
+;i±;i<;o;
+;i±;i8;@
+;@;o;=
+;>[ ;?"	-140;@;iˇt;@@h;@;/0;i±"	blueo;%
+;o;	;	o;
+;i±;iW;o;
+;i±;iS;@
+;@;o;=
+;>[ ;?"	-114;@;iâ;@@h;@;/0;i±"
+greeno;%
+;o;	;	o;
+;i±;iJ;o;
+;i±;iF;@
+;@;o;=
+;>[ ;?"	-141;@;iˇs;@@h;@;/0;i±;\["red"
+green"	blue;]{@4"red@<"	blue@D"
+green;/0;i±;0;[ ;i±;^0o;T;"third-stop;U0;o;	;	o;
+;i≤;iW;o;
+;i≤;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i≤;iW;o;
+;i≤;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i≤;i0;o;
+;i≤;i%;@
+;@;@;@;/0;i≤;1"base_color;@;Xo;Y;ZIC;[{"redo;%
+;o;	;	o;
+;i≤;i;;o;
+;i≤;i8;@
+;@;o;=
+;>[ ;?"-86;@;i•;@@h;@;/0;i≤"	blueo;%
+;o;	;	o;
+;i≤;iV;o;
+;i≤;iS;@
+;@;o;=
+;>[ ;?"-48;@;iÀ;@@h;@;/0;i≤"
+greeno;%
+;o;	;	o;
+;i≤;iI;o;
+;i≤;iF;@
+;@;o;=
+;>[ ;?"-75;@;i∞;@@h;@;/0;i≤;\["red"
+green"	blue;]{@h"red@p"	blue@x"
+green;/0;i≤;0;[ ;i≤;^0u;A˘[o: Sass::Script::Tree::Funcall:
+@name"is-light:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@linei¥:@offseti!:@start_poso;
+;i¥;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@splat0:@kwarg_splat0:@options{ :
+@args[o:!Sass::Script::Tree::Variable;"base-color;o;	;	o;
+;i¥;i ;o;
+;i¥;i;@;@;@:@filename@:@css_variable_warning0;i¥:@underscored_name"base_color;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;i¥0[o:Sass::Tree::VariableNode;"
+color:@guarded0;o;	;	o;
+;iµ;i&;o;
+;iµ;i;@;@;@:
+@expro; ;"hsl;o;	;	o;
+;iµ;i&;o;
+;iµ;i;@;@;0;0;@;[o: Sass::Script::Tree::Literal
+;o;	;	o;
+;iµ;i;o;
+;iµ;i;@;@:@valueo: Sass::Script::Value::Number
+:@numerator_units[ :@original"0;@;(i :@denominator_units[ ;@;0;iµo;'
+;o;	;	o;
+;iµ;i ;o;
+;iµ;i;@;@;(o;)
+;*[ ;+"0;@;(i ;,@0;@;0;iµo;'
+;o;	;	o;
+;iµ;i%;o;
+;iµ;i";@;@;(o;)
+;*["%;+"20%;@;(i;,[ ;@;0;iµ;@;o;; IC;!{ ;"[ ;#{ ;0;iµ;0:@children[ ;iµ:@global0o;$;"text-shadow;%0;o;	;	o;
+;i∂;iS;o;
+;i∂;i;@;@;@;&o; ;"adjust-color;o;	;	o;
+;i∂;iS;o;
+;i∂;i;@;@;0;0;@;[o;;"base-color;o;	;	o;
+;i∂;i0;o;
+;i∂;i%;@;@;@;@;0;i∂;"base_color;@;o;; IC;!{"saturationo;'
+;o;	;	o;
+;i∂;iB;o;
+;i∂;i?;@;@;(o;)
+;*["%;+"10%;@;(i;,[ ;@;0;i∂"lightnesso;'
+;o;	;	o;
+;i∂;iR;o;
+;i∂;iP;@;@;(o;)
+;*["%;+"4%;@;(i	;,[ ;@;0;i∂;"["saturation"lightness;#{@Y"saturation@c"lightness;0;i∂;0;-[ ;i∂;.0u;A"[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@lineiπ:@offseti:@start_poso;	;
+iπ;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+iπ;i;o;	;
+iπ;i;@
+;@:@valueo:Sass::Script::Value::Bool:@options{ ;T:@filename@:@css_variable_warning0;
+iπ;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"grayscale;o;	;o;	;
+iπ;i;@	;@
+;@;@;@;0;
+iπ:@underscored_name"grayscale;0;
+iπ:@operator:eq0[o:Sass::Tree::VariableNode;"border:@guarded0;o;	;o;	;
+i∫;i,;o;	;
+i∫;i;@
+;@;@:
+@expro: Sass::Script::Tree::Funcall;"grayscale;o;	;o;	;
+i∫;i,;o;	;
+i∫;i;@
+;@:@splat0:@kwarg_splat0;@:
+@args[o;;"border;o;	;o;	;
+i∫;i+;o;	;
+i∫;i$;@
+;@;@;@;0;
+i∫;"border;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+i∫;0:@children[ ;
+i∫:@global0o;";"border-bottom;#0;o;	;o;	;
+iª;i3;o;	;
+iª;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+iª;i3;o;	;
+iª;i;@
+;@;&0;'0;@;([o;;"border-bottom;o;	;o;	;
+iª;i2;o;	;
+iª;i$;@
+;@;@;@;0;
+iª;"border_bottom;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+iª;0;/[ ;
+iª;00o;";"fourth-stop;#0;o;	;o;	;
+iº;i1;o;	;
+iº;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+iº;i1;o;	;
+iº;i;@
+;@;&0;'0;@;([o;;"fourth-stop;o;	;o;	;
+iº;i0;o;	;
+iº;i$;@
+;@;@;@;0;
+iº;"fourth_stop;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+iº;0;/[ ;
+iº;00o;";"inset-shadow;#0;o;	;o;	;
+iΩ;i2;o;	;
+iΩ;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+iΩ;i2;o;	;
+iΩ;i;@
+;@;&0;'0;@;([o;;"inset-shadow;o;	;o;	;
+iΩ;i1;o;	;
+iΩ;i$;@
+;@;@;@;0;
+iΩ;"inset_shadow;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+iΩ;0;/[ ;
+iΩ;00o;";"second-stop;#0;o;	;o;	;
+iæ;i1;o;	;
+iæ;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+iæ;i1;o;	;
+iæ;i;@
+;@;&0;'0;@;([o;;"second-stop;o;	;o;	;
+iæ;i0;o;	;
+iæ;i$;@
+;@;@;@;0;
+iæ;"second_stop;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+iæ;0;/[ ;
+iæ;00o;";"text-shadow;#0;o;	;o;	;
+iø;i1;o;	;
+iø;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+iø;i1;o;	;
+iø;i;@
+;@;&0;'0;@;([o;;"text-shadow;o;	;o;	;
+iø;i0;o;	;
+iø;i$;@
+;@;@;@;0;
+iø;"text_shadow;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+iø;0;/[ ;
+iø;00o;";"third-stop;#0;o;	;o;	;
+i¿;i0;o;	;
+i¿;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i¿;i0;o;	;
+i¿;i;@
+;@;&0;'0;@;([o;;"third-stop;o;	;o;	;
+i¿;i/;o;	;
+i¿;i$;@
+;@;@;@;0;
+i¿;"third_stop;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i¿;0;/[ ;
+i¿;00o;_;"linear-gradient;o;	;	o;
+;i√;ik;o;
+;i√;i;@
+;@; 0;W0;@;![
+o;%
+;o;	;	o;
+;i√;i$;o;
+;i√;i!;@
+;@;o;&	;@;'0;"top;;(;@;/0;i√o;9;o;	;	o;
+;i√;i4;o;
+;i√;i%;@
+;@;@;:;;;@;/0;<[o;0;"base-color;o;	;	o;
+;i√;i1;o;
+;i√;i&;@
+;@;@;@;/0;i√;1"base_coloro;%
+;o;	;	o;
+;i√;i4;o;
+;i√;i2;@
+;@;o;=
+;>["%;?"0%;@;i ;@[ ;@;/0;i√;i√o;9;o;	;	o;
+;i√;iF;o;
+;i√;i5;@
+;@;@;:;;;@;/0;<[o;0;"second-stop;o;	;	o;
+;i√;iB;o;
+;i√;i6;@
+;@;@;@;/0;i√;1"second_stopo;%
+;o;	;	o;
+;i√;iF;o;
+;i√;iC;@
+;@;o;=
+;>["%;?"50%;@;i7;@[ ;@;/0;i√;i√o;9;o;	;	o;
+;i√;iW;o;
+;i√;iG;@
+;@;@;:;;;@;/0;<[o;0;"third-stop;o;	;	o;
+;i√;iS;o;
+;i√;iH;@
+;@;@;@;/0;i√;1"third_stopo;%
+;o;	;	o;
+;i√;iW;o;
+;i√;iT;@
+;@;o;=
+;>["%;?"50%;@;i7;@[ ;@;/0;i√;i√o;9;o;	;	o;
+;i√;ij;o;
+;i√;iX;@
+;@;@;:;;;@;/0;<[o;0;"fourth-stop;o;	;	o;
+;i√;ie;o;
+;i√;iY;@
+;@;@;@;/0;i√;1"fourth_stopo;%
+;o;	;	o;
+;i√;ij;o;
+;i√;if;@
+;@;o;=
+;>["%;?"	100%;@;ii;@[ ;@;/0;i√;i√;0;[ ;Xo;Y;ZIC;[{ ;\[ ;]{ ;i√o;";#o;	;	o;
+;i≈;i;o;
+;i≈;i;@
+;@;["border;$i ;o;	;	o;
+;i≈;i!;@Ô;@
+;@;@;o;9;o;	;	o;
+;i≈;i!;o;
+;i≈;i;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;i≈;i;o;
+;i≈;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;i≈o;%
+;o;	;	o;
+;i≈;i;o;
+;i≈;i;@
+;@;o;&	;@;'0;"
+solid;;(;@;/0;i≈o;0;"border;o;	;	o;
+;i≈;i!;o;
+;i≈;i;@
+;@;@;@;/0;i≈;1"border;i≈;0;[ ;);*;+o;	;	@Û;o;
+;i≈;i;@
+;@;i≈o;";#o;	;	o;
+;i∆;i;o;
+;i∆;i;@
+;@;["border-bottom;$i ;o;	;	o;
+;i∆;i/;@;@
+;@;@;o;9;o;	;	o;
+;i∆;i/;o;
+;i∆;i;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;i∆;i;o;
+;i∆;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;i∆o;%
+;o;	;	o;
+;i∆;i ;o;
+;i∆;i;@
+;@;o;&	;@;'0;"
+solid;;(;@;/0;i∆o;0;"border-bottom;o;	;	o;
+;i∆;i/;o;
+;i∆;i!;@
+;@;@;@;/0;i∆;1"border_bottom;i∆;0;[ ;);*;+o;	;	@;o;
+;i∆;i;@
+;@;i∆o;";#o;	;	o;
+;i«;i;o;
+;i«;i;@
+;@;["border-radius;$i ;o;	;	o;
+;i«;i;@9;@
+;@;@;o;%;o;	;	o;
+;i«;i;o;
+;i«;i;@
+;@;o;&	;@;'0;"5px;;(;i«;0;[ ;);*;+o;	;	@=;o;
+;i«;i;@
+;@;i«o;";#o;	;	o;
+;i»;i;o;
+;i»;i;@
+;@;["box-shadow;$i ;o;	;	o;
+;i»;i1;@J;@
+;@;@;o;9;o;	;	o;
+;i»;i1;o;
+;i»;i;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;i»;i;o;
+;i»;i;@
+;@;o;&	;@;'0;"
+inset;;(;@;/0;i»o;%
+;o;	;	o;
+;i»;i;o;
+;i»;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i»o;%
+;o;	;	o;
+;i»;i;o;
+;i»;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;i»o;%
+;o;	;	o;
+;i»;i!;o;
+;i»;i ;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i»o;%
+;o;	;	o;
+;i»;i#;o;
+;i»;i";@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i»o;0;"inset-shadow;o;	;	o;
+;i»;i1;o;
+;i»;i$;@
+;@;@;@;/0;i»;1"inset_shadow;i»;0;[ ;);*;+o;	;	@N;o;
+;i»;i;@
+;@;i»o;";#o;	;	o;
+;i…;i;o;
+;i…;i;@
+;@;["
+color;$i ;o;	;	o;
+;i…;i;@Ñ;@
+;@;@;o;0;"
+color;o;	;	o;
+;i…;i;o;
+;i…;i;@
+;@;@;@;/0;i…;1"
+color;0;[ ;);*;+o;	;	@à;o;
+;i…;i;@
+;@;i…o;";#o;	;	o;
+;i ;i;o;
+;i ;i;@
+;@;["display;$i ;o;	;	o;
+;i ;i;@ï;@
+;@;@;o;%;o;	;	o;
+;i ;i;o;
+;i ;i;@
+;@;o;&	;@;'0;"inline-block;;(;i ;0;[ ;);*;+o;	;	@ô;o;
+;i ;i;@
+;@;i o;";#o;	;	o;
+;iÀ;i;o;
+;iÀ;i;@
+;@;["font-size;$i ;o;	;	o;
+;iÀ;i;@¶;@
+;@;@;o;0;"textsize;o;	;	o;
+;iÀ;i;o;
+;iÀ;i;@
+;@;@;@;/0;iÀ;1"textsize;0;[ ;);*;+o;	;	@™;o;
+;iÀ;i;@
+;@;iÀo;";#o;	;	o;
+;iÃ;i;o;
+;iÃ;i;@
+;@;["font-weight;$i ;o;	;	o;
+;iÃ;i;@∑;@
+;@;@;o;%;o;	;	o;
+;iÃ;i;o;
+;iÃ;i;@
+;@;o;&	;@;'0;"	bold;;(;iÃ;0;[ ;);*;+o;	;	@ª;o;
+;iÃ;i;@
+;@;iÃo;";#o;	;	o;
+;iÕ;i;o;
+;iÕ;i;@
+;@;["padding;$i ;o;	;	o;
+;iÕ;i;@»;@
+;@;@;o;0;"padding;o;	;	o;
+;iÕ;i;o;
+;iÕ;i;@
+;@;@;@;/0;iÕ;1"padding;0;[ ;);*;+o;	;	@Ã;o;
+;iÕ;i;@
+;@;iÕo;";#o;	;	o;
+;iŒ;i;o;
+;iŒ;i;@
+;@;["text-align;$i ;o;	;	o;
+;iŒ;i;@Ÿ;@
+;@;@;o;%;o;	;	o;
+;iŒ;i;o;
+;iŒ;i;@
+;@;o;&	;@;'0;"center;;(;iŒ;0;[ ;);*;+o;	;	@›;o;
+;iŒ;i;@
+;@;iŒo;";#o;	;	o;
+;iœ;i;o;
+;iœ;i;@
+;@;["text-decoration;$i ;o;	;	o;
+;iœ;i;@Í;@
+;@;@;o;%;o;	;	o;
+;iœ;i;o;
+;iœ;i;@
+;@;o;&	;@;'0;"	none;;(;iœ;0;[ ;);*;+o;	;	@Ó;o;
+;iœ;i;@
+;@;iœo;";#o;	;	o;
+;i–;i;o;
+;i–;i;@
+;@;["text-shadow;$i ;o;	;	o;
+;i–;i,;@˚;@
+;@;@;o;9;o;	;	o;
+;i–;i,;o;
+;i–;i;@
+;@;@;:;;;@;/0;<[	o;%
+;o;	;	o;
+;i–;i;o;
+;i–;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i–o;%
+;o;	;	o;
+;i–;i;o;
+;i–;i;@
+;@;o;=
+;>["px;?"	-1px;@;i˙;@[ ;@;/0;i–o;%
+;o;	;	o;
+;i–;i;o;
+;i–;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;i–o;0;"text-shadow;o;	;	o;
+;i–;i,;o;
+;i–;i ;@
+;@;@;@;/0;i–;1"text_shadow;i–;0;[ ;);*;+o;	;	@ˇ;o;
+;i–;i;@
+;@;i–o;B;$i ;o;	;	o;
+;i“;i;o;
+;i“;i;@
+;@;Co;D;E[o;F;E[o;G;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;H;I0;0;i“o;J;"
+hover;K0;L0;0;M;N;i“o;J;"not;Ko;D;E[o;F;E[o;G	;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;J	;"disabled;K0;L0;M;N;O0;Po;;{ ;L0;0;M;N;i“;0;O0;i“;Po;;{ ;i“;0;i“;@;Qo;	;	o;
+;i“;i;@*	;@
+;@;T;R["&:hover:not(:disabled);0;[o;T;"first-stop-hover;U0;o;	;	o;
+;i”;i[;o;
+;i”;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i”;i[;o;
+;i”;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i”;i6;o;
+;i”;i+;@
+;@;@;@;/0;i”;1"base_color;@;Xo;Y;ZIC;[{"redo;%
+;o;	;	o;
+;i”;iA;o;
+;i”;i>;@
+;@;o;=
+;>[ ;?"-13;@;iÓ;@@h;@;/0;i”"	blueo;%
+;o;	;	o;
+;i”;iZ;o;
+;i”;iW;@
+;@;o;=
+;>[ ;?"-18;@;iÈ;@@h;@;/0;i”"
+greeno;%
+;o;	;	o;
+;i”;iN;o;
+;i”;iK;@
+;@;o;=
+;>[ ;?"-15;@;iÏ;@@h;@;/0;i”;\["red"
+green"	blue;]{@`	"red@h	"	blue@p	"
+green;/0;i”;0;[ ;i”;^0o;T;"second-stop-hover;U0;o;	;	o;
+;i‘;i[;o;
+;i‘;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i‘;i[;o;
+;i‘;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i‘;i6;o;
+;i‘;i+;@
+;@;@;@;/0;i‘;1"base_color;@;Xo;Y;ZIC;[{"redo;%
+;o;	;	o;
+;i‘;iA;o;
+;i‘;i>;@
+;@;o;=
+;>[ ;?"-66;@;iπ;@@h;@;/0;i‘"	blueo;%
+;o;	;	o;
+;i‘;iZ;o;
+;i‘;iW;@
+;@;o;=
+;>[ ;?"-51;@;i»;@@h;@;/0;i‘"
+greeno;%
+;o;	;	o;
+;i‘;iN;o;
+;i‘;iK;@
+;@;o;=
+;>[ ;?"-62;@;iΩ;@@h;@;/0;i‘;\["red"
+green"	blue;]{@î	"red@ú	"	blue@§	"
+green;/0;i‘;0;[ ;i‘;^0o;T;"third-stop-hover;U0;o;	;	o;
+;i’;i[;o;
+;i’;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i’;i[;o;
+;i’;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i’;i6;o;
+;i’;i+;@
+;@;@;@;/0;i’;1"base_color;@;Xo;Y;ZIC;[{"redo;%
+;o;	;	o;
+;i’;iA;o;
+;i’;i>;@
+;@;o;=
+;>[ ;?"-93;@;iû;@@h;@;/0;i’"	blueo;%
+;o;	;	o;
+;i’;iZ;o;
+;i’;iW;@
+;@;o;=
+;>[ ;?"-66;@;iπ;@@h;@;/0;i’"
+greeno;%
+;o;	;	o;
+;i’;iN;o;
+;i’;iK;@
+;@;o;=
+;>[ ;?"-85;@;i¶;@@h;@;/0;i’;\["red"
+green"	blue;]{@»	"red@–	"	blue@ÿ	"
+green;/0;i’;0;[ ;i’;^0o;T;"fourth-stop-hover;U0;o;	;	o;
+;i÷;i[;o;
+;i÷;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i÷;i[;o;
+;i÷;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i÷;i6;o;
+;i÷;i+;@
+;@;@;@;/0;i÷;1"base_color;@;Xo;Y;ZIC;[{"redo;%
+;o;	;	o;
+;i÷;iA;o;
+;i÷;i>;@
+;@;o;=
+;>[ ;?"-86;@;i•;@@h;@;/0;i÷"	blueo;%
+;o;	;	o;
+;i÷;iZ;o;
+;i÷;iW;@
+;@;o;=
+;>[ ;?"-63;@;iº;@@h;@;/0;i÷"
+greeno;%
+;o;	;	o;
+;i÷;iN;o;
+;i÷;iK;@
+;@;o;=
+;>[ ;?"-80;@;i´;@@h;@;/0;i÷;\["red"
+green"	blue;]{@¸	"red@
+"	blue@
+"
+green;/0;i÷;0;[ ;i÷;^0u;A	[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@lineiÿ:@offseti!:@start_poso;	;
+iÿ;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+iÿ;i ;o;	;
+iÿ;i;@
+;@:@valueo:Sass::Script::Value::Bool:@options{ ;T:@filename@:@css_variable_warning0;
+iÿ;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"grayscale;o;	;o;	;
+iÿ;i;@	;@
+;@;@;@;0;
+iÿ:@underscored_name"grayscale;0;
+iÿ:@operator:eq0[	o:Sass::Tree::VariableNode;"first-stop-hover:@guarded0;o;	;o;	;
+iŸ;i<;o;	;
+iŸ;i;@
+;@;@:
+@expro: Sass::Script::Tree::Funcall;"grayscale;o;	;o;	;
+iŸ;i<;o;	;
+iŸ;i ;@
+;@:@splat0:@kwarg_splat0;@:
+@args[o;;"first-stop-hover;o;	;o;	;
+iŸ;i;;o;	;
+iŸ;i*;@
+;@;@;@;0;
+iŸ;"first_stop_hover;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+iŸ;0:@children[ ;
+iŸ:@global0o;";"second-stop-hover;#0;o;	;o;	;
+i⁄;i=;o;	;
+i⁄;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i⁄;i=;o;	;
+i⁄;i ;@
+;@;&0;'0;@;([o;;"second-stop-hover;o;	;o;	;
+i⁄;i<;o;	;
+i⁄;i*;@
+;@;@;@;0;
+i⁄;"second_stop_hover;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i⁄;0;/[ ;
+i⁄;00o;";"third-stop-hover;#0;o;	;o;	;
+i€;i<;o;	;
+i€;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i€;i<;o;	;
+i€;i ;@
+;@;&0;'0;@;([o;;"third-stop-hover;o;	;o;	;
+i€;i;;o;	;
+i€;i*;@
+;@;@;@;0;
+i€;"third_stop_hover;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i€;0;/[ ;
+i€;00o;";"fourth-stop-hover;#0;o;	;o;	;
+i‹;i=;o;	;
+i‹;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i‹;i=;o;	;
+i‹;i ;@
+;@;&0;'0;@;([o;;"fourth-stop-hover;o;	;o;	;
+i‹;i<;o;	;
+i‹;i*;@
+;@;@;@;0;
+i‹;"fourth_stop_hover;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i‹;0;/[ ;
+i‹;00o;_;"linear-gradient;o;	;	o;
+;i‚;i@;o;
+;iﬂ;i
+;@
+;@; 0;W0;@;![
+o;%
+;o;	;	o;
+;iﬂ;i&;o;
+;iﬂ;i#;@
+;@;o;&	;@;'0;"top;;(;@;/0;iﬂo;9;o;	;	o;
+;iﬂ;i=;o;
+;iﬂ;i';@
+;@;@;:;;;@;/0;<[o;0;"first-stop-hover;o;	;	o;
+;iﬂ;i9;o;
+;iﬂ;i(;@
+;@;@;@;/0;iﬂ;1"first_stop_hovero;%
+;o;	;	o;
+;iﬂ;i=;o;
+;iﬂ;i;;@
+;@;o;=
+;>["%;?"0%;@;i ;@[ ;@;/0;iﬂ;iﬂo;9;o;	;	o;
+;i‡;i>;o;
+;iﬂ;i>;@
+;@;@;:;;;@;/0;<[o;0;"second-stop-hover;o;	;	o;
+;i‡;i:;o;
+;i‡;i(;@
+;@;@;@;/0;i‡;1"second_stop_hovero;%
+;o;	;	o;
+;i‡;i>;o;
+;i‡;i;;@
+;@;o;=
+;>["%;?"50%;@;i7;@[ ;@;/0;i‡;iﬂo;9;o;	;	o;
+;i·;i>;o;
+;i‡;i?;@
+;@;@;:;;;@;/0;<[o;0;"third-stop-hover;o;	;	o;
+;i·;i9;o;
+;i·;i(;@
+;@;@;@;/0;i·;1"third_stop_hovero;%
+;o;	;	o;
+;i·;i>;o;
+;i·;i;;@
+;@;o;=
+;>["%;?"50%;@;i7;@[ ;@;/0;i·;i‡o;9;o;	;	o;
+;i‚;i?;o;
+;i·;i?;@
+;@;@;:;;;@;/0;<[o;0;"fourth-stop-hover;o;	;	o;
+;i‚;i:;o;
+;i‚;i(;@
+;@;@;@;/0;i‚;1"fourth_stop_hovero;%
+;o;	;	o;
+;i‚;i?;o;
+;i‚;i;;@
+;@;o;=
+;>["%;?"	100%;@;ii;@[ ;@;/0;i‚;i·;0;[ ;Xo;Y;ZIC;[{ ;\[ ;]{ ;iﬂo;";#o;	;	o;
+;i„;i;o;
+;i„;i
+;@
+;@;["cursor;$i ;o;	;	o;
+;i„;i;@Ç
+;@
+;@;@;o;%;o;	;	o;
+;i„;i;o;
+;i„;i;@
+;@;o;&	;@;'0;"pointer;;(;i„;0;[ ;);*;+o;	;	@Ü
+;o;
+;i„;i;@
+;@;i„;i“o;B;$i ;o;	;	o;
+;iÁ;i;o;
+;iÊ;i;@
+;@;Co;D;E[o;F;E[o;G;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;H;I0;0;iÊo;J;"active;K0;L0;0;M;N;iÊo;J;"not;Ko;D;E[o;F;E[o;G	;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;J	;"disabled;K0;L0;M;N;O0;Po;;{ ;L0;0;M;N;iÊ;0;O0;iÊ;Po;;{ ;iÊo;F;E["
+o;G;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;H;I0;0;iÊo;J;"
+focus;K0;L0;0;M;N;iÊo;J;"not;Ko;D;E[o;F;E[o;G	;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;J	;"disabled;K0;L0;M;N;O0;Po;;{ ;L0;0;M;N;iÊ;0;O0;iÊ;Po;;{ ;iÊ;0;iÊ;@;Qo;	;	o;
+;iÁ;i;@ì
+;@
+;@;T;R["6&:active:not(:disabled),
+  &:focus:not(:disabled);0;[o;T;"inset-shadow-active;U0;o;	;	o;
+;iË;i`;o;
+;iË;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;iË;i`;o;
+;iË;i ;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;iË;i8;o;
+;iË;i-;@
+;@;@;@;/0;iË;1"base_color;@;Xo;Y;ZIC;[{"redo;%
+;o;	;	o;
+;iË;iD;o;
+;iË;i@;@
+;@;o;=
+;>[ ;?"	-111;@;iå;@@h;@;/0;iË"	blueo;%
+;o;	;	o;
+;iË;i_;o;
+;iË;i[;@
+;@;o;=
+;>[ ;?"	-122;@;iÅ;@@h;@;/0;iË"
+greeno;%
+;o;	;	o;
+;iË;iR;o;
+;iË;iN;@
+;@;o;=
+;>[ ;?"	-116;@;iá;@@h;@;/0;iË;\["red"
+green"	blue;]{@Â
+"red@Ì
+"	blue@ı
+"
+green;/0;iË;0;[ ;iË;^0u;Aq[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@lineiÍ:@offseti!:@start_poso;	;
+iÍ;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+iÍ;i ;o;	;
+iÍ;i;@
+;@:@valueo:Sass::Script::Value::Bool:@options{ ;T:@filename@:@css_variable_warning0;
+iÍ;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"grayscale;o;	;o;	;
+iÍ;i;@	;@
+;@;@;@;0;
+iÍ:@underscored_name"grayscale;0;
+iÍ:@operator:eq0[o:Sass::Tree::VariableNode;"inset-shadow-active:@guarded0;o;	;o;	;
+iÎ;iA;o;	;
+iÎ;i;@
+;@;@:
+@expro: Sass::Script::Tree::Funcall;"grayscale;o;	;o;	;
+iÎ;iA;o;	;
+iÎ;i";@
+;@:@splat0:@kwarg_splat0;@:
+@args[o;;"inset-shadow-active;o;	;o;	;
+iÎ;i@;o;	;
+iÎ;i,;@
+;@;@;@;0;
+iÎ;"inset_shadow_active;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+iÎ;0:@children[ ;
+iÎ:@global0o;";#o;	;	o;
+;iÓ;i;o;
+;iÓ;i
+;@
+;@;["box-shadow;$i ;o;	;	o;
+;iÓ;i;;@
+;@
+;@;@;o;9;o;	;	o;
+;iÓ;i;;o;
+;iÓ;i;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;iÓ;i;o;
+;iÓ;i;@
+;@;o;&	;@;'0;"
+inset;;(;@;/0;iÓo;%
+;o;	;	o;
+;iÓ;i;o;
+;iÓ;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;iÓo;%
+;o;	;	o;
+;iÓ;i;o;
+;iÓ;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;iÓo;%
+;o;	;	o;
+;iÓ;i$;o;
+;iÓ;i ;@
+;@;o;=
+;>["px;?"	20px;@;i;@[ ;@;/0;iÓo;%
+;o;	;	o;
+;iÓ;i&;o;
+;iÓ;i%;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;iÓo;0;"inset-shadow-active;o;	;	o;
+;iÓ;i;;o;
+;iÓ;i';@
+;@;@;@;/0;iÓ;1"inset_shadow_active;iÓ;0;[ ;);*;+o;	;	@;o;
+;iÓ;i;@
+;@;iÓ;iÊ;i™o;;o;	;	o;
+;iÚ;i;o;
+;iÚ;i;@
+;@;@;["/* Pill Button */;0;[ ;iÚ;;o;;"	pill;o;	;	o;
+;iÛ;iZ;o;
+;iÛ;i;@
+;@; 0;@;T;![	[o;0;"base-color;o;	;	o;
+;iÛ;i;o;
+;iÛ;i;@
+;@;@;@;/0;iÛ;1"base_color0[o;0;"grayscale;o;	;	o;
+;iÛ;i);o;
+;iÛ;i;@
+;@;@;@;/0;iÛ;1"grayscaleo;%
+;o;	;	o;
+;iÛ;i0;o;
+;iÛ;i+;@
+;@;@);@;/0;iÛ[o;0;"textsize;o;	;	o;
+;iÛ;i;;o;
+;iÛ;i2;@
+;@;@;@;/0;iÛ;1"textsizeo;%
+;o;	;	o;
+;iÛ;iD;o;
+;iÛ;i=;@
+;@;o;&	;@;'0;"inherit;;(;@;/0;iÛ[o;0;"padding;o;	;	o;
+;iÛ;iN;o;
+;iÛ;iF;@
+;@;@;@;/0;iÛ;1"paddingo;9;o;	;	o;
+;iÛ;iX;o;
+;iÛ;iO;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;iÛ;iS;o;
+;iÛ;iP;@
+;@;o;=
+;>["px;?"7px;@;i;@[ ;@;/0;iÛo;%
+;o;	;	o;
+;iÛ;iX;o;
+;iÛ;iT;@
+;@;o;=
+;>["px;?"	18px;@;i;@[ ;@;/0;iÛ;iÛ;0;[o;T;"
+color;U0;o;	;	o;
+;iÙ;i';o;
+;iÙ;i	;@
+;@;@;-o;V;"hsl;o;	;	o;
+;iÙ;i';o;
+;iÙ;i;@
+;@; 0;W0;@;![o;%
+;o;	;	o;
+;iÙ;i;o;
+;iÙ;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;iÙo;%
+;o;	;	o;
+;iÙ;i ;o;
+;iÙ;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;iÙo;%
+;o;	;	o;
+;iÙ;i&;o;
+;iÙ;i";@
+;@;o;=
+;>["%;?"	100%;@;ii;@[ ;@;/0;iÙ;@;Xo;Y;ZIC;[{ ;\[ ;]{ ;/0;iÙ;0;[ ;iÙ;^0o;T;"border-bottom;U0;o;	;	o;
+;iı;i`;o;
+;iı;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;iı;i`;o;
+;iı;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;iı;i0;o;
+;iı;i%;@
+;@;@;@;/0;iı;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;iı;iM;o;
+;iı;iI;@
+;@;o;=
+;>["%;?"	-11%;@;i;@[ ;@;/0;iı"hueo;%
+;o;	;	o;
+;iı;i:;o;
+;iı;i9;@
+;@;o;=
+;>[ ;?"8;@;i;@@h;@;/0;iı"lightnesso;%
+;o;	;	o;
+;iı;i_;o;
+;iı;i[;@
+;@;o;=
+;>["%;?"	-26%;@;i·;@[ ;@;/0;iı;\["hue"saturation"lightness;]{@∆"saturation@–"hue@ÿ"lightness;/0;iı;0;[ ;iı;^0o;T;"border-sides;U0;o;	;	o;
+;iˆ;i`;o;
+;iˆ;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;iˆ;i`;o;
+;iˆ;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;iˆ;i0;o;
+;iˆ;i%;@
+;@;@;@;/0;iˆ;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;iˆ;iM;o;
+;iˆ;iI;@
+;@;o;=
+;>["%;?"	-21%;@;iÊ;@[ ;@;/0;iˆ"hueo;%
+;o;	;	o;
+;iˆ;i:;o;
+;iˆ;i9;@
+;@;o;=
+;>[ ;?"4;@;i	;@@h;@;/0;iˆ"lightnesso;%
+;o;	;	o;
+;iˆ;i_;o;
+;iˆ;i[;@
+;@;o;=
+;>["%;?"	-21%;@;iÊ;@[ ;@;/0;iˆ;\["hue"saturation"lightness;]{@˛"saturation@"hue@"lightness;/0;iˆ;0;[ ;iˆ;^0o;T;"border-top;U0;o;	;	o;
+;i˜;i`;o;
+;i˜;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i˜;i`;o;
+;i˜;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i˜;i0;o;
+;i˜;i%;@
+;@;@;@;/0;i˜;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;i˜;iM;o;
+;i˜;iI;@
+;@;o;=
+;>["%;?"	-30%;@;i›;@[ ;@;/0;i˜"hueo;%
+;o;	;	o;
+;i˜;i:;o;
+;i˜;i8;@
+;@;o;=
+;>[ ;?"-1;@;i˙;@@h;@;/0;i˜"lightnesso;%
+;o;	;	o;
+;i˜;i_;o;
+;i˜;i[;@
+;@;o;=
+;>["%;?"	-15%;@;iÏ;@[ ;@;/0;i˜;\["hue"saturation"lightness;]{@6"saturation@@"hue@H"lightness;/0;i˜;0;[ ;i˜;^0o;T;"inset-shadow;U0;o;	;	o;
+;i¯;i_;o;
+;i¯;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i¯;i_;o;
+;i¯;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i¯;i0;o;
+;i¯;i%;@
+;@;@;@;/0;i¯;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;i¯;iL;o;
+;i¯;iI;@
+;@;o;=
+;>["%;?"-1%;@;i˙;@[ ;@;/0;i¯"hueo;%
+;o;	;	o;
+;i¯;i:;o;
+;i¯;i8;@
+;@;o;=
+;>[ ;?"-1;@;i˙;@@h;@;/0;i¯"lightnesso;%
+;o;	;	o;
+;i¯;i^;o;
+;i¯;i\;@
+;@;o;=
+;>["%;?"7%;@;i;@[ ;@;/0;i¯;\["hue"saturation"lightness;]{@n"saturation@x"hue@Ä"lightness;/0;i¯;0;[ ;i¯;^0o;T;"stop-gradient;U0;o;	;	o;
+;i˘;i`;o;
+;i˘;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i˘;i`;o;
+;i˘;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i˘;i0;o;
+;i˘;i%;@
+;@;@;@;/0;i˘;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;i˘;iM;o;
+;i˘;iJ;@
+;@;o;=
+;>["%;?"14%;@;i;@[ ;@;/0;i˘"hueo;%
+;o;	;	o;
+;i˘;i:;o;
+;i˘;i9;@
+;@;o;=
+;>[ ;?"8;@;i;@@h;@;/0;i˘"lightnesso;%
+;o;	;	o;
+;i˘;i_;o;
+;i˘;i[;@
+;@;o;=
+;>["%;?"	-10%;@;iÒ;@[ ;@;/0;i˘;\["hue"saturation"lightness;]{@¶"saturation@∞"hue@∏"lightness;/0;i˘;0;[ ;i˘;^0o;T;"text-shadow;U0;o;	;	o;
+;i˙;i`;o;
+;i˙;i	;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i˙;i`;o;
+;i˙;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i˙;i0;o;
+;i˙;i%;@
+;@;@;@;/0;i˙;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;i˙;iM;o;
+;i˙;iI;@
+;@;o;=
+;>["%;?"	-19%;@;iË;@[ ;@;/0;i˙"hueo;%
+;o;	;	o;
+;i˙;i:;o;
+;i˙;i9;@
+;@;o;=
+;>[ ;?"5;@;i
+;@@h;@;/0;i˙"lightnesso;%
+;o;	;	o;
+;i˙;i_;o;
+;i˙;i[;@
+;@;o;=
+;>["%;?"	-15%;@;iÏ;@[ ;@;/0;i˙;\["hue"saturation"lightness;]{@ﬁ"saturation@Ë"hue@"lightness;/0;i˙;0;[ ;i˙;^0u;A˘[o: Sass::Script::Tree::Funcall:
+@name"is-light:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@linei¸:@offseti!:@start_poso;
+;i¸;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@splat0:@kwarg_splat0:@options{ :
+@args[o:!Sass::Script::Tree::Variable;"base-color;o;	;	o;
+;i¸;i ;o;
+;i¸;i;@;@;@:@filename@:@css_variable_warning0;i¸:@underscored_name"base_color;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;i¸0[o:Sass::Tree::VariableNode;"
+color:@guarded0;o;	;	o;
+;i˝;i&;o;
+;i˝;i;@;@;@:
+@expro; ;"hsl;o;	;	o;
+;i˝;i&;o;
+;i˝;i;@;@;0;0;@;[o: Sass::Script::Tree::Literal
+;o;	;	o;
+;i˝;i;o;
+;i˝;i;@;@:@valueo: Sass::Script::Value::Number
+:@numerator_units[ :@original"0;@;(i :@denominator_units[ ;@;0;i˝o;'
+;o;	;	o;
+;i˝;i ;o;
+;i˝;i;@;@;(o;)
+;*[ ;+"0;@;(i ;,@0;@;0;i˝o;'
+;o;	;	o;
+;i˝;i%;o;
+;i˝;i";@;@;(o;)
+;*["%;+"20%;@;(i;,[ ;@;0;i˝;@;o;; IC;!{ ;"[ ;#{ ;0;i˝;0:@children[ ;i˝:@global0o;$;"text-shadow;%0;o;	;	o;
+;i˛;iS;o;
+;i˛;i;@;@;@;&o; ;"adjust-color;o;	;	o;
+;i˛;iS;o;
+;i˛;i;@;@;0;0;@;[o;;"base-color;o;	;	o;
+;i˛;i0;o;
+;i˛;i%;@;@;@;@;0;i˛;"base_color;@;o;; IC;!{"saturationo;'
+;o;	;	o;
+;i˛;iB;o;
+;i˛;i?;@;@;(o;)
+;*["%;+"10%;@;(i;,[ ;@;0;i˛"lightnesso;'
+;o;	;	o;
+;i˛;iR;o;
+;i˛;iP;@;@;(o;)
+;*["%;+"4%;@;(i	;,[ ;@;0;i˛;"["saturation"lightness;#{@Y"saturation@c"lightness;0;i˛;0;-[ ;i˛;.0u;AU[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@linei:@offseti:@start_poso;	;
+i;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+i;i;o;	;
+i;i;@
+;@:@valueo:Sass::Script::Value::Bool:@options{ ;T:@filename@:@css_variable_warning0;
+i;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"grayscale;o;	;o;	;
+i;i;@	;@
+;@;@;@;0;
+i:@underscored_name"grayscale;0;
+i:@operator:eq0[o:Sass::Tree::VariableNode;"border-bottom:@guarded0;o;	;o;	;
+i;i3;o;	;
+i;i;@
+;@;@:
+@expro: Sass::Script::Tree::Funcall;"grayscale;o;	;o;	;
+i;i3;o;	;
+i;i;@
+;@:@splat0:@kwarg_splat0;@:
+@args[o;;"border-bottom;o;	;o;	;
+i;i2;o;	;
+i;i$;@
+;@;@;@;0;
+i;"border_bottom;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+i;0:@children[ ;
+i:@global0o;";"border-sides;#0;o;	;o;	;
+i;i2;o;	;
+i;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i;i2;o;	;
+i;i;@
+;@;&0;'0;@;([o;;"border-sides;o;	;o;	;
+i;i1;o;	;
+i;i$;@
+;@;@;@;0;
+i;"border_sides;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i;0;/[ ;
+i;00o;";"border-top;#0;o;	;o;	;
+i;i0;o;	;
+i;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i;i0;o;	;
+i;i;@
+;@;&0;'0;@;([o;;"border-top;o;	;o;	;
+i;i/;o;	;
+i;i$;@
+;@;@;@;0;
+i;"border_top;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i;0;/[ ;
+i;00o;";"inset-shadow;#0;o;	;o;	;
+i;i2;o;	;
+i;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i;i2;o;	;
+i;i;@
+;@;&0;'0;@;([o;;"inset-shadow;o;	;o;	;
+i;i1;o;	;
+i;i$;@
+;@;@;@;0;
+i;"inset_shadow;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i;0;/[ ;
+i;00o;";"stop-gradient;#0;o;	;o;	;
+i;i3;o;	;
+i;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i;i3;o;	;
+i;i;@
+;@;&0;'0;@;([o;;"stop-gradient;o;	;o;	;
+i;i2;o;	;
+i;i$;@
+;@;@;@;0;
+i;"stop_gradient;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i;0;/[ ;
+i;00o;";"text-shadow;#0;o;	;o;	;
+i;i1;o;	;
+i;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i;i1;o;	;
+i;i;@
+;@;&0;'0;@;([o;;"text-shadow;o;	;o;	;
+i;i0;o;	;
+i;i$;@
+;@;@;@;0;
+i;"text_shadow;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i;0;/[ ;
+i;00o;";#o;	;	o;
+;i
+;i;o;
+;i
+;i;@
+;@;["border;$i ;o;	;	o;
+;i
+;i%;@;@
+;@;@;o;9;o;	;	o;
+;i
+;i%;o;
+;i
+;i;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;i
+;i;o;
+;i
+;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;i
+o;%
+;o;	;	o;
+;i
+;i;o;
+;i
+;i;@
+;@;o;&	;@;'0;"
+solid;;(;@;/0;i
+o;0;"border-top;o;	;	o;
+;i
+;i%;o;
+;i
+;i;@
+;@;@;@;/0;i
+;1"border_top;i
+;0;[ ;);*;+o;	;	@;o;
+;i
+;i;@
+;@;i
+o;";#o;	;	o;
+;i;i;o;
+;i;i;@
+;@;["border-color;$i ;o;	;	o;
+;i;i>;@-;@
+;@;@;o;9;o;	;	o;
+;i;i>;o;
+;i;i;@
+;@;@;:;;;@;/0;<[o;0;"border-top;o;	;	o;
+;i;i!;o;
+;i;i;@
+;@;@;@;/0;i;1"border_topo;0;"border-sides;o;	;	o;
+;i;i/;o;
+;i;i";@
+;@;@;@;/0;i;1"border_sideso;0;"border-bottom;o;	;	o;
+;i;i>;o;
+;i;i0;@
+;@;@;@;/0;i;1"border_bottom;i;0;[ ;);*;+o;	;	@1;o;
+;i;i;@
+;@;io;";#o;	;	o;
+;i;i;o;
+;i;i;@
+;@;["border-radius;$i ;o;	;	o;
+;i;i;@O;@
+;@;@;o;%;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;o;&	;@;'0;"	16px;;(;i;0;[ ;);*;+o;	;	@S;o;
+;i;i;@
+;@;io;";#o;	;	o;
+;i;i;o;
+;i;i;@
+;@;["box-shadow;$i ;o;	;	o;
+;i;i1;@`;@
+;@;@;o;9;o;	;	o;
+;i;i1;o;
+;i;i;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;o;&	;@;'0;"
+inset;;(;@;/0;io;%
+;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;io;%
+;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;io;%
+;o;	;	o;
+;i;i!;o;
+;i;i ;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;io;%
+;o;	;	o;
+;i;i#;o;
+;i;i";@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;io;0;"inset-shadow;o;	;	o;
+;i;i1;o;
+;i;i$;@
+;@;@;@;/0;i;1"inset_shadow;i;0;[ ;);*;+o;	;	@d;o;
+;i;i;@
+;@;io;";#o;	;	o;
+;i;i;o;
+;i;i;@
+;@;["
+color;$i ;o;	;	o;
+;i;i;@ö;@
+;@;@;o;0;"
+color;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;@;@;/0;i;1"
+color;0;[ ;);*;+o;	;	@û;o;
+;i;i;@
+;@;io;";#o;	;	o;
+;i;i;o;
+;i;i;@
+;@;["display;$i ;o;	;	o;
+;i;i;@´;@
+;@;@;o;%;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;o;&	;@;'0;"inline-block;;(;i;0;[ ;);*;+o;	;	@Ø;o;
+;i;i;@
+;@;io;";#o;	;	o;
+;i;i;o;
+;i;i;@
+;@;["font-size;$i ;o;	;	o;
+;i;i;@º;@
+;@;@;o;0;"textsize;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;@;@;/0;i;1"textsize;0;[ ;);*;+o;	;	@¿;o;
+;i;i;@
+;@;io;";#o;	;	o;
+;i;i;o;
+;i;i;@
+;@;["font-weight;$i ;o;	;	o;
+;i;i;@Õ;@
+;@;@;o;%;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;o;&	;@;'0;"normal;;(;i;0;[ ;);*;+o;	;	@—;o;
+;i;i;@
+;@;io;";#o;	;	o;
+;i;i;o;
+;i;i;@
+;@;["line-height;$i ;o;	;	o;
+;i;i;@ﬁ;@
+;@;@;o;%;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;o;&	;@;'0;"1;;(;i;0;[ ;);*;+o;	;	@‚;o;
+;i;i;@
+;@;io;_;"linear-gradient;o;	;	o;
+;i;i>;o;
+;i;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i;i-;o;
+;i;i";@
+;@;@;@;/0;i;1"base_coloro;0;"stop-gradient;o;	;	o;
+;i;i=;o;
+;i;i/;@
+;@;@;@;/0;i;1"stop_gradient;0;[ ;Xo;Y;ZIC;[{ ;\[ ;]{ ;io;";#o;	;	o;
+;i;i;o;
+;i;i;@
+;@;["padding;$i ;o;	;	o;
+;i;i;@;@
+;@;@;o;0;"padding;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;@;@;/0;i;1"padding;0;[ ;);*;+o;	;	@
+;o;
+;i;i;@
+;@;io;";#o;	;	o;
+;i;i;o;
+;i;i;@
+;@;["text-align;$i ;o;	;	o;
+;i;i;@;@
+;@;@;o;%;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;o;&	;@;'0;"center;;(;i;0;[ ;);*;+o;	;	@;o;
+;i;i;@
+;@;io;";#o;	;	o;
+;i;i;o;
+;i;i;@
+;@;["text-decoration;$i ;o;	;	o;
+;i;i;@(;@
+;@;@;o;%;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;o;&	;@;'0;"	none;;(;i;0;[ ;);*;+o;	;	@,;o;
+;i;i;@
+;@;io;";#o;	;	o;
+;i;i;o;
+;i;i;@
+;@;["text-shadow;$i ;o;	;	o;
+;i;i,;@9;@
+;@;@;o;9;o;	;	o;
+;i;i,;o;
+;i;i;@
+;@;@;:;;;@;/0;<[	o;%
+;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;io;%
+;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;o;=
+;>["px;?"	-1px;@;i˙;@[ ;@;/0;io;%
+;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;io;0;"text-shadow;o;	;	o;
+;i;i,;o;
+;i;i ;@
+;@;@;@;/0;i;1"text_shadow;i;0;[ ;);*;+o;	;	@=;o;
+;i;i;@
+;@;io;";#o;	;	o;
+;i;i;o;
+;i;i;@
+;@;["background-clip;$i ;o;	;	o;
+;i;i$;@h;@
+;@;@;o;%;o;	;	o;
+;i;i$;o;
+;i;i;@
+;@;o;&	;@;'0;"padding-box;;(;i;0;[ ;);*;+o;	;	@l;o;
+;i;i;@
+;@;io;B;$i ;o;	;	o;
+;i;i;o;
+;i;i;@
+;@;Co;D;E[o;F;E[o;G;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;H;I0;0;io;J;"
+hover;K0;L0;0;M;N;io;J;"not;Ko;D;E[o;F;E[o;G	;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;J	;"disabled;K0;L0;M;N;O0;Po;;{ ;L0;0;M;N;i;0;O0;i;Po;;{ ;i;0;i;@;Qo;	;	o;
+;i;i;@y;@
+;@;T;R["&:hover:not(:disabled);0;[o;T;"base-color-hover;U0;o;	;	o;
+;i;ik;o;
+;i;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i;ik;o;
+;i;i ;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i;i8;o;
+;i;i-;@
+;@;@;@;/0;i;1"base_color;@;Xo;Y;ZIC;[{"lightnesso;%
+;o;	;	o;
+;i;ij;o;
+;i;ie;@
+;@;o;=
+;>["%;?"
+-4.5%;@;f	-4.5;@[ ;@;/0;i;\["lightness;]{@Ø"lightness;/0;i;0;[ ;i;^0o;T;"border-bottom;U0;o;	;	o;
+;i;ij;o;
+;i;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i;ij;o;
+;i;i ;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i;i8;o;
+;i;i-;@
+;@;@;@;/0;i;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;i;iW;o;
+;i;iR;@
+;@;o;=
+;>["%;?"
+13.5%;@;f	13.5;@[ ;@;/0;i"hueo;%
+;o;	;	o;
+;i;iB;o;
+;i;iA;@
+;@;o;=
+;>[ ;?"8;@;i;@@h;@;/0;i"lightnesso;%
+;o;	;	o;
+;i;ii;o;
+;i;ie;@
+;@;o;=
+;>["%;?"	-32%;@;i€;@[ ;@;/0;i;\["hue"saturation"lightness;]{@“"saturation@›"hue@Â"lightness;/0;i;0;[ ;i;^0o;T;"border-sides;U0;o;	;	o;
+;i;ij;o;
+;i;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i;ij;o;
+;i;i ;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i;i8;o;
+;i;i-;@
+;@;@;@;/0;i;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;i;iT;o;
+;i;iQ;@
+;@;o;=
+;>["%;?"-2%;@;i˘;@[ ;@;/0;i"hueo;%
+;o;	;	o;
+;i;iB;o;
+;i;iA;@
+;@;o;=
+;>[ ;?"4;@;i	;@@h;@;/0;i"lightnesso;%
+;o;	;	o;
+;i;ii;o;
+;i;ie;@
+;@;o;=
+;>["%;?"	-27%;@;i‡;@[ ;@;/0;i;\["hue"saturation"lightness;]{@"saturation@"hue@"lightness;/0;i;0;[ ;i;^0o;T;"border-top;U0;o;	;	o;
+;i;ij;o;
+;i;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i;ij;o;
+;i;i ;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i;i8;o;
+;i;i-;@
+;@;@;@;/0;i;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;i;iU;o;
+;i;iQ;@
+;@;o;=
+;>["%;?"	-17%;@;iÍ;@[ ;@;/0;i"hueo;%
+;o;	;	o;
+;i;iB;o;
+;i;i@;@
+;@;o;=
+;>[ ;?"-1;@;i˙;@@h;@;/0;i"lightnesso;%
+;o;	;	o;
+;i;ii;o;
+;i;ie;@
+;@;o;=
+;>["%;?"	-21%;@;iÊ;@[ ;@;/0;i;\["hue"saturation"lightness;]{@C"saturation@M"hue@U"lightness;/0;i;0;[ ;i;^0o;T;"inset-shadow-hover;U0;o;	;	o;
+;i;ii;o;
+;i;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i;ii;o;
+;i;i ;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i;i8;o;
+;i;i-;@
+;@;@;@;/0;i;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;i;iT;o;
+;i;iQ;@
+;@;o;=
+;>["%;?"-1%;@;i˙;@[ ;@;/0;i"lightnesso;%
+;o;	;	o;
+;i;ih;o;
+;i;if;@
+;@;o;=
+;>["%;?"3%;@;i;@[ ;@;/0;i;\["saturation"lightness;]{@{"saturation@Ö"lightness;/0;i;0;[ ;i;^0o;T;"stop-gradient-hover;U0;o;	;	o;
+;i ;il;o;
+;i ;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i ;il;o;
+;i ;i ;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i ;i8;o;
+;i ;i-;@
+;@;@;@;/0;i ;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;i ;iT;o;
+;i ;iQ;@
+;@;o;=
+;>["%;?"-4%;@;i˜;@[ ;@;/0;i "hueo;%
+;o;	;	o;
+;i ;iB;o;
+;i ;iA;@
+;@;o;=
+;>[ ;?"8;@;i;@@h;@;/0;i "lightnesso;%
+;o;	;	o;
+;i ;ik;o;
+;i ;ie;@
+;@;o;=
+;>["%;?"-15.5%;@;f
+-15.5;@[ ;@;/0;i ;\["hue"saturation"lightness;]{@©"saturation@≥"hue@ª"lightness;/0;i ;0;[ ;i ;^0o;T;"text-shadow-hover;U0;o;	;	o;
+;i!;ij;o;
+;i!;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i!;ij;o;
+;i!;i ;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i!;i8;o;
+;i!;i-;@
+;@;@;@;/0;i!;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;i!;iT;o;
+;i!;iQ;@
+;@;o;=
+;>["%;?"-5%;@;iˆ;@[ ;@;/0;i!"hueo;%
+;o;	;	o;
+;i!;iB;o;
+;i!;iA;@
+;@;o;=
+;>[ ;?"5;@;i
+;@@h;@;/0;i!"lightnesso;%
+;o;	;	o;
+;i!;ii;o;
+;i!;ie;@
+;@;o;=
+;>["%;?"	-22%;@;iÂ;@[ ;@;/0;i!;\["hue"saturation"lightness;]{@‚"saturation@Ï"hue@Ù"lightness;/0;i!;0;[ ;i!;^0u;A∆[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@linei#:@offseti!:@start_poso;	;
+i#;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+i#;i ;o;	;
+i#;i;@
+;@:@valueo:Sass::Script::Value::Bool:@options{ ;T:@filename@:@css_variable_warning0;
+i#;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"grayscale;o;	;o;	;
+i#;i;@	;@
+;@;@;@;0;
+i#:@underscored_name"grayscale;0;
+i#:@operator:eq0[o:Sass::Tree::VariableNode;"base-color-hover:@guarded0;o;	;o;	;
+i$;i>;o;	;
+i$;i;@
+;@;@:
+@expro: Sass::Script::Tree::Funcall;"grayscale;o;	;o;	;
+i$;i>;o;	;
+i$;i";@
+;@:@splat0:@kwarg_splat0;@:
+@args[o;;"base-color-hover;o;	;o;	;
+i$;i=;o;	;
+i$;i,;@
+;@;@;@;0;
+i$;"base_color_hover;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+i$;0:@children[ ;
+i$:@global0o;";"border-bottom;#0;o;	;o;	;
+i%;i;;o;	;
+i%;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i%;i;;o;	;
+i%;i";@
+;@;&0;'0;@;([o;;"border-bottom;o;	;o;	;
+i%;i:;o;	;
+i%;i,;@
+;@;@;@;0;
+i%;"border_bottom;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i%;0;/[ ;
+i%;00o;";"border-sides;#0;o;	;o;	;
+i&;i:;o;	;
+i&;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i&;i:;o;	;
+i&;i";@
+;@;&0;'0;@;([o;;"border-sides;o;	;o;	;
+i&;i9;o;	;
+i&;i,;@
+;@;@;@;0;
+i&;"border_sides;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i&;0;/[ ;
+i&;00o;";"border-top;#0;o;	;o;	;
+i';i8;o;	;
+i';i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i';i8;o;	;
+i';i";@
+;@;&0;'0;@;([o;;"border-top;o;	;o;	;
+i';i7;o;	;
+i';i,;@
+;@;@;@;0;
+i';"border_top;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i';0;/[ ;
+i';00o;";"inset-shadow-hover;#0;o;	;o;	;
+i(;i@;o;	;
+i(;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i(;i@;o;	;
+i(;i";@
+;@;&0;'0;@;([o;;"inset-shadow-hover;o;	;o;	;
+i(;i?;o;	;
+i(;i,;@
+;@;@;@;0;
+i(;"inset_shadow_hover;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i(;0;/[ ;
+i(;00o;";"stop-gradient-hover;#0;o;	;o;	;
+i);iA;o;	;
+i);i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i);iA;o;	;
+i);i";@
+;@;&0;'0;@;([o;;"stop-gradient-hover;o;	;o;	;
+i);i@;o;	;
+i);i,;@
+;@;@;@;0;
+i);"stop_gradient_hover;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i);0;/[ ;
+i);00o;";"text-shadow-hover;#0;o;	;o;	;
+i*;i?;o;	;
+i*;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+i*;i?;o;	;
+i*;i";@
+;@;&0;'0;@;([o;;"text-shadow-hover;o;	;o;	;
+i*;i>;o;	;
+i*;i,;@
+;@;@;@;0;
+i*;"text_shadow_hover;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+i*;0;/[ ;
+i*;00o;_;"linear-gradient;o;	;	o;
+;i-;iL;o;
+;i-;i
+;@
+;@; 0;W0;@;![o;0;"base-color-hover;o;	;	o;
+;i-;i5;o;
+;i-;i$;@
+;@;@;@;/0;i-;1"base_color_hovero;0;"stop-gradient-hover;o;	;	o;
+;i-;iK;o;
+;i-;i7;@
+;@;@;@;/0;i-;1"stop_gradient_hover;0;[ ;Xo;Y;ZIC;[{ ;\[ ;]{ ;i-o;";#o;	;	o;
+;i/;i;o;
+;i/;i
+;@
+;@;["background-clip;$i ;o;	;	o;
+;i/;i&;@";@
+;@;@;o;%;o;	;	o;
+;i/;i&;o;
+;i/;i;@
+;@;o;&	;@;'0;"padding-box;;(;i/;0;[ ;);*;+o;	;	@&;o;
+;i/;i;@
+;@;i/o;";#o;	;	o;
+;i0;i;o;
+;i0;i
+;@
+;@;["border;$i ;o;	;	o;
+;i0;i';@3;@
+;@;@;o;9;o;	;	o;
+;i0;i';o;
+;i0;i;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;i0;i;o;
+;i0;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;i0o;%
+;o;	;	o;
+;i0;i;o;
+;i0;i;@
+;@;o;&	;@;'0;"
+solid;;(;@;/0;i0o;0;"border-top;o;	;	o;
+;i0;i';o;
+;i0;i;@
+;@;@;@;/0;i0;1"border_top;i0;0;[ ;);*;+o;	;	@7;o;
+;i0;i;@
+;@;i0o;";#o;	;	o;
+;i1;i;o;
+;i1;i
+;@
+;@;["border-color;$i ;o;	;	o;
+;i1;i@;@X;@
+;@;@;o;9;o;	;	o;
+;i1;i@;o;
+;i1;i;@
+;@;@;:;;;@;/0;<[o;0;"border-top;o;	;	o;
+;i1;i#;o;
+;i1;i;@
+;@;@;@;/0;i1;1"border_topo;0;"border-sides;o;	;	o;
+;i1;i1;o;
+;i1;i$;@
+;@;@;@;/0;i1;1"border_sideso;0;"border-bottom;o;	;	o;
+;i1;i@;o;
+;i1;i2;@
+;@;@;@;/0;i1;1"border_bottom;i1;0;[ ;);*;+o;	;	@\;o;
+;i1;i;@
+;@;i1o;";#o;	;	o;
+;i2;i;o;
+;i2;i
+;@
+;@;["box-shadow;$i ;o;	;	o;
+;i2;i9;@z;@
+;@;@;o;9;o;	;	o;
+;i2;i9;o;
+;i2;i;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;i2;i;o;
+;i2;i;@
+;@;o;&	;@;'0;"
+inset;;(;@;/0;i2o;%
+;o;	;	o;
+;i2;i;o;
+;i2;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i2o;%
+;o;	;	o;
+;i2;i!;o;
+;i2;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;i2o;%
+;o;	;	o;
+;i2;i#;o;
+;i2;i";@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i2o;%
+;o;	;	o;
+;i2;i%;o;
+;i2;i$;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i2o;0;"inset-shadow-hover;o;	;	o;
+;i2;i9;o;
+;i2;i&;@
+;@;@;@;/0;i2;1"inset_shadow_hover;i2;0;[ ;);*;+o;	;	@~;o;
+;i2;i;@
+;@;i2o;";#o;	;	o;
+;i3;i;o;
+;i3;i
+;@
+;@;["cursor;$i ;o;	;	o;
+;i3;i;@¥;@
+;@;@;o;%;o;	;	o;
+;i3;i;o;
+;i3;i;@
+;@;o;&	;@;'0;"pointer;;(;i3;0;[ ;);*;+o;	;	@∏;o;
+;i3;i;@
+;@;i3o;";#o;	;	o;
+;i4;i;o;
+;i4;i
+;@
+;@;["text-shadow;$i ;o;	;	o;
+;i4;i4;@≈;@
+;@;@;o;9;o;	;	o;
+;i4;i4;o;
+;i4;i;@
+;@;@;:;;;@;/0;<[	o;%
+;o;	;	o;
+;i4;i;o;
+;i4;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;i4o;%
+;o;	;	o;
+;i4;i;o;
+;i4;i;@
+;@;o;=
+;>["px;?"	-1px;@;i˙;@[ ;@;/0;i4o;%
+;o;	;	o;
+;i4;i!;o;
+;i4;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;i4o;0;"text-shadow-hover;o;	;	o;
+;i4;i4;o;
+;i4;i";@
+;@;@;@;/0;i4;1"text_shadow_hover;i4;0;[ ;);*;+o;	;	@…;o;
+;i4;i;@
+;@;i4;io;B;$i ;o;	;	o;
+;i8;i;o;
+;i7;i;@
+;@;Co;D;E[o;F;E[o;G;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;H;I0;0;i7o;J;"active;K0;L0;0;M;N;i7o;J;"not;Ko;D;E[o;F;E[o;G	;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;J	;"disabled;K0;L0;M;N;O0;Po;;{ ;L0;0;M;N;i7;0;O0;i7;Po;;{ ;i7o;F;E["
+o;G;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;H;I0;0;i7o;J;"
+focus;K0;L0;0;M;N;i7o;J;"not;Ko;D;E[o;F;E[o;G	;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;J	;"disabled;K0;L0;M;N;O0;Po;;{ ;L0;0;M;N;i7;0;O0;i7;Po;;{ ;i7;0;i7;@;Qo;	;	o;
+;i8;i;@Ù;@
+;@;T;R["6&:active:not(:disabled),
+  &:focus:not(:disabled);0;[o;T;"active-color;U0;o;	;	o;
+;i9;ij;o;
+;i9;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i9;ij;o;
+;i9;i!;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i9;i9;o;
+;i9;i.;@
+;@;@;@;/0;i9;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;i9;iV;o;
+;i9;iR;@
+;@;o;=
+;>["%;?"	-12%;@;iÔ;@[ ;@;/0;i9"hueo;%
+;o;	;	o;
+;i9;iB;o;
+;i9;iA;@
+;@;o;=
+;>[ ;?"4;@;i	;@@h;@;/0;i9"lightnesso;%
+;o;	;	o;
+;i9;ii;o;
+;i9;ie;@
+;@;o;=
+;>["%;?"	-10%;@;iÒ;@[ ;@;/0;i9;\["hue"saturation"lightness;]{@F"saturation@P"hue@X"lightness;/0;i9;0;[ ;i9;^0o;T;"border-active;U0;o;	;	o;
+;i:;ij;o;
+;i:;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i:;ij;o;
+;i:;i!;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i:;i9;o;
+;i:;i.;@
+;@;@;@;/0;i:;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;i:;iW;o;
+;i:;iR;@
+;@;o;=
+;>["%;?"
+-2.5%;@;f	-2.5;@[ ;@;/0;i:"hueo;%
+;o;	;	o;
+;i:;iB;o;
+;i:;iA;@
+;@;o;=
+;>[ ;?"6;@;i;@@h;@;/0;i:"lightnesso;%
+;o;	;	o;
+;i:;ii;o;
+;i:;ie;@
+;@;o;=
+;>["%;?"	-30%;@;i›;@[ ;@;/0;i:;\["hue"saturation"lightness;]{@~"saturation@â"hue@ë"lightness;/0;i:;0;[ ;i:;^0o;T;"border-bottom-active;U0;o;	;	o;
+;i;;ij;o;
+;i;;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i;;ij;o;
+;i;;i!;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i;;i9;o;
+;i;;i.;@
+;@;@;@;/0;i;;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;i;;iU;o;
+;i;;iS;@
+;@;o;=
+;>["%;?"6%;@;i;@[ ;@;/0;i;"hueo;%
+;o;	;	o;
+;i;;iC;o;
+;i;;iA;@
+;@;o;=
+;>[ ;?"11;@;i;@@h;@;/0;i;"lightnesso;%
+;o;	;	o;
+;i;;ii;o;
+;i;;ie;@
+;@;o;=
+;>["%;?"	-31%;@;i‹;@[ ;@;/0;i;;\["hue"saturation"lightness;]{@∑"saturation@¡"hue@…"lightness;/0;i;;0;[ ;i;;^0o;T;"inset-shadow-active;U0;o;	;	o;
+;i<;il;o;
+;i<;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i<;il;o;
+;i<;i!;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i<;i9;o;
+;i<;i.;@
+;@;@;@;/0;i<;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;i<;iU;o;
+;i<;iS;@
+;@;o;=
+;>["%;?"2%;@;i;@[ ;@;/0;i<"hueo;%
+;o;	;	o;
+;i<;iB;o;
+;i<;iA;@
+;@;o;=
+;>[ ;?"9;@;i;@@h;@;/0;i<"lightnesso;%
+;o;	;	o;
+;i<;ik;o;
+;i<;ie;@
+;@;o;=
+;>["%;?"-21.5%;@;f
+-21.5;@[ ;@;/0;i<;\["hue"saturation"lightness;]{@Ô"saturation@˘"hue@"lightness;/0;i<;0;[ ;i<;^0o;T;"text-shadow-active;U0;o;	;	o;
+;i=;il;o;
+;i=;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;i=;il;o;
+;i=;i!;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;i=;i9;o;
+;i=;i.;@
+;@;@;@;/0;i=;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;i=;iV;o;
+;i=;iR;@
+;@;o;=
+;>["%;?"	-12%;@;iÔ;@[ ;@;/0;i="hueo;%
+;o;	;	o;
+;i=;iB;o;
+;i=;iA;@
+;@;o;=
+;>[ ;?"5;@;i
+;@@h;@;/0;i="lightnesso;%
+;o;	;	o;
+;i=;ik;o;
+;i=;ie;@
+;@;o;=
+;>["%;?"-21.5%;@;f
+-21.5;@[ ;@;/0;i=;\["hue"saturation"lightness;]{@("saturation@2"hue@:"lightness;/0;i=;0;[ ;i=;^0u;Ak
+[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@linei?:@offseti!:@start_poso;	;
+i?;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+i?;i ;o;	;
+i?;i;@
+;@:@valueo:Sass::Script::Value::Bool:@options{ ;T:@filename@:@css_variable_warning0;
+i?;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"grayscale;o;	;o;	;
+i?;i;@	;@
+;@;@;@;0;
+i?:@underscored_name"grayscale;0;
+i?:@operator:eq0[
+o:Sass::Tree::VariableNode;"active-color:@guarded0;o;	;o;	;
+i@;i;;o;	;
+i@;i;@
+;@;@:
+@expro: Sass::Script::Tree::Funcall;"grayscale;o;	;o;	;
+i@;i;;o;	;
+i@;i#;@
+;@:@splat0:@kwarg_splat0;@:
+@args[o;;"active-color;o;	;o;	;
+i@;i:;o;	;
+i@;i-;@
+;@;@;@;0;
+i@;"active_color;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+i@;0:@children[ ;
+i@:@global0o;";"border-active;#0;o;	;o;	;
+iA;i<;o;	;
+iA;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+iA;i<;o;	;
+iA;i#;@
+;@;&0;'0;@;([o;;"border-active;o;	;o;	;
+iA;i;;o;	;
+iA;i-;@
+;@;@;@;0;
+iA;"border_active;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+iA;0;/[ ;
+iA;00o;";"border-bottom-active;#0;o;	;o;	;
+iB;iC;o;	;
+iB;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+iB;iC;o;	;
+iB;i#;@
+;@;&0;'0;@;([o;;"border-bottom-active;o;	;o;	;
+iB;iB;o;	;
+iB;i-;@
+;@;@;@;0;
+iB;"border_bottom_active;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+iB;0;/[ ;
+iB;00o;";"inset-shadow-active;#0;o;	;o;	;
+iC;iB;o;	;
+iC;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+iC;iB;o;	;
+iC;i#;@
+;@;&0;'0;@;([o;;"inset-shadow-active;o;	;o;	;
+iC;iA;o;	;
+iC;i-;@
+;@;@;@;0;
+iC;"inset_shadow_active;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+iC;0;/[ ;
+iC;00o;";"text-shadow-active;#0;o;	;o;	;
+iD;iA;o;	;
+iD;i;@
+;@;@;$o;%;"grayscale;o;	;o;	;
+iD;iA;o;	;
+iD;i#;@
+;@;&0;'0;@;([o;;"text-shadow-active;o;	;o;	;
+iD;i@;o;	;
+iD;i-;@
+;@;@;@;0;
+iD;"text_shadow_active;@;)o;*;+IC;,{ ;-[ ;.{ ;0;
+iD;0;/[ ;
+iD;00o;";#o;	;	o;
+;iG;i;o;
+;iG;i
+;@
+;@;["background;$i ;o;	;	o;
+;iG;i#;@R;@
+;@;@;o;0;"active-color;o;	;	o;
+;iG;i#;o;
+;iG;i;@
+;@;@;@;/0;iG;1"active_color;0;[ ;);*;+o;	;	@V;o;
+;iG;i;@
+;@;iGo;";#o;	;	o;
+;iH;i;o;
+;iH;i
+;@
+;@;["border;$i ;o;	;	o;
+;iH;i*;@c;@
+;@;@;o;9;o;	;	o;
+;iH;i*;o;
+;iH;i;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;iH;i;o;
+;iH;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;iHo;%
+;o;	;	o;
+;iH;i;o;
+;iH;i;@
+;@;o;&	;@;'0;"
+solid;;(;@;/0;iHo;0;"border-active;o;	;	o;
+;iH;i*;o;
+;iH;i;@
+;@;@;@;/0;iH;1"border_active;iH;0;[ ;);*;+o;	;	@g;o;
+;iH;i;@
+;@;iHo;";#o;	;	o;
+;iI;i;o;
+;iI;i
+;@
+;@;["border-bottom;$i ;o;	;	o;
+;iI;i8;@à;@
+;@;@;o;9;o;	;	o;
+;iI;i8;o;
+;iI;i;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;iI;i;o;
+;iI;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;iIo;%
+;o;	;	o;
+;iI;i";o;
+;iI;i;@
+;@;o;&	;@;'0;"
+solid;;(;@;/0;iIo;0;"border-bottom-active;o;	;	o;
+;iI;i8;o;
+;iI;i#;@
+;@;@;@;/0;iI;1"border_bottom_active;iI;0;[ ;);*;+o;	;	@å;o;
+;iI;i;@
+;@;iIo;";#o;	;	o;
+;iJ;i;o;
+;iJ;i
+;@
+;@;["box-shadow;$i ;o;	;	o;
+;iJ;i<;@≠;@
+;@;@;o;9;o;	;	o;
+;iJ;i<;o;
+;iJ;i;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;iJ;i;o;
+;iJ;i;@
+;@;o;&	;@;'0;"
+inset;;(;@;/0;iJo;%
+;o;	;	o;
+;iJ;i;o;
+;iJ;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;iJo;%
+;o;	;	o;
+;iJ;i;o;
+;iJ;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;iJo;%
+;o;	;	o;
+;iJ;i#;o;
+;iJ;i ;@
+;@;o;=
+;>["px;?"6px;@;i;@[ ;@;/0;iJo;%
+;o;	;	o;
+;iJ;i';o;
+;iJ;i$;@
+;@;o;=
+;>["px;?"3px;@;i;@[ ;@;/0;iJo;0;"inset-shadow-active;o;	;	o;
+;iJ;i<;o;
+;iJ;i(;@
+;@;@;@;/0;iJ;1"inset_shadow_active;iJ;0;[ ;);*;+o;	;	@±;o;
+;iJ;i;@
+;@;iJo;";#o;	;	o;
+;iK;i;o;
+;iK;i
+;@
+;@;["text-shadow;$i ;o;	;	o;
+;iK;i5;@È;@
+;@;@;o;9;o;	;	o;
+;iK;i5;o;
+;iK;i;@
+;@;@;:;;;@;/0;<[	o;%
+;o;	;	o;
+;iK;i;o;
+;iK;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;iKo;%
+;o;	;	o;
+;iK;i;o;
+;iK;i;@
+;@;o;=
+;>["px;?"	-1px;@;i˙;@[ ;@;/0;iKo;%
+;o;	;	o;
+;iK;i!;o;
+;iK;i;@
+;@;o;=
+;>["px;?"1px;@;i;@[ ;@;/0;iKo;0;"text-shadow-active;o;	;	o;
+;iK;i5;o;
+;iK;i";@
+;@;@;@;/0;iK;1"text_shadow_active;iK;0;[ ;);*;+o;	;	@Ì;o;
+;iK;i;@
+;@;iK;i7;iÛo;;o;	;	o;
+;iO;i;o;
+;iO;i;@
+;@;@;["/* Flat Button */;0;[ ;iO;;o;;"	flat;o;	;	o;
+;iP;iZ;o;
+;iP;i;@
+;@; 0;@;T;![	[o;0;"base-color;o;	;	o;
+;iP;i;o;
+;iP;i;@
+;@;@;@;/0;iP;1"base_color0[o;0;"grayscale;o;	;	o;
+;iP;i);o;
+;iP;i;@
+;@;@;@;/0;iP;1"grayscaleo;%
+;o;	;	o;
+;iP;i0;o;
+;iP;i+;@
+;@;@);@;/0;iP[o;0;"textsize;o;	;	o;
+;iP;i;;o;
+;iP;i2;@
+;@;@;@;/0;iP;1"textsizeo;%
+;o;	;	o;
+;iP;iD;o;
+;iP;i=;@
+;@;o;&	;@;'0;"inherit;;(;@;/0;iP[o;0;"padding;o;	;	o;
+;iP;iN;o;
+;iP;iF;@
+;@;@;@;/0;iP;1"paddingo;9;o;	;	o;
+;iP;iX;o;
+;iP;iO;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;iP;iS;o;
+;iP;iP;@
+;@;o;=
+;>["px;?"7px;@;i;@[ ;@;/0;iPo;%
+;o;	;	o;
+;iP;iX;o;
+;iP;iT;@
+;@;o;=
+;>["px;?"	18px;@;i;@[ ;@;/0;iP;iP;0;[o;T;"
+color;U0;o;	;	o;
+;iQ;i';o;
+;iQ;i	;@
+;@;@;-o;V;"hsl;o;	;	o;
+;iQ;i';o;
+;iQ;i;@
+;@; 0;W0;@;![o;%
+;o;	;	o;
+;iQ;i;o;
+;iQ;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;iQo;%
+;o;	;	o;
+;iQ;i ;o;
+;iQ;i;@
+;@;o;=
+;>[ ;?"0;@;i ;@@h;@;/0;iQo;%
+;o;	;	o;
+;iQ;i&;o;
+;iQ;i";@
+;@;o;=
+;>["%;?"	100%;@;ii;@[ ;@;/0;iQ;@;Xo;Y;ZIC;[{ ;\[ ;]{ ;/0;iQ;0;[ ;iQ;^0u;AÍ[o: Sass::Script::Tree::Funcall:
+@name"is-light:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@lineiS:@offseti!:@start_poso;
+;iS;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@splat0:@kwarg_splat0:@options{ :
+@args[o:!Sass::Script::Tree::Variable;"base-color;o;	;	o;
+;iS;i ;o;
+;iS;i;@;@;@:@filename@:@css_variable_warning0;iS:@underscored_name"base_color;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;iS0[o:Sass::Tree::VariableNode;"
+color:@guarded0;o;	;	o;
+;iT;i&;o;
+;iT;i;@;@;@:
+@expro; ;"hsl;o;	;	o;
+;iT;i&;o;
+;iT;i;@;@;0;0;@;[o: Sass::Script::Tree::Literal
+;o;	;	o;
+;iT;i;o;
+;iT;i;@;@:@valueo: Sass::Script::Value::Number
+:@numerator_units[ :@original"0;@;(i :@denominator_units[ ;@;0;iTo;'
+;o;	;	o;
+;iT;i ;o;
+;iT;i;@;@;(o;)
+;*[ ;+"0;@;(i ;,@0;@;0;iTo;'
+;o;	;	o;
+;iT;i%;o;
+;iT;i";@;@;(o;)
+;*["%;+"20%;@;(i;,[ ;@;0;iT;@;o;; IC;!{ ;"[ ;#{ ;0;iT;0:@children[ ;iT:@global0o;";#o;	;	o;
+;iW;i;o;
+;iW;i;@
+;@;["background-color;$i ;o;	;	o;
+;iW;i%;@ã;@
+;@;@;o;0;"base-color;o;	;	o;
+;iW;i%;o;
+;iW;i;@
+;@;@;@;/0;iW;1"base_color;0;[ ;);*;+o;	;	@è;o;
+;iW;i;@
+;@;iWo;";#o;	;	o;
+;iX;i;o;
+;iX;i;@
+;@;["border-radius;$i ;o;	;	o;
+;iX;i;@ú;@
+;@;@;o;%;o;	;	o;
+;iX;i;o;
+;iX;i;@
+;@;o;&	;@;'0;"3px;;(;iX;0;[ ;);*;+o;	;	@†;o;
+;iX;i;@
+;@;iXo;";#o;	;	o;
+;iY;i;o;
+;iY;i;@
+;@;["border;$i ;o;	;	o;
+;iY;i;@≠;@
+;@;@;o;%;o;	;	o;
+;iY;i;o;
+;iY;i;@
+;@;o;&	;@;'0;"0;;(;iY;0;[ ;);*;+o;	;	@±;o;
+;iY;i;@
+;@;iYo;";#o;	;	o;
+;iZ;i;o;
+;iZ;i;@
+;@;["
+color;$i ;o;	;	o;
+;iZ;i;@æ;@
+;@;@;o;0;"
+color;o;	;	o;
+;iZ;i;o;
+;iZ;i;@
+;@;@;@;/0;iZ;1"
+color;0;[ ;);*;+o;	;	@¬;o;
+;iZ;i;@
+;@;iZo;";#o;	;	o;
+;i[;i;o;
+;i[;i;@
+;@;["display;$i ;o;	;	o;
+;i[;i;@œ;@
+;@;@;o;%;o;	;	o;
+;i[;i;o;
+;i[;i;@
+;@;o;&	;@;'0;"inline-block;;(;i[;0;[ ;);*;+o;	;	@”;o;
+;i[;i;@
+;@;i[o;";#o;	;	o;
+;i\;i;o;
+;i\;i;@
+;@;["font-size;$i ;o;	;	o;
+;i\;i;@‡;@
+;@;@;o;0;"textsize;o;	;	o;
+;i\;i;o;
+;i\;i;@
+;@;@;@;/0;i\;1"textsize;0;[ ;);*;+o;	;	@‰;o;
+;i\;i;@
+;@;i\o;";#o;	;	o;
+;i];i;o;
+;i];i;@
+;@;["font-weight;$i ;o;	;	o;
+;i];i;@Ò;@
+;@;@;o;%;o;	;	o;
+;i];i;o;
+;i];i;@
+;@;o;&	;@;'0;"	bold;;(;i];0;[ ;);*;+o;	;	@ı;o;
+;i];i;@
+;@;i]o;";#o;	;	o;
+;i^;i;o;
+;i^;i;@
+;@;["padding;$i ;o;	;	o;
+;i^;i;@;@
+;@;@;o;0;"padding;o;	;	o;
+;i^;i;o;
+;i^;i;@
+;@;@;@;/0;i^;1"padding;0;[ ;);*;+o;	;	@;o;
+;i^;i;@
+;@;i^o;";#o;	;	o;
+;i_;i;o;
+;i_;i;@
+;@;["text-decoration;$i ;o;	;	o;
+;i_;i;@;@
+;@;@;o;%;o;	;	o;
+;i_;i;o;
+;i_;i;@
+;@;o;&	;@;'0;"	none;;(;i_;0;[ ;);*;+o;	;	@;o;
+;i_;i;@
+;@;i_o;";#o;	;	o;
+;i`;i;o;
+;i`;i;@
+;@;["background-clip;$i ;o;	;	o;
+;i`;i$;@$;@
+;@;@;o;%;o;	;	o;
+;i`;i$;o;
+;i`;i;@
+;@;o;&	;@;'0;"padding-box;;(;i`;0;[ ;);*;+o;	;	@(;o;
+;i`;i;@
+;@;i`o;B;$i ;o;	;	o;
+;ib;i;o;
+;ib;i;@
+;@;Co;D;E[o;F;E[o;G;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;H;I0;0;ibo;J;"
+hover;K0;L0;0;M;N;ibo;J;"not;Ko;D;E[o;F;E[o;G	;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;J	;"disabled;K0;L0;M;N;O0;Po;;{ ;L0;0;M;N;ib;0;O0;ib;Po;;{ ;ib;0;ib;@;Qo;	;	o;
+;ib;i;@5;@
+;@;T;R["&:hover:not(:disabled);0;[	o;T;"base-color-hover;U0;o;	;	o;
+;ic;iZ;o;
+;ic;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;ic;iZ;o;
+;ic;i ;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;ic;i8;o;
+;ic;i-;@
+;@;@;@;/0;ic;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;ic;iI;o;
+;ic;iG;@
+;@;o;=
+;>["%;?"4%;@;i	;@[ ;@;/0;ic"lightnesso;%
+;o;	;	o;
+;ic;iY;o;
+;ic;iW;@
+;@;o;=
+;>["%;?"5%;@;i
+;@[ ;@;/0;ic;\["saturation"lightness;]{@k"saturation@u"lightness;/0;ic;0;[ ;ic;^0u;Ay[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@lineie:@offseti!:@start_poso;	;
+ie;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+ie;i ;o;	;
+ie;i;@
+;@:@valueo:Sass::Script::Value::Bool:@options{ ;T:@filename@:@css_variable_warning0;
+ie;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"grayscale;o;	;o;	;
+ie;i;@	;@
+;@;@;@;0;
+ie:@underscored_name"grayscale;0;
+ie:@operator:eq0[o:Sass::Tree::VariableNode;"base-color-hover:@guarded0;o;	;o;	;
+if;i;;o;	;
+if;i;@
+;@;@:
+@expro: Sass::Script::Tree::Funcall;"grayscale;o;	;o;	;
+if;i;;o;	;
+if;i;@
+;@:@splat0:@kwarg_splat0;@:
+@args[o;;"base-color-hover;o;	;o;	;
+if;i:;o;	;
+if;i);@
+;@;@;@;0;
+if;"base_color_hover;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+if;0:@children[ ;
+if:@global0o;";#o;	;	o;
+;ii;i;o;
+;ii;i
+;@
+;@;["background-color;$i ;o;	;	o;
+;ii;i-;@ä;@
+;@;@;o;0;"base-color-hover;o;	;	o;
+;ii;i-;o;
+;ii;i;@
+;@;@;@;/0;ii;1"base_color_hover;0;[ ;);*;+o;	;	@é;o;
+;ii;i;@
+;@;iio;";#o;	;	o;
+;ij;i;o;
+;ij;i
+;@
+;@;["cursor;$i ;o;	;	o;
+;ij;i;@õ;@
+;@;@;o;%;o;	;	o;
+;ij;i;o;
+;ij;i;@
+;@;o;&	;@;'0;"pointer;;(;ij;0;[ ;);*;+o;	;	@ü;o;
+;ij;i;@
+;@;ij;ibo;B;$i ;o;	;	o;
+;in;i;o;
+;im;i;@
+;@;Co;D;E[o;F;E[o;G;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;H;I0;0;imo;J;"active;K0;L0;0;M;N;imo;J;"not;Ko;D;E[o;F;E[o;G	;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;J	;"disabled;K0;L0;M;N;O0;Po;;{ ;L0;0;M;N;im;0;O0;im;Po;;{ ;imo;F;E["
+o;G;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;H;I0;0;imo;J;"
+focus;K0;L0;0;M;N;imo;J;"not;Ko;D;E[o;F;E[o;G	;o;	;	o;
+;i;i;o;
+;i;i;0;0;E[o;J	;"disabled;K0;L0;M;N;O0;Po;;{ ;L0;0;M;N;im;0;O0;im;Po;;{ ;im;0;im;@;Qo;	;	o;
+;in;i;@¨;@
+;@;T;R["6&:active:not(:disabled),
+  &:focus:not(:disabled);0;[	o;T;"base-color-active;U0;o;	;	o;
+;io;iZ;o;
+;io;i;@
+;@;@;-o;V;"adjust-color;o;	;	o;
+;io;iZ;o;
+;io;i;@
+;@; 0;W0;@;![o;0;"base-color;o;	;	o;
+;io;i6;o;
+;io;i+;@
+;@;@;@;/0;io;1"base_color;@;Xo;Y;ZIC;[{"saturationo;%
+;o;	;	o;
+;io;iH;o;
+;io;iE;@
+;@;o;=
+;>["%;?"-4%;@;i˜;@[ ;@;/0;io"lightnesso;%
+;o;	;	o;
+;io;iY;o;
+;io;iV;@
+;@;o;=
+;>["%;?"-5%;@;iˆ;@[ ;@;/0;io;\["saturation"lightness;]{@˛"saturation@"lightness;/0;io;0;[ ;io;^0u;A|[o:"Sass::Script::Tree::Operation:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position:
+@lineiq:@offseti!:@start_poso;	;
+iq;i:@importero: Sass::Importers::Filesystem:@real_root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:
+@root"U/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics:@same_name_warningso:Set:
+@hash{ :
+@file"~/Users/alexwllrd/Google Drive/Web Development/Courses/Team Treehouse/Sass Basics/css/bourbon/_bourbon-deprecated-upcoming.scss:@operand2o: Sass::Script::Tree::Literal
+;o;	;o;	;
+iq;i ;o;	;
+iq;i;@
+;@:@valueo:Sass::Script::Value::Bool:@options{ ;T:@filename@:@css_variable_warning0;
+iq;@;@:@operand1o:!Sass::Script::Tree::Variable:
+@name"grayscale;o;	;o;	;
+iq;i;@	;@
+;@;@;@;0;
+iq:@underscored_name"grayscale;0;
+iq:@operator:eq0[o:Sass::Tree::VariableNode;"base-color-active:@guarded0;o;	;o;	;
+ir;i=;o;	;
+ir;i;@
+;@;@:
+@expro: Sass::Script::Tree::Funcall;"grayscale;o;	;o;	;
+ir;i=;o;	;
+ir;i ;@
+;@:@splat0:@kwarg_splat0;@:
+@args[o;;"base-color-active;o;	;o;	;
+ir;i<;o;	;
+ir;i*;@
+;@;@;@;0;
+ir;"base_color_active;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;0;
+ir;0:@children[ ;
+ir:@global0o;";#o;	;	o;
+;iu;i;o;
+;iu;i
+;@
+;@;["background-color;$i ;o;	;	o;
+;iu;i.;@;@
+;@;@;o;0;"base-color-active;o;	;	o;
+;iu;i.;o;
+;iu;i;@
+;@;@;@;/0;iu;1"base_color_active;0;[ ;);*;+o;	;	@!;o;
+;iu;i;@
+;@;iuo;";#o;	;	o;
+;iv;i;o;
+;iv;i
+;@
+;@;["cursor;$i ;o;	;	o;
+;iv;i;@.;@
+;@;@;o;%;o;	;	o;
+;iv;i;o;
+;iv;i;@
+;@;o;&	;@;'0;"pointer;;(;iv;0;[ ;);*;+o;	;	@2;o;
+;iv;i;@
+;@;iv;im;iPo;;o;	;	o;
+;iz;i;o;
+;iz;i;@
+;@;@;["/* Flexible grid */;0;[ ;iz;;o:Sass::Tree::FunctionNode;"flex-grid;o;	;	o;
+;i{;iI;o;
+;i{;i;@
+;@; 0;@;T;![[o;0;"columns;o;	;	o;
+;i{;i";o;
+;i{;i;@
+;@;@;@;/0;i{;1"columns0[o;0;"container-columns;o;	;	o;
+;i{;i6;o;
+;i{;i$;@
+;@;@;@;/0;i{;1"container_columnso;0;"fg-max-columns;o;	;	o;
+;i{;iG;o;
+;i{;i8;@
+;@;@;@;/0;i{;1"fg_max_columns;0;[	o;T;"
+width;U0;o;	;	o;
+;i|;iC;o;
+;i|;i	;@
+;@;@;-o:"Sass::Script::Tree::Operation;o;	;	o;
+;i|;iC;o;
+;i|;i;@
+;@:@operand2o;b;o;	;	o;
+;i|;iC;o;
+;i|;i);@
+;@;co;0;"fg-gutter;o;	;	o;
+;i|;iC;o;
+;i|;i9;@
+;@;@;@;/0;i|;1"fg_gutter;@;@:@operand1o;b;o;	;	o;
+;i|;i5;@j;@
+;@;co;%
+;o;	;	o;
+;i|;i5;o;
+;i|;i4;@
+;@;o;=
+;>[ ;?0;@;i;@@h;@;/0;i|;@;@;do;0;"columns;o;	;	o;
+;i|;i1;@j;@
+;@;@;@;/0;i|;1"columns;/0;i|:@operator:
+minus;/0;i|;e:
+times;@;@;do;b;o;	;	o;
+;i|;i%;@f;@
+;@;co;0;"fg-column;o;	;	o;
+;i|;i%;o;
+;i|;i;@
+;@;@;@;/0;i|;1"fg_column;@;@;do;0;"columns;o;	;	o;
+;i|;i;@f;@
+;@;@;@;/0;i|;1"columns;/0;i|;e;g;/0;i|;e:	plus;0;[ ;i|;^0o;T;"container-width;U0;o;	;	o;
+;i};ia;o;
+;i};i	;@
+;@;@;-o;b;o;	;	o;
+;i};ia;o;
+;i};i;@
+;@;co;b;o;	;	o;
+;i};ia;o;
+;i};i=;@
+;@;co;0;"fg-gutter;o;	;	o;
+;i};ia;o;
+;i};iW;@
+;@;@;@;/0;i};1"fg_gutter;@;@;do;b;o;	;	o;
+;i};iS;@ö;@
+;@;co;%
+;o;	;	o;
+;i};iS;o;
+;i};iR;@
+;@;o;=
+;>[ ;?0;@;i;@@h;@;/0;i};@;@;do;0;"container-columns;o;	;	o;
+;i};iO;@ö;@
+;@;@;@;/0;i};1"container_columns;/0;i};e;f;/0;i};e;g;@;@;do;b;o;	;	o;
+;i};i9;@ñ;@
+;@;co;0;"fg-column;o;	;	o;
+;i};i9;o;
+;i};i/;@
+;@;@;@;/0;i};1"fg_column;@;@;do;0;"container-columns;o;	;	o;
+;i};i,;@ñ;@
+;@;@;@;/0;i};1"container_columns;/0;i};e;g;/0;i};e;h;0;[ ;i};^0o:Sass::Tree::ReturnNode;o;	;	o;
+;i~;i5;o;
+;i~;i;@
+;@;@;-o;V;"percentage;o;	;	o;
+;i~;i5;o;
+;i~;i;@
+;@; 0;W0;@;![o;b;o;	;	o;
+;i~;i4;o;
+;i~;i;@
+;@;co;0;"container-width;o;	;	o;
+;i~;i4;o;
+;i~;i$;@
+;@;@;@;/0;i~;1"container_width;@;@;do;0;"
+width;o;	;	o;
+;i~;i!;@À;@
+;@;@;@;/0;i~;1"
+width;/0;i~;e:div;@;Xo;Y;ZIC;[{ ;\[ ;]{ ;/0;i~;0;[ ;i~o;,;o;	;	o;
+;iÄ;ij;o;
+;iÄ;i;@
+;@;@;-o;%
+;o;	;	o;
+;iÄ;ij;o;
+;iÄ;i;@
+;@;o;&	;@;'0;"_The flex-grid function is deprecated and will be removed in the next major version release;;.;@;/0;iÄ;0;[ ;iÄ;i{o;;o;	;	o;
+;iÉ;i;o;
+;iÉ;i;@
+;@;@;["/* Flexible gutter */;0;[ ;iÉ;;o;a;"flex-gutter;o;	;	o;
+;iÑ;iV;o;
+;iÑ;i;@
+;@; 0;@;T;![[o;0;"container-columns;o;	;	o;
+;iÑ;i.;o;
+;iÑ;i;@
+;@;@;@;/0;iÑ;1"container_columnso;0;"fg-max-columns;o;	;	o;
+;iÑ;i?;o;
+;iÑ;i0;@
+;@;@;@;/0;iÑ;1"fg_max_columns[o;0;"gutter;o;	;	o;
+;iÑ;iH;o;
+;iÑ;iA;@
+;@;@;@;/0;iÑ;1"guttero;0;"fg-gutter;o;	;	o;
+;iÑ;iT;o;
+;iÑ;iJ;@
+;@;@;@;/0;iÑ;1"fg_gutter;0;[o;T;"container-width;U0;o;	;	o;
+;iÖ;ia;o;
+;iÖ;i	;@
+;@;@;-o;b;o;	;	o;
+;iÖ;ia;o;
+;iÖ;i;@
+;@;co;b;o;	;	o;
+;iÖ;ia;o;
+;iÖ;i=;@
+;@;co;0;"fg-gutter;o;	;	o;
+;iÖ;ia;o;
+;iÖ;iW;@
+;@;@;@;/0;iÖ;1"fg_gutter;@;@;do;b;o;	;	o;
+;iÖ;iS;@;@
+;@;co;%
+;o;	;	o;
+;iÖ;iS;o;
+;iÖ;iR;@
+;@;o;=
+;>[ ;?0;@;i;@@h;@;/0;iÖ;@;@;do;0;"container-columns;o;	;	o;
+;iÖ;iO;@;@
+;@;@;@;/0;iÖ;1"container_columns;/0;iÖ;e;f;/0;iÖ;e;g;@;@;do;b;o;	;	o;
+;iÖ;i9;@;@
+;@;co;0;"fg-column;o;	;	o;
+;iÖ;i9;o;
+;iÖ;i/;@
+;@;@;@;/0;iÖ;1"fg_column;@;@;do;0;"container-columns;o;	;	o;
+;iÖ;i,;@;@
+;@;@;@;/0;iÖ;1"container_columns;/0;iÖ;e;g;/0;iÖ;e;h;0;[ ;iÖ;^0o;i;o;	;	o;
+;iÜ;i6;o;
+;iÜ;i;@
+;@;@;-o;V;"percentage;o;	;	o;
+;iÜ;i6;o;
+;iÜ;i;@
+;@; 0;W0;@;![o;b;o;	;	o;
+;iÜ;i5;o;
+;iÜ;i;@
+;@;co;0;"container-width;o;	;	o;
+;iÜ;i5;o;
+;iÜ;i%;@
+;@;@;@;/0;iÜ;1"container_width;@;@;do;0;"gutter;o;	;	o;
+;iÜ;i";@L;@
+;@;@;@;/0;iÜ;1"gutter;/0;iÜ;e;j;@;Xo;Y;ZIC;[{ ;\[ ;]{ ;/0;iÜ;0;[ ;iÜo;,;o;	;	o;
+;ià;il;o;
+;ià;i;@
+;@;@;-o;%
+;o;	;	o;
+;ià;il;o;
+;ià;i;@
+;@;o;&	;@;'0;"aThe flex-gutter function is deprecated and will be removed in the next major version release;;.;@;/0;ià;0;[ ;ià;iÑo;a;"grid-width;o;	;	o;
+;iã;i;o;
+;iã;i;@
+;@; 0;@;T;![[o;0;"n;o;	;	o;
+;iã;i;o;
+;iã;i;@
+;@;@;@;/0;iã;1"n0;0;[o;i;o;	;	o;
+;iå;i7;o;
+;iå;i;@
+;@;@;-o;b;o;	;	o;
+;iå;i7;o;
+;iå;i;@
+;@;co;b;o;	;	o;
+;iå;i7;o;
+;iå;i#;@
+;@;co;0;"gw-gutter;o;	;	o;
+;iå;i7;o;
+;iå;i-;@
+;@;@;@;/0;iå;1"gw_gutter;@;@;do;b;o;	;	o;
+;iå;i);@Å;@
+;@;co;%
+;o;	;	o;
+;iå;i);o;
+;iå;i(;@
+;@;o;=
+;>[ ;?0;@;i;@@h;@;/0;iå;@;@;do;0;"n;o;	;	o;
+;iå;i%;@Å;@
+;@;@;@;/0;iå;1"n;/0;iå;e;f;/0;iå;e;g;@;@;do;b;o;	;	o;
+;iå;i;@};@
+;@;co;0;"gw-column;o;	;	o;
+;iå;i;o;
+;iå;i;@
+;@;@;@;/0;iå;1"gw_column;@;@;do;0;"n;o;	;	o;
+;iå;i;@};@
+;@;@;@;/0;iå;1"n;/0;iå;e;g;/0;iå;e;h;0;[ ;iåo;,;o;	;	o;
+;ié;ik;o;
+;ié;i;@
+;@;@;-o;%
+;o;	;	o;
+;ié;ik;o;
+;ié;i;@
+;@;o;&	;@;'0;"`The grid-width function is deprecated and will be removed in the next major version release;;.;@;/0;ié;0;[ ;ié;ião;a;"golden-ratio;o;	;	o;
+;ië;i1;o;
+;ië;i;@
+;@; 0;@;T;![[o;0;"
+value;o;	;	o;
+;ië;i#;o;
+;ië;i;@
+;@;@;@;/0;ië;1"
+value0[o;0;"increment;o;	;	o;
+;ië;i/;o;
+;ië;i%;@
+;@;@;@;/0;ië;1"increment0;0;[o;i;o;	;	o;
+;ií;iB;o;
+;ií;i;@
+;@;@;-o;V;"modular-scale;o;	;	o;
+;ií;iB;o;
+;ií;i;@
+;@; 0;W0;@;![o;0;"increment;o;	;	o;
+;ií;i(;o;
+;ií;i;@
+;@;@;@;/0;ií;1"incremento;0;"
+value;o;	;	o;
+;ií;i0;o;
+;ií;i*;@
+;@;@;@;/0;ií;1"
+value;@;Xo;Y;ZIC;[{"
+ratioo;0;"golden;o;	;	o;
+;ií;iA;o;
+;ií;i:;@
+;@;@;@;/0;ií;1"golden;\["
+ratio;]{@›"
+ratio;/0;ií;0;[ ;iío;,;o;	;	o;
+;iî;iô;o;
+;iî;i;@
+;@;@;-o;%
+;o;	;	o;
+;iî;iô;o;
+;iî;i;@
+;@;o;&	;@;'0;"éThe golden-ratio function is deprecated and will be removed in the next major version release. Please use the modular-scale function, instead.;;.;@;/0;iî;0;[ ;iî;iëo;;"box-sizing;o;	;	o;
+;ió;i;o;
+;ió;i;@
+;@; 0;@;T;![[o;0;"box;o;	;	o;
+;ió;i;o;
+;ió;i;@
+;@;@;@;/0;ió;1"box0;0;[o;_;"prefixer;o;	;	o;
+;iò;i<;o;
+;iò;i;@
+;@; 0;W0;@;![o;%
+;o;	;	o;
+;iò;i$;o;
+;iò;i;@
+;@;o;&	;@;'0;"box-sizing;;(;@;/0;iòo;0;"box;o;	;	o;
+;iò;i*;o;
+;iò;i&;@
+;@;@;@;/0;iò;1"boxo;9;o;	;	o;
+;iò;i;;o;
+;iò;i+;@
+;@;@;:;;;@;/0;<[o;%
+;o;	;	o;
+;iò;i2;o;
+;iò;i,;@
+;@;o;&	;@;'0;"webkit;;(;@;/0;iòo;%
+;o;	;	o;
+;iò;i6;o;
+;iò;i3;@
+;@;o;&	;@;'0;"moz;;(;@;/0;iòo;%
+;o;	;	o;
+;iò;i;;o;
+;iò;i7;@
+;@;o;&	;@;'0;"	spec;;(;@;/0;iò;iò;0;[ ;Xo;Y;ZIC;[{ ;\[ ;]{ ;iòo;,;o;	;	o;
+;iö;iè;o;
+;iö;i;@
+;@;@;-o;%
+;o;	;	o;
+;iö;iè;o;
+;iö;i;@
+;@;o;&	;@;'0;"ÑThe box-sizing mixin is deprecated and will be removed in the next major version release. This property can now be used un-prefixed.;;.;@;/0;iö;0;[ ;iö;ió;i

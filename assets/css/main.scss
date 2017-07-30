@@ -1,0 +1,653 @@
+// Frameworks
+
+// Definings
+@import "_reset.scss";
+@import "_variables.scss";
+
+// Global Styles
+@import "_globals.scss";
+
+// Page Specifics
+
+// Mixins
+@import "_mixins.scss";
+
+@mixin center {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+// Global Settings
+$gradientBg: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 50, 1));
+$blackBg: rgba(0, 0, 0, 1);
+$appearance: 4px solid rgba(255, 255, 200, 0.8);
+
+// Sizes
+$negative-5-layer-size: 1430px;
+$negative-4-layer-size: 2865px;
+$negative-3-layer-size: 2025px;
+$negative-2-layer-size: 1430px;
+$negative-1-layer-size: 1008px;
+$zero-layer-size: 710px;
+$first-layer-size: 500px;
+$second-layer-size: 350px;
+$third-layer-size: 245px;
+$fourth-layer-size: 170px;
+$fifth-layer-size: 115px;
+$sixth-layer-size: 75px;
+$seventh-layer-size: 50px;
+$eigth-layer-size: 30px;
+
+// Speeds
+$negative-5-layer-speed: 10s;
+$negative-4-layer-speed: 20s;
+$negative-3-layer-speed: 30s;
+$negative-2-layer-speed: 40s;
+$negative-1-layer-speed: 50s;
+$zero-layer-speed: 60s;
+$first-layer-speed: 70s;
+$second-layer-speed: 80s;
+$third-layer-speed: 90s;
+$fourth-layer-speed: 100s;
+$fifth-layer-speed: 110s;
+$sixth-layer-speed: 120s;
+$seventh-layer-speed: 130s;
+$eigth-layer-speed: 140s;
+
+
+html {
+  height: 100%;
+  width: 100%;
+  background: $gradientBg;
+}
+
+//----------------
+//  Structure
+//----------------
+#wrapper {
+  @include center;
+  /*.negative-layer-5 {
+    .layer-1 {
+      @include center;
+      //animation-name: rotate;
+      animation-duration: $negative-2-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $negative-5-layer-size;
+        height: $negative-5-layer-size;
+        border: 4px solid white;
+        position: absolute;
+      }
+      .square-2 {
+        width: $negative-5-layer-size;
+        height: $negative-5-layer-size;
+        border: 4px solid white;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      //animation-name: rotateOpposite;
+      animation-duration: $negative-5-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $negative-5-layer-size;
+        height: $negative-5-layer-size;
+        border: 4px solid white;
+        position: absolute;
+      }
+      .square-2 {
+        width: $negative-5-layer-size;
+        height: $negative-5-layer-size;
+        border: 4px solid white;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .negative-layer-4 {
+    .layer-1 {
+      @include center;
+      animation-name: rotate;
+      animation-duration: $negative-4-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $negative-4-layer-size;
+        height: $negative-4-layer-size;
+        border: 4px solid white;
+        position: absolute;
+      }
+      .square-2 {
+        width: $negative-4-layer-size;
+        height: $negative-4-layer-size;
+        border: 4px solid white;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      animation-name: rotateOpposite;
+      animation-duration: $negative-4-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $negative-4-layer-size;
+        height: $negative-4-layer-size;
+        border: 4px solid white;
+        position: absolute;
+      }
+      .square-2 {
+        width: $negative-4-layer-size;
+        height: $negative-4-layer-size;
+        border: 4px solid white;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .negative-layer-3 {
+    .layer-1 {
+      @include center;
+      animation-name: rotateOpposite;
+      animation-duration: $negative-3-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $negative-3-layer-size;
+        height: $negative-3-layer-size;
+        border: 4px solid white;
+        position: absolute;
+      }
+      .square-2 {
+        width: $negative-3-layer-size;
+        height: $negative-3-layer-size;
+        border: 4px solid white;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      animation-name: rotate;
+      animation-duration: $negative-3-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $negative-3-layer-size;
+        height: $negative-3-layer-size;
+        border: 4px solid white;
+        position: absolute;
+      }
+      .square-2 {
+        width: $negative-3-layer-size;
+        height: $negative-3-layer-size;
+        border: 4px solid white;
+        transform: rotate(45deg);
+      }
+    }
+  }*/
+  .negative-layer-2 {
+    .layer-1 {
+      @include center;
+      animation-name: rotate;
+      animation-duration: $negative-2-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $negative-2-layer-size;
+        height: $negative-2-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $negative-2-layer-size;
+        height: $negative-2-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      animation-name: rotateOpposite;
+      animation-duration: $negative-2-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $negative-2-layer-size;
+        height: $negative-2-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $negative-2-layer-size;
+        height: $negative-2-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .negative-layer-1 {
+    .layer-1 {
+      @include center;
+      animation-name: rotateOpposite;
+      animation-duration: $negative-1-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $negative-1-layer-size;
+        height: $negative-1-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $negative-1-layer-size;
+        height: $negative-1-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      animation-name: rotate;
+      animation-duration: $negative-1-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $negative-1-layer-size;
+        height: $negative-1-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $negative-1-layer-size;
+        height: $negative-1-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .zero-layer {
+    .layer-1 {
+      @include center;
+      animation-name: rotate;
+      animation-duration: $zero-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $zero-layer-size;
+        height: $zero-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $zero-layer-size;
+        height: $zero-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      animation-name: rotateOpposite;
+      animation-duration: $zero-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $zero-layer-size;
+        height: $zero-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $zero-layer-size;
+        height: $zero-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .first-layer {
+    .layer-1 {
+      @include center;
+      animation-name: rotateOpposite;
+      animation-duration: $first-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $first-layer-size;
+        height: $first-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $first-layer-size;
+        height: $first-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      animation-name: rotate;
+      animation-duration: $first-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $first-layer-size;
+        height: $first-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $first-layer-size;
+        height: $first-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .second-layer {
+    .layer-1 {
+      @include center;
+      animation-name: rotate;
+      animation-duration: $second-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $second-layer-size;
+        height: $second-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $second-layer-size;
+        height: $second-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      animation-name: rotateOpposite;
+      animation-duration: $second-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $second-layer-size;
+        height: $second-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $second-layer-size;
+        height: $second-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .third-layer {
+    .layer-1 {
+      @include center;
+      animation-name: rotateOpposite;
+      animation-duration: $third-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $third-layer-size;
+        height: $third-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $third-layer-size;
+        height: $third-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      animation-name: rotate;
+      animation-duration: $third-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $third-layer-size;
+        height: $third-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $third-layer-size;
+        height: $third-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .fourth-layer {
+    .layer-1 {
+      @include center;
+      animation-name: rotate;
+      animation-duration: $fourth-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $fourth-layer-size;
+        height: $fourth-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $fourth-layer-size;
+        height: $fourth-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      animation-name: rotateOpposite;
+      animation-duration: $fourth-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $fourth-layer-size;
+        height: $fourth-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $fourth-layer-size;
+        height: $fourth-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .fifth-layer {
+    .layer-1 {
+      @include center;
+      animation-name: rotateOpposite;
+      animation-duration: $fifth-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $fifth-layer-size;
+        height: $fifth-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $fifth-layer-size;
+        height: $fifth-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      animation-name: rotate;
+      animation-duration: $fifth-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $fifth-layer-size;
+        height: $fifth-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $fifth-layer-size;
+        height: $fifth-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .sixth-layer {
+    .layer-1 {
+      @include center;
+      animation-name: rotate;
+      animation-duration: $sixth-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $sixth-layer-size;
+        height: $sixth-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $sixth-layer-size;
+        height: $sixth-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      animation-name: rotateOpposite;
+      animation-duration: $sixth-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $sixth-layer-size;
+        height: $sixth-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $sixth-layer-size;
+        height: $sixth-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .seventh-layer {
+    .layer-1 {
+      @include center;
+      animation-name: rotateOpposite;
+      animation-duration: $seventh-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $seventh-layer-size;
+        height: $seventh-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $seventh-layer-size;
+        height: $seventh-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      animation-name: rotate;
+      animation-duration: $seventh-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $seventh-layer-size;
+        height: $seventh-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $seventh-layer-size;
+        height: $seventh-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .eigth-layer {
+    .layer-1 {
+      @include center;
+      animation-name: rotate;
+      animation-duration: $eigth-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $eigth-layer-size;
+        height: $eigth-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $eigth-layer-size;
+        height: $eigth-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+    .layer-2 {
+      @include center;
+      animation-name: rotateOpposite;
+      animation-duration: $eigth-layer-speed;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      .square-1 {
+        width: $eigth-layer-size;
+        height: $eigth-layer-size;
+        border: $appearance;
+        position: absolute;
+      }
+      .square-2 {
+        width: $eigth-layer-size;
+        height: $eigth-layer-size;
+        border: $appearance;
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+
+//----------------
+//  Animations
+//----------------
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100%{
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes rotateOpposite {
+  0% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+  100%{
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+}
