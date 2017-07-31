@@ -65,6 +65,38 @@ html {
 }
 
 //----------------
+//  Miscellaneous
+//----------------
+
+#overlay-message {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.9);
+	z-index: 1001;
+	display: none;
+	vertical-align: middle;
+	p {
+		color: rgba(255, 255, 0, 1);
+		font-size: 7.5em;
+		position: fixed;
+		display: block;
+		text-align: center;
+		transform: translate(-50%, -50%);
+		top: 50%;
+		left: 50%;
+	}
+}
+
+#overlay-button {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 1002;
+	pointer-events: none;
+}
+
+//----------------
 //  Menus
 //----------------
 .menu {
@@ -72,11 +104,23 @@ html {
 	bottom: 30px;
 	left: 30px;
 	background: rgba(255, 255, 255, 0.8);
-	width: 250px;
-	height: 350px;
+	width: 200px;
+	height: 290px;
 	z-index: 1000;
 	border-radius: 10px;
 	padding: 20px;
+	font-size: 0.8em;
+	overflow: hidden;
+	button.minimize {
+		position: absolute;
+		border-radius: 50%;
+		border: none;
+		padding: 2px;
+		left: 15px;
+		top: 15px;
+		font-size: 0.5em;
+		background: rgba(0, 0, 0, 0.1);
+	}
 	h1 {
 		text-align: center;
 		line-height: 20px;
@@ -88,8 +132,8 @@ html {
 
 	.row .col-xs-3 {
 		background: rgba(0, 0, 0, 0.3);
-		height: 40px;
-		width: 45px;
+		height: 30px;
+		width: 32px;
 	}
 
 	.row .col-xs-3:nth-child(2), .row .col-xs-3:nth-child(3), .row .col-xs-3:nth-child(4) {
@@ -98,12 +142,12 @@ html {
 
 	.color-picker {
 		width: 100%;
-		height: 40px;
+		height: 30px;
 	}
 
 	.background-color-picker {
 		width: 100%;
-		height: 40px;
+		height: 30px;
 	}
 }
 
