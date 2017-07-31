@@ -42,26 +42,69 @@ $seventh-layer-size: 50px;
 $eigth-layer-size: 30px;
 
 // Speeds
-$negative-5-layer-speed: 10s;
-$negative-4-layer-speed: 20s;
-$negative-3-layer-speed: 30s;
-$negative-2-layer-speed: 40s;
-$negative-1-layer-speed: 50s;
-$zero-layer-speed: 60s;
-$first-layer-speed: 70s;
-$second-layer-speed: 80s;
-$third-layer-speed: 90s;
-$fourth-layer-speed: 100s;
-$fifth-layer-speed: 110s;
-$sixth-layer-speed: 120s;
-$seventh-layer-speed: 130s;
-$eigth-layer-speed: 140s;
+$negative-5-layer-speed: 5s;
+$negative-4-layer-speed: 10s;
+$negative-3-layer-speed: 20s;
+$negative-2-layer-speed: 30s;
+$negative-1-layer-speed: 40s;
+$zero-layer-speed: 50s;
+$first-layer-speed: 60s;
+$second-layer-speed: 70s;
+$third-layer-speed: 80s;
+$fourth-layer-speed: 90s;
+$fifth-layer-speed: 100s;
+$sixth-layer-speed: 110s;
+$seventh-layer-speed: 120s;
+$eigth-layer-speed: 130s;
 
 
 html {
   height: 100%;
   width: 100%;
   background: $gradientBg2;
+}
+
+//----------------
+//  Menus
+//----------------
+.menu {
+	position: fixed;
+	bottom: 30px;
+	left: 30px;
+	background: rgba(255, 255, 255, 0.8);
+	width: 250px;
+	height: 350px;
+	z-index: 1000;
+	border-radius: 10px;
+	padding: 20px;
+	h1 {
+		text-align: center;
+		line-height: 20px;
+	}
+
+	.row {
+		margin: 0;
+	}
+
+	.row .col-xs-3 {
+		background: rgba(0, 0, 0, 0.3);
+		height: 40px;
+		width: 45px;
+	}
+
+	.row .col-xs-3:nth-child(2), .row .col-xs-3:nth-child(3), .row .col-xs-3:nth-child(4) {
+		margin-left: 10px;
+	}
+
+	.color-picker {
+		width: 100%;
+		height: 40px;
+	}
+
+	.background-color-picker {
+		width: 100%;
+		height: 40px;
+	}
 }
 
 //----------------
