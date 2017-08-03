@@ -19,6 +19,8 @@
   left: 50%;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+
 // Device Dimensions
 $xsmall-device: 480px;
 
@@ -67,6 +69,10 @@ html {
   background: $gradientBg2;
 }
 
+body {
+  font-family: "Noto Sans", sans-serif;
+}
+
 //----------------
 //  Miscellaneous
 //----------------
@@ -80,12 +86,13 @@ html {
 	display: none;
 	vertical-align: middle;
 	p {
-		color: rgba(255, 255, 0, 1);
+		color: rgba(255, 255, 200, 1);
 		font-size: 7.5em;
 		position: fixed;
 		display: block;
 		text-align: center;
 		transform: translate(-50%, -50%);
+    font-family: "Noto Sans", sans-serif;
 		top: 50%;
 		left: 50%;
     @media (max-width: $xsmall-device) {
@@ -118,7 +125,6 @@ html {
 	padding: 30px 20px 20px 20px;
 	font-size: 0.8em;
 	overflow: hidden;
-
   .top-bar {
     width: 100%;
     border-top-right-radius: 7px;

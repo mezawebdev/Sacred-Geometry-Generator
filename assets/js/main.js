@@ -1,4 +1,14 @@
 $(document).ready(function() {
+
+
+//--------------------
+//  Global Variables
+//--------------------
+var isMobile = false;
+if (/Mobi/.test(navigator.userAgent)) {
+	isMobile = true; // mobile!
+}
+
 //----------------
 //  Editor Menu
 //----------------
@@ -9,7 +19,13 @@ var hasDisplayedMessage = false;
 // 1.- Close button
 $(".close-button").on("click", function(button) {
 	if (! hasDisplayedMessage) {
-		$("#overlay-message").fadeIn();
+		if (isMobile) {
+			$("#overlay-message p").html("Tap screen to open menu");
+			$("#overlay-message").fadeIn();
+
+		} else {
+			$("#overlay-message").fadeIn();
+		}
 	}
 	setTimeout(function() {
 		$("#overlay-message").fadeOut();
