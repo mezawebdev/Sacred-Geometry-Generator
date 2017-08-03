@@ -69,6 +69,9 @@ html {
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%; }
+    @media (max-width: 480px) {
+      #overlay-message p {
+        font-size: 4em; } }
 
 #overlay-button {
   position: fixed;
@@ -81,22 +84,33 @@ html {
   position: fixed;
   bottom: 30px;
   left: 30px;
-  background: rgba(255, 255, 255, 0.8);
+  background: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
   width: 200px;
   height: 290px;
   z-index: 1000;
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: 7px;
+  padding: 30px 20px 20px 20px;
   font-size: 0.8em;
   overflow: hidden; }
-  .menu button.minimize {
+  .menu .top-bar {
+    width: 100%;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+    background: linear-gradient(0deg, #CACACA, #F3F3F3);
+    height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid #A4A4A4; }
+  .menu button.close-button {
     position: absolute;
     border-radius: 50%;
     border: none;
     padding: 2px;
-    left: 15px;
-    top: 15px;
-    font-size: 0.5em;
+    left: 5px;
+    top: 3px;
+    font-size: 0.3em;
     background: rgba(0, 0, 0, 0.1); }
   .menu h1 {
     text-align: center;
