@@ -18,8 +18,21 @@ $(document).ready(function() {
 		return slider.noUiSlider.get();
 	}
 
-	function setShapeSpeed(speed) {
-		$(".negative-layer-2")
+
+	function setShapeSpeed(value) {
+		$(".eigth-layer .layer-1, .eigth-layer .layer-2").css("animation-duration", value + "s");
+		$(".seventh-layer .layer-1, .seventh-layer .layer-2").css("animation-duration", value - 5 + "s");
+		console.log(value - 10 + "s");
+		$(".sixth-layer .layer-1, .sixth-layer .layer-2").css("animation-duration", value - 10 + "s");
+		console.log(value - 20 + "s");
+		$(".fifth-layer .layer-1, .fifth-layer .layer-2").css("animation-duration", value - 15 + "s");
+		$(".fourth-layer .layer-1, .fourth-layer .layer-2").css("animation-duration", value - 20 + "s");
+		$(".third-layer .layer-1, .third-layer .layer-2").css("animation-duration", value - 25 + "s");
+		$(".second-layer .layer-1, .second-layer .layer-2").css("animation-duration", value - 30 + "s");
+		$(".first-layer .layer-1, .first-layer .layer-2").css("animation-duration", value - 35 + "s");
+		$(".zero-layer .layer-1, .zero-layer .layer-2").css("animation-duration", value - 40 + "s");
+		$(".negative-layer-1 .layer-1, .negative-layer-1 .layer-2").css("animation-duration", value - 45 + "s");
+		$(".negative-layer-2 .layer-1, .negative-layer-2 .layer-2").css("animation-duration", value - 50 + "s");
 	}
 
 	//----------------
@@ -28,6 +41,9 @@ $(document).ready(function() {
 	var menuMinimized = false;
 	var canOpenWindow = false;
 	var hasDisplayedMessage = false;
+
+	// Initial Drivers
+	setShapeSpeed(130);
 
 	// 1.- Close button
 	$(".close-button").on("click", function(button) {
@@ -92,15 +108,14 @@ $(document).ready(function() {
 		//--- Create Shape Slider 
 		var shapeSpeedSlider = document.getElementById("shape-speed-draggable");
 		noUiSlider.create(shapeSpeedSlider, {
-			start: [50],
+			start: [125],
 			range: {
-				"min": [0],
-				"max": [100]
+				"min": [50],
+				"max": [200]
 			}
 		});
 		// Set Speeds
-		$("#shape-speed-draggable").on("mousedown mouseup", function() {
-			console.log(getSliderValue(shapeSpeedSlider));
+		$("#shape-speed-draggable").on("mousedown mousemove click touchstart touchmove", function() {
 			setShapeSpeed(getSliderValue(shapeSpeedSlider));
 		});
 
@@ -108,10 +123,10 @@ $(document).ready(function() {
 		//--- Background speed
 		var bgSpeedSlider = document.getElementById("background-speed-draggable");
 		noUiSlider.create(bgSpeedSlider, {
-			start: [50],
+			start: [130],
 			range: {
-				"min": [0],
-				"max": [100]
+				"min": [30],
+				"max": [230]
 			}
 		});
 
