@@ -16,46 +16,87 @@
 	<link rel="stylesheet" href="assets/css/jquery-ui.min.css">
 </head>
 <body>
+	<script src="assets/js/jquery.min.js"></script>
 	<!-- wrapper start -->
 		<div id="overlay-message">
 			<p>Click screen to open menu</p>
 		</div>
 		<div id="overlay-button">
 		</div>
-		<div class="menu">
-			<div class="top-bar"></div>
-			<button class="close-button"><span class="glyphicon glyphicon-remove"></span></button>
+		<div class="menu" id="editor">
+			<div class="top-bar"><button class="close-button"><span class="glyphicon glyphicon-remove"></span></button></div>
 			<h1>Sacred Geometry <br />Generator v1.0</h1>
 			<br />
-			<h4>Shape</h4>
-			<br />
 			<div class="row">
-				<div class="col-xs-3">
-					<div class="shape-block">
+				<div class="col-xs-6">
+					<h4>Shape</h4>
+					<br />
+					<div class="row shape-block-group">
+						<div class="col-xs-6">
+							<div class="shape-block">
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="shape-block">
+							</div>
+						</div>
 					</div>
+					<br />
+					<div class="row shape-block-group">
+						<div class="col-xs-6">
+							<div class="shape-block">
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="shape-block">
+							</div>
+						</div>
+					</div>
+					<br />
+					<h4>Color</h4>
+					<br />
+					<input type="color" class="color-picker" value="#EAE6AB" />
+					<br />
+					<br />
+					<h4>Background</h4>
+					<br />
+					<input type="color" class="background-color-picker" value="#7B0700" />
 				</div>
-				<div class="col-xs-3">
-					<div class="shape-block">
+				<div class="col-xs-6">
+					<h4>Shape</h4>
+					<br />
+					<div class="row shape-block-group">
+						<div class="col-xs-6">
+							<div class="shape-block">
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="shape-block">
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class="col-xs-3">
-					<div class="shape-block">
+					<br />
+					<div class="row shape-block-group">
+						<div class="col-xs-6">
+							<div class="shape-block">
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="shape-block">
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class="col-xs-3">
-					<div class="shape-block">
-					</div>
+					<br />
+					<h4>Color</h4>
+					<br />
+					<input type="color" class="color-picker" value="#EAE6AB" />
+					<br />
+					<br />
+					<h4>Background</h4>
+					<br />
+					<input type="color" class="background-color-picker" value="#7B0700" />
 				</div>
 			</div>
-			<br />
-			<h4>Color</h4>
-			<br />
-			<input type="color" class="color-picker" value="#EAE6AB" />
-			<br />
-			<br />
-			<h4>Background</h4>
-			<br />
-			<input type="color" class="background-color-picker" value="#7B0700" />
 		</div>
 		<div id="wrapper">
 	  <!--<div class="negative-layer-5">
@@ -312,10 +353,10 @@
 	  </div>
 	</div>
 	<!-- wrapper ends -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery-ui.min.js"></script>
-	<script src="assets/js/jquery-touch-punch.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenLite.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/easing/EasePack.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/utils/Draggable.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/plugins/CSSPlugin.min.js"></script>
 	<script src="assets/js/main.js"></script>
 </body>
 </html>

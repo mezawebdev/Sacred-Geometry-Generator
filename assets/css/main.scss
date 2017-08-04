@@ -1,16 +1,4 @@
-// Frameworks
-
-// Definings
 @import "_reset.scss";
-@import "_variables.scss";
-
-// Global Styles
-@import "_globals.scss";
-
-// Page Specifics
-
-// Mixins
-@import "_mixins.scss";
 
 @mixin center {
   position: fixed;
@@ -29,6 +17,7 @@ $gradientBg: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 50, 1));
 $blackBg: rgba(0, 0, 0, 1);
 $gradientBg2: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(150, 0, 0, 1));
 $appearance: 4px solid rgba(255, 255, 200, 0.8);
+$defaultSettings: 4px solid rgba(255, 255, 200, 0.8) !important;
 
 // Sizes
 $negative-5-layer-size: 1430px;
@@ -73,58 +62,28 @@ body {
   font-family: "Noto Sans", sans-serif;
 }
 
-//----------------
-//  Miscellaneous
-//----------------
-
-#overlay-message {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.9);
-	z-index: 1001;
-	display: none;
-	vertical-align: middle;
-	p {
-		color: rgba(255, 255, 200, 1);
-		font-size: 7.5em;
-		position: fixed;
-		display: block;
-		text-align: center;
-		transform: translate(-50%, -50%);
-    font-family: "Noto Sans", sans-serif;
-		top: 50%;
-		left: 50%;
-    @media (max-width: $xsmall-device) {
-      font-size: 4em;
-    }
-	}
-}
-
-#overlay-button {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	z-index: 1002;
-	pointer-events: none;
+input, textarea {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
 }
 
 //----------------
-//  Menus
+//  Menu
 //----------------
 .menu {
 	position: fixed;
-	bottom: 30px;
-	left: 30px;
 	background: rgba(255, 255, 255, 1);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
-	width: 200px;
-	height: 290px;
+	width: 300px;
+	height: auto;
 	z-index: 1000;
 	border-radius: 7px;
 	padding: 30px 20px 20px 20px;
 	font-size: 0.8em;
 	overflow: hidden;
+  transform: translate(-50%, 0%);
+  left: 50%;
+  bottom: 20px;
   .top-bar {
     width: 100%;
     border-top-right-radius: 7px;
@@ -135,17 +94,20 @@ body {
     top: 0;
     left: 0;
     border-bottom: 1px solid #A4A4A4;
+    button.close-button {
+      position: absolute;
+      border: none;
+      width: 20px;
+      height: 20px;
+      left: 0px;
+      top: 0px;
+      font-size: 0.8em;
+      background: none;
+      @media (min-width: $xsmall-device) {
+        font-size: 0.5em;
+      }
+    }
   }
-	button.close-button {
-		position: absolute;
-		border-radius: 50%;
-		border: none;
-		padding: 2px;
-		left: 5px;
-		top: 3px;
-		font-size: 0.3em;
-		background: rgba(0, 0, 0, 0.1);
-	}
 	h1 {
 		text-align: center;
 		line-height: 20px;
@@ -155,11 +117,15 @@ body {
 		margin: 0;
 	}
 
-	.row .col-xs-3 {
-		background: rgba(0, 0, 0, 0.3);
-		height: 30px;
-		width: 32px;
+	.shape-block-group .col-xs-6 {
+		background: rgba(0, 0, 0, 0.5);
+    height: 30px;
+    width: 45px;
 	}
+
+  .shape-block-group .col-xs-6:nth-child(2) {
+    margin-left: 10px;
+  }
 
 	.row .col-xs-3:nth-child(2), .row .col-xs-3:nth-child(3), .row .col-xs-3:nth-child(4) {
 		margin-left: 10px;
@@ -301,6 +267,9 @@ body {
       }
     }
   }*/
+  .square-1, .square-2 {
+    border: $defaultSettings;
+  }
   .negative-layer-2 {
     .layer-1 {
       @include center;
@@ -763,4 +732,41 @@ body {
   100%{
     transform: translate(-50%, -50%) rotate(0deg);
   }
+}
+
+
+//----------------
+//  Miscellaneous
+//----------------
+
+#overlay-message {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1001;
+  display: none;
+  vertical-align: middle;
+  p {
+    color: rgba(255, 255, 200, 1);
+    font-size: 7.5em;
+    position: fixed;
+    display: block;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    font-family: "Noto Sans", sans-serif;
+    top: 50%;
+    left: 50%;
+    @media (max-width: $xsmall-device) {
+      font-size: 4em;
+    }
+  }
+}
+
+#overlay-button {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1002;
+  pointer-events: none;
 }

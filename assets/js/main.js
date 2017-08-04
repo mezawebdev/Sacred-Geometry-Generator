@@ -9,6 +9,8 @@ if (/Mobi/.test(navigator.userAgent)) {
 	isMobile = true; // mobile!
 }
 
+
+
 //----------------
 //  Editor Menu
 //----------------
@@ -46,7 +48,11 @@ $("#overlay-button").on("click", function() {
 });
 
 // 2.- Make menu draggable
-$(".menu").draggable();
+Draggable.create(".menu", {
+	type:"x,y", 
+	edgeResistance:0.65, 
+	throwProps:true
+});
 
 //----------------- The End -----------------//
 });
