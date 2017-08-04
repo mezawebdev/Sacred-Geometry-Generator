@@ -51,10 +51,12 @@ table {
 html {
   height: 100%;
   width: 100%;
-  background: linear-gradient(0deg, black, #960000); }
+  overflow: hidden; }
 
 body {
-  font-family: "Noto Sans", sans-serif; }
+  font-family: "Noto Sans", sans-serif;
+  overflow: hidden;
+  background: linear-gradient(0deg, black, #960000); }
 
 input, textarea {
   -webkit-appearance: none;
@@ -71,8 +73,7 @@ input, textarea {
   padding: 30px 20px 20px 20px;
   font-size: 0.8em;
   overflow: hidden;
-  transform: translate(-50%, 0%);
-  left: 50%;
+  left: 20px;
   bottom: 20px; }
   .menu .top-bar {
     width: 100%;
@@ -98,23 +99,37 @@ input, textarea {
           font-size: 0.5em; } }
   .menu h1 {
     text-align: center;
-    line-height: 20px; }
+    line-height: 50px;
+    font-weight: bold;
+    font-size: 1.4em; }
   .menu .row {
     margin: 0; }
-  .menu .shape-block-group .col-xs-6 {
-    background: rgba(0, 0, 0, 0.5);
+  .menu .block-group .col-xs-6 {
+    background: rgba(0, 0, 0, 0.9);
     height: 30px;
     width: 45px; }
-  .menu .shape-block-group .col-xs-6:nth-child(2) {
+  .menu .block-group .col-xs-6 button {
+    width: 45px;
+    height: 100%;
+    border: none;
+    margin-left: -15px;
+    background: none; }
+  .menu .block-group .col-xs-6 button.active {
+    background: rgba(255, 226, 0, 0.2); }
+  .menu .block-group .col-xs-6:nth-child(2) {
     margin-left: 10px; }
   .menu .row .col-xs-3:nth-child(2), .menu .row .col-xs-3:nth-child(3), .menu .row .col-xs-3:nth-child(4) {
     margin-left: 10px; }
   .menu .color-picker {
+    border: none; }
+  .menu #geometry-color-picker {
     width: 100%;
     height: 30px; }
-  .menu .background-color-picker {
+  .menu #background-color-picker {
     width: 100%;
     height: 30px; }
+  .menu #credits a {
+    color: rgba(0, 0, 0, 0.6); }
 
 #wrapper {
   position: fixed;

@@ -55,11 +55,13 @@ $eigth-layer-speed: 130s;
 html {
   height: 100%;
   width: 100%;
-  background: $gradientBg2;
+  overflow: hidden;
 }
 
 body {
   font-family: "Noto Sans", sans-serif;
+  overflow: hidden;
+  background: $gradientBg2;
 }
 
 input, textarea {
@@ -81,8 +83,7 @@ input, textarea {
 	padding: 30px 20px 20px 20px;
 	font-size: 0.8em;
 	overflow: hidden;
-  transform: translate(-50%, 0%);
-  left: 50%;
+  left: 20px;
   bottom: 20px;
   .top-bar {
     width: 100%;
@@ -110,20 +111,34 @@ input, textarea {
   }
 	h1 {
 		text-align: center;
-		line-height: 20px;
+		line-height: 50px;
+    font-weight: bold;
+    font-size: 1.4em;
 	}
 
 	.row {
 		margin: 0;
 	}
 
-	.shape-block-group .col-xs-6 {
-		background: rgba(0, 0, 0, 0.5);
+	.block-group .col-xs-6 {
+		background: rgba(0, 0, 0, 0.9);
     height: 30px;
     width: 45px;
 	}
 
-  .shape-block-group .col-xs-6:nth-child(2) {
+  .block-group .col-xs-6 button {
+    width: 45px;
+    height: 100%;
+    border: none;
+    margin-left: -15px;
+    background: none;
+  }
+
+  .block-group .col-xs-6 button.active {
+    background: rgba(255, 226, 0, 0.2);
+  }
+
+  .block-group .col-xs-6:nth-child(2) {
     margin-left: 10px;
   }
 
@@ -131,15 +146,25 @@ input, textarea {
 		margin-left: 10px;
 	}
 
-	.color-picker {
+  .color-picker {
+    border: none;
+  }
+
+	#geometry-color-picker {
 		width: 100%;
 		height: 30px;
 	}
 
-	.background-color-picker {
+	#background-color-picker {
 		width: 100%;
 		height: 30px;
 	}
+
+  #credits {
+    a {
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
 }
 
 //----------------

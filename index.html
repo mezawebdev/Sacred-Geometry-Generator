@@ -19,82 +19,73 @@
 	<script src="assets/js/jquery.min.js"></script>
 	<!-- wrapper start -->
 		<div id="overlay-message">
-			<p>Click screen to open menu</p>
+			<p>Click on screen to open menu</p>
 		</div>
 		<div id="overlay-button">
 		</div>
 		<div class="menu" id="editor">
 			<div class="top-bar"><button class="close-button"><span class="glyphicon glyphicon-remove"></span></button></div>
-			<h1>Sacred Geometry <br />Generator v1.0</h1>
+			<h1>Sacred Geometry System</h1>
 			<br />
 			<div class="row">
 				<div class="col-xs-6">
 					<h4>Shape</h4>
 					<br />
-					<div class="row shape-block-group">
+					<div class="row block-group shape-block-group">
 						<div class="col-xs-6">
-							<div class="shape-block">
-							</div>
+							<button class="shape-block-1 active"></button>
 						</div>
 						<div class="col-xs-6">
-							<div class="shape-block">
-							</div>
+							<button class="shape-block-2"></button>
 						</div>
 					</div>
 					<br />
-					<div class="row shape-block-group">
+					<div class="row block-group shape-block-group">
 						<div class="col-xs-6">
-							<div class="shape-block">
-							</div>
+							<button class="shape-block-3"></button>
 						</div>
 						<div class="col-xs-6">
-							<div class="shape-block">
-							</div>
+							<button class="shape-block-4"></button>
 						</div>
 					</div>
 					<br />
 					<h4>Color</h4>
 					<br />
-					<input type="color" class="color-picker" value="#EAE6AB" />
+					<input class="jscolor color-picker" id="geometry-color-picker" value="rgba(255, 255, 200, 0.8)">
 					<br />
 					<br />
-					<h4>Background</h4>
+					<h4>Speed</h4>
 					<br />
-					<input type="color" class="background-color-picker" value="#7B0700" />
+					<input class="jscolor color-picker" id="background-color-picker" value="rgba(150, 0, 0, 1)">
 				</div>
 				<div class="col-xs-6">
-					<h4>Shape</h4>
+					<h4>Background</h4>
 					<br />
-					<div class="row shape-block-group">
+					<div class="row block-group background-block-group">
 						<div class="col-xs-6">
-							<div class="shape-block">
-							</div>
+							<button class="background-block-1 active">
+							</button>
 						</div>
 						<div class="col-xs-6">
-							<div class="shape-block">
-							</div>
-						</div>
-					</div>
-					<br />
-					<div class="row shape-block-group">
-						<div class="col-xs-6">
-							<div class="shape-block">
-							</div>
-						</div>
-						<div class="col-xs-6">
-							<div class="shape-block">
-							</div>
+							<button class="background-block-2">
+							</button>
 						</div>
 					</div>
 					<br />
 					<h4>Color</h4>
 					<br />
-					<input type="color" class="color-picker" value="#EAE6AB" />
+					<input class="jscolor color-picker" id="background-color-picker" value="rgba(150, 0, 0, 1)">
 					<br />
 					<br />
-					<h4>Background</h4>
+					<h4>Speed</h4>
 					<br />
-					<input type="color" class="background-color-picker" value="#7B0700" />
+					<input class="jscolor color-picker" id="background-color-picker" value="rgba(150, 0, 0, 1)">
+					<br />
+					<br />
+					<br />
+					<div id="credits">
+						<a href="http://alexmeza.me"><em>@mezawebdev</em></a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -357,6 +348,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/easing/EasePack.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/utils/Draggable.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/plugins/CSSPlugin.min.js"></script>
+	<script src="assets/js/jscolor.min.js"></script>
 	<script src="assets/js/main.js"></script>
 </body>
 </html>
