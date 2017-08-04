@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+	<link rel="stylesheet" href="assets/css/nouislider.min.css">
 </head>
 <body>
 	<script src="assets/js/jquery.min.js"></script>
@@ -24,7 +25,7 @@
 		<div id="overlay-button">
 		</div>
 		<div class="menu" id="editor">
-			<div class="top-bar"><button class="close-button"><span class="glyphicon glyphicon-remove"></span></button></div>
+			<div class="top-bar"><button class="close-button"><span class="glyphicon glyphicon-remove"></span></button><p>Sacred Geometry System</div>
 			<h1>Sacred Geometry System</h1>
 			<br />
 			<div class="row">
@@ -49,14 +50,14 @@
 						</div>
 					</div>
 					<br />
-					<h4>Color</h4>
+					<h4>Shape Color</h4>
 					<br />
 					<input class="jscolor color-picker" id="geometry-color-picker" value="rgba(255, 255, 200, 0.8)">
 					<br />
 					<br />
-					<h4>Speed</h4>
+					<h4>Shape Speed</h4>
 					<br />
-					<input class="jscolor color-picker" id="background-color-picker" value="rgba(150, 0, 0, 1)">
+					<div id="shape-speed-draggable"></div>
 				</div>
 				<div class="col-xs-6">
 					<h4>Background</h4>
@@ -72,15 +73,14 @@
 						</div>
 					</div>
 					<br />
-					<h4>Color</h4>
+					<h4>Bg Color</h4>
 					<br />
 					<input class="jscolor color-picker" id="background-color-picker" value="rgba(150, 0, 0, 1)">
 					<br />
 					<br />
-					<h4>Speed</h4>
+					<h4>Bg Speed</h4>
 					<br />
-					<input class="jscolor color-picker" id="background-color-picker" value="rgba(150, 0, 0, 1)">
-					<br />
+					<div id="background-speed-draggable"></div>
 					<br />
 					<br />
 					<div id="credits">
@@ -349,6 +349,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/utils/Draggable.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/plugins/CSSPlugin.min.js"></script>
 	<script src="assets/js/jscolor.min.js"></script>
+	<script src="assets/js/nouislider.min.js"></script>
 	<script src="assets/js/main.js"></script>
 </body>
 </html>

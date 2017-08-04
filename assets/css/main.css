@@ -64,11 +64,11 @@ input, textarea {
 
 .menu {
   position: fixed;
-  background: white;
+  background: rgba(255, 255, 255, 0.9);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
   width: 300px;
   height: auto;
-  z-index: 1000;
+  z-index: 900;
   border-radius: 7px;
   padding: 30px 20px 20px 20px;
   font-size: 0.8em;
@@ -97,6 +97,10 @@ input, textarea {
       @media (min-width: 480px) {
         .menu .top-bar button.close-button {
           font-size: 0.5em; } }
+    .menu .top-bar p {
+      text-align: center;
+      color: rgba(0, 0, 0, 0.7);
+      margin-top: 3px; }
   .menu h1 {
     text-align: center;
     line-height: 50px;
@@ -121,13 +125,29 @@ input, textarea {
   .menu .row .col-xs-3:nth-child(2), .menu .row .col-xs-3:nth-child(3), .menu .row .col-xs-3:nth-child(4) {
     margin-left: 10px; }
   .menu .color-picker {
+    border: none;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    font-size: 0; }
+  .menu #background-speed-draggable {
+    height: 30px;
+    width: 100%;
+    position: relative;
+    z-index: 995;
+    background: rgba(0, 0, 0, 0.1);
     border: none; }
-  .menu #geometry-color-picker {
+    .menu #background-speed-draggable .noUi-handle {
+      top: 1px; }
+  .menu #shape-speed-draggable {
+    height: 30px;
     width: 100%;
-    height: 30px; }
-  .menu #background-color-picker {
-    width: 100%;
-    height: 30px; }
+    position: relative;
+    z-index: 995;
+    background: rgba(0, 0, 0, 0.1);
+    border: none; }
+    .menu #shape-speed-draggable .noUi-handle {
+      top: 1px; }
   .menu #credits a {
     color: rgba(0, 0, 0, 0.6); }
 

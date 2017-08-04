@@ -5,6 +5,7 @@ $(document).ready(function() {
 	var isMobile = false;
 	if (/Mobi/.test(navigator.userAgent)) {
 		isMobile = true; // mobile!
+		// Editor Mobile Center Fix 
 		$(".menu").css({
 			"bottom": "auto",
 			"left": "50%",
@@ -13,8 +14,13 @@ $(document).ready(function() {
 		});
 	}
 
-	// Editor Mobile Center Fix 
+	function getSliderValue(slider) {
+		return slider.noUiSlider.get();
+	}
 
+	function setShapeSpeed(speed) {
+		$(".negative-layer-2")
+	}
 
 	//----------------
 	//  Editor Menu
@@ -53,11 +59,6 @@ $(document).ready(function() {
 	});
 
 	// 2.- Make menu draggable
-	Draggable.create(".menu", {
-		type:"x,y", 
-		edgeResistance:0.65, 
-		throwProps:true
-	});
 
 	// 3. - Shape Buttons
 	$(".shape-block-1").on("click", function(element) {
@@ -86,6 +87,33 @@ $(document).ready(function() {
 		$(".background-block-group .col-xs-6 button.active").removeClass("active");
 		$(".background-block-2").toggleClass("active");
 	});
+
+	//4. Speed Range Sliders
+		//--- Create Shape Slider 
+		var shapeSpeedSlider = document.getElementById("shape-speed-draggable");
+		noUiSlider.create(shapeSpeedSlider, {
+			start: [50],
+			range: {
+				"min": [0],
+				"max": [100]
+			}
+		});
+		// Set Speeds
+		$("#shape-speed-draggable").on("mousedown mouseup", function() {
+			console.log(getSliderValue(shapeSpeedSlider));
+			setShapeSpeed(getSliderValue(shapeSpeedSlider));
+		});
+
+
+		//--- Background speed
+		var bgSpeedSlider = document.getElementById("background-speed-draggable");
+		noUiSlider.create(bgSpeedSlider, {
+			start: [50],
+			range: {
+				"min": [0],
+				"max": [100]
+			}
+		});
 
 //----------------- The End -----------------//
 });
