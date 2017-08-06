@@ -123,12 +123,31 @@ $(document).ready(function() {
 		//--- Background speed
 		var bgSpeedSlider = document.getElementById("background-speed-draggable");
 		noUiSlider.create(bgSpeedSlider, {
-			start: [130],
+			start: [125],
 			range: {
-				"min": [30],
-				"max": [230]
+				"min": [50],
+				"max": [200]
 			}
 		});
+
+	//5. Background Color
+	var bgColor = $("#background-color-picker").attr("value");
+	console.log(bgColor);
+	setInterval(function() {
+		bgColor = $("#background-color-picker").attr("value");
+		$("body").css("background", "linear-gradient(0deg, rgba(0, 0, 0, 1), " + bgColor + ")");
+	}, 1000);
+
+
+
+
+
+
+
+
+
+
+
 
 //----------------- The End -----------------//
 });
