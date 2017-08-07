@@ -139,6 +139,7 @@ $(document).ready(function() {
 	}, 500);
 
 
+	$(".menu").draggable();
 
 
 
