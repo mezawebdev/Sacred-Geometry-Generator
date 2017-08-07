@@ -80,7 +80,7 @@ input, textarea {
 	height: auto;
 	z-index: 900;
 	border-radius: 7px;
-	padding: 30px 20px 20px 20px;
+	padding: 30px 20px 30px 20px;
 	font-size: 0.8em;
 	overflow: hidden;
   left: 20px;
@@ -120,7 +120,11 @@ input, textarea {
     font-weight: bold;
     font-size: 1.4em;
 	}
-
+  h3 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
 	.row {
 		margin: 0;
 	}
@@ -800,7 +804,7 @@ input, textarea {
   vertical-align: middle;
   p {
     color: rgba(255, 255, 200, 1);
-    font-size: 7.5em;
+    font-size: 4em;
     position: fixed;
     display: block;
     text-align: center;
@@ -808,8 +812,8 @@ input, textarea {
     font-family: "Noto Sans", sans-serif;
     top: 50%;
     left: 50%;
-    @media (max-width: $xsmall-device) {
-      font-size: 4em;
+    @media (min-width: $xsmall-device) {
+      font-size: 5em;
     }
   }
 }

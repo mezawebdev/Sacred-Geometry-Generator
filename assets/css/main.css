@@ -70,7 +70,7 @@ input, textarea {
   height: auto;
   z-index: 900;
   border-radius: 7px;
-  padding: 30px 20px 20px 20px;
+  padding: 30px 20px 30px 20px;
   font-size: 0.8em;
   overflow: hidden;
   left: 20px;
@@ -106,6 +106,10 @@ input, textarea {
     line-height: 50px;
     font-weight: bold;
     font-size: 1.4em; }
+  .menu h3 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em; }
   .menu .row {
     margin: 0; }
   .menu .block-group .col-xs-6 {
@@ -717,7 +721,7 @@ input, textarea {
   vertical-align: middle; }
   #overlay-message p {
     color: #ffffc8;
-    font-size: 7.5em;
+    font-size: 4em;
     position: fixed;
     display: block;
     text-align: center;
@@ -725,9 +729,9 @@ input, textarea {
     font-family: "Noto Sans", sans-serif;
     top: 50%;
     left: 50%; }
-    @media (max-width: 480px) {
+    @media (min-width: 480px) {
       #overlay-message p {
-        font-size: 4em; } }
+        font-size: 5em; } }
 
 #overlay-button {
   position: fixed;

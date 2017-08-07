@@ -130,13 +130,13 @@ $(document).ready(function() {
 			}
 		});
 
-	//5. Background Color
+	//5. Background Color Picker
 	var bgColor = $("#background-color-picker").attr("value");
 	console.log(bgColor);
 	setInterval(function() {
-		bgColor = $("#background-color-picker").attr("value");
+		bgColor = $("#background-color-picker").css("background-color");
 		$("body").css("background", "linear-gradient(0deg, rgba(0, 0, 0, 1), " + bgColor + ")");
-	}, 1000);
+	}, 500);
 
 
 
