@@ -5,7 +5,7 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge />">
 	<meta http-equiv="content-type" content="text/html" charset="utf-8"/>
-	<meta name="viewport" content="width=device-width, intial-scale=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="author" content="Alex Meza" />
 	<meta name="keywords" content="HTML, CSS, JavaScript, jQuery, jQueryUI, Bootstrap" />
 	<meta name="prototype" content="0" />
@@ -20,20 +20,21 @@
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery-ui.min.js"></script>
 	<!-- wrapper start -->
+		<canvas id="background-gradient"></canvas>
 		<div id="overlay-message">
 			<p>Click on screen to open menu</p>
 		</div>
 		<div id="overlay-button">
 		</div>
 		<div class="menu" id="editor">
-			<div class="top-bar"><button class="close-button"><span class="glyphicon glyphicon-remove"></span></button><p>Sacred Geometry System</div>
+			<div class="top-bar"><button class="close-button"><span class="glyphicon glyphicon-remove"></span></button><p>Sacred Geometry System v1.0</div>
 			<h1>Sacred Geometry System</h1>
 			<br />
 			<div class="row">
 				<div class="col-xs-6">
 					<h3>Geometry</h3>
 					<br />
-					<div class="row block-group shape-block-group">
+					<div class="row block-group shape-block-group-1">
 						<div class="col-xs-6">
 							<button class="shape-block-1 active"></button>
 						</div>
@@ -42,7 +43,7 @@
 						</div>
 					</div>
 					<br />
-					<div class="row block-group shape-block-group">
+					<div class="row block-group shape-block-group-2">
 						<div class="col-xs-6">
 							<button class="shape-block-3"></button>
 						</div>
@@ -53,7 +54,7 @@
 					<br />
 					<h4>Color</h4>
 					<br />
-					<input class="jscolor color-picker" id="geometry-color-picker" readonly value="rgba(255, 255, 200, 0.8)">
+					<input type="button" class="jscolor color-picker" id="geometry-color-picker" readonly="readonly" value="rgba(255, 255, 200, 0.8)">
 					<br />
 					<br />
 					<h4>Speed</h4>
@@ -65,21 +66,36 @@
 					<br />
 					<div class="row block-group background-block-group">
 						<div class="col-xs-6">
-							<button class="background-block-1 active">
+							<button class="background-block-1">
 							</button>
 						</div>
 						<div class="col-xs-6">
-							<button class="background-block-2">
+							<button class="background-block-2 active">
 							</button>
 						</div>
 					</div>
 					<br />
-					<h4>Bg Color</h4>
+					<h4>Colors</h4>
 					<br />
-					<input class="jscolor color-picker" id="background-color-picker" readonly value="rgba(150, 0, 0, 1)">
+					<input type="button" class="jscolor color-picker" id="background-color-picker" readonly="readonly" value="rgba(150, 0, 0, 1)">
+					<div class="background-gradient-picker-group">
+						<div class="col-xs-3">
+							<input type="button" class="jscolor background-gradient-picker-1" value="#880800"></input>
+						</div>
+						<div class="col-xs-3">
+							<input type="button" class="jscolor background-gradient-picker-2" value="#001976"></input>
+						</div>
+						<div class="col-xs-3">
+							<input type="button" class="jscolor background-gradient-picker-3" value="#0D7600"></input>
+						</div>
+						<div class="col-xs-3">
+							<input type="button" class="jscolor background-gradient-picker-4" value="#C0C1C0"></input>
+						</div>
+						<div class="overlay">COMMING SOON</div>
+					</div>
 					<br />
 					<br />
-					<h4>Bg Speed</h4>
+					<h4>Speed</h4>
 					<br />
 					<div id="background-speed-draggable"></div>
 					<br />
@@ -345,10 +361,7 @@
 	  </div>
 	</div>
 	<!-- wrapper ends -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenLite.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/easing/EasePack.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/utils/Draggable.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/plugins/CSSPlugin.min.js"></script>
+	<script src="assets/js/granim.min.js"></script>
 	<script src="assets/js/jscolor.min.js"></script>
 	<script src="assets/js/nouislider.min.js"></script>
 	<script src="assets/js/main.js"></script>

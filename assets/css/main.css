@@ -62,6 +62,11 @@ input, textarea {
   -webkit-appearance: none;
   -webkit-border-radius: 0; }
 
+#background-gradient {
+  width: 100vw;
+  height: 100vh;
+  position: fixed; }
+
 .menu {
   position: fixed;
   background: rgba(255, 255, 255, 0.9);
@@ -115,7 +120,8 @@ input, textarea {
   .menu .block-group .col-xs-6 {
     background: rgba(0, 0, 0, 0.9);
     height: 30px;
-    width: 45px; }
+    width: 45px;
+    border-radius: 6px; }
   .menu .block-group .col-xs-6 button {
     width: 45px;
     height: 100%;
@@ -126,21 +132,54 @@ input, textarea {
     background: rgba(255, 226, 0, 0.2); }
   .menu .block-group .col-xs-6:nth-child(2) {
     margin-left: 10px; }
-  .menu .row .col-xs-3:nth-child(2), .menu .row .col-xs-3:nth-child(3), .menu .row .col-xs-3:nth-child(4) {
-    margin-left: 10px; }
+  .menu .row .col-xs-6 .shape-block-group-1 .col-xs-6:nth-child(1) {
+    background-image: url("../images/geometry-block-1.png");
+    background-size: cover; }
+  .menu #geometry-color-picker {
+    border-radius: 6px; }
   .menu .color-picker {
     border: none;
     width: 100%;
     height: 30px;
     text-align: center;
     font-size: 0; }
+  .menu #background-color-picker {
+    display: none;
+    border-radius: 6px; }
+  .menu .background-gradient-picker-group {
+    margin-bottom: 30px;
+    margin-top: 0px; }
+    .menu .background-gradient-picker-group .overlay {
+      width: 106px;
+      padding: 10px 20px 8px 20px;
+      background: rgba(0, 0, 0, 0.8);
+      position: absolute;
+      z-index: 10;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.8); }
+    .menu .background-gradient-picker-group .col-xs-3:nth-child(2), .menu .background-gradient-picker-group .col-xs-3:nth-child(4) {
+      margin-left: 10px; }
+    .menu .background-gradient-picker-group .col-xs-3 {
+      width: 45px;
+      margin: 0;
+      padding: 0;
+      border-radius: 6px; }
+      .menu .background-gradient-picker-group .col-xs-3 input {
+        top: 0px;
+        position: relative;
+        border-radius: 6px;
+        width: 50px;
+        height: 15px;
+        border: none;
+        font-size: 0; }
   .menu #background-speed-draggable {
     height: 30px;
     width: 100%;
     position: relative;
     z-index: 995;
     background: rgba(0, 0, 0, 0.1);
-    border: none; }
+    border: none;
+    border-radius: 6px; }
     .menu #background-speed-draggable .noUi-handle {
       top: 1px; }
   .menu #shape-speed-draggable {
@@ -149,7 +188,8 @@ input, textarea {
     position: relative;
     z-index: 995;
     background: rgba(0, 0, 0, 0.1);
-    border: none; }
+    border: none;
+    border-radius: 6px; }
     .menu #shape-speed-draggable .noUi-handle {
       top: 1px; }
   .menu #credits a {
@@ -281,7 +321,8 @@ input, textarea {
     }
   }*/ }
   #wrapper .square-1, #wrapper .square-2 {
-    border: 4px solid rgba(255, 255, 200, 0.8) !important; }
+    border: 4px solid #ffffc8;
+    opacity: 0.8; }
   #wrapper .negative-layer-2 .layer-1 {
     position: fixed;
     transform: translate(-50%, -50%);
@@ -294,12 +335,10 @@ input, textarea {
     #wrapper .negative-layer-2 .layer-1 .square-1 {
       width: 1430px;
       height: 1430px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .negative-layer-2 .layer-1 .square-2 {
       width: 1430px;
       height: 1430px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .negative-layer-2 .layer-2 {
     position: fixed;
@@ -313,12 +352,10 @@ input, textarea {
     #wrapper .negative-layer-2 .layer-2 .square-1 {
       width: 1430px;
       height: 1430px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .negative-layer-2 .layer-2 .square-2 {
       width: 1430px;
       height: 1430px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .negative-layer-1 .layer-1 {
     position: fixed;
@@ -332,12 +369,10 @@ input, textarea {
     #wrapper .negative-layer-1 .layer-1 .square-1 {
       width: 1008px;
       height: 1008px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .negative-layer-1 .layer-1 .square-2 {
       width: 1008px;
       height: 1008px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .negative-layer-1 .layer-2 {
     position: fixed;
@@ -351,12 +386,10 @@ input, textarea {
     #wrapper .negative-layer-1 .layer-2 .square-1 {
       width: 1008px;
       height: 1008px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .negative-layer-1 .layer-2 .square-2 {
       width: 1008px;
       height: 1008px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .zero-layer .layer-1 {
     position: fixed;
@@ -370,12 +403,10 @@ input, textarea {
     #wrapper .zero-layer .layer-1 .square-1 {
       width: 710px;
       height: 710px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .zero-layer .layer-1 .square-2 {
       width: 710px;
       height: 710px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .zero-layer .layer-2 {
     position: fixed;
@@ -389,12 +420,10 @@ input, textarea {
     #wrapper .zero-layer .layer-2 .square-1 {
       width: 710px;
       height: 710px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .zero-layer .layer-2 .square-2 {
       width: 710px;
       height: 710px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .first-layer .layer-1 {
     position: fixed;
@@ -408,12 +437,10 @@ input, textarea {
     #wrapper .first-layer .layer-1 .square-1 {
       width: 500px;
       height: 500px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .first-layer .layer-1 .square-2 {
       width: 500px;
       height: 500px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .first-layer .layer-2 {
     position: fixed;
@@ -427,12 +454,10 @@ input, textarea {
     #wrapper .first-layer .layer-2 .square-1 {
       width: 500px;
       height: 500px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .first-layer .layer-2 .square-2 {
       width: 500px;
       height: 500px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .second-layer .layer-1 {
     position: fixed;
@@ -446,12 +471,10 @@ input, textarea {
     #wrapper .second-layer .layer-1 .square-1 {
       width: 350px;
       height: 350px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .second-layer .layer-1 .square-2 {
       width: 350px;
       height: 350px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .second-layer .layer-2 {
     position: fixed;
@@ -465,12 +488,10 @@ input, textarea {
     #wrapper .second-layer .layer-2 .square-1 {
       width: 350px;
       height: 350px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .second-layer .layer-2 .square-2 {
       width: 350px;
       height: 350px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .third-layer .layer-1 {
     position: fixed;
@@ -484,12 +505,10 @@ input, textarea {
     #wrapper .third-layer .layer-1 .square-1 {
       width: 245px;
       height: 245px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .third-layer .layer-1 .square-2 {
       width: 245px;
       height: 245px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .third-layer .layer-2 {
     position: fixed;
@@ -503,12 +522,10 @@ input, textarea {
     #wrapper .third-layer .layer-2 .square-1 {
       width: 245px;
       height: 245px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .third-layer .layer-2 .square-2 {
       width: 245px;
       height: 245px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .fourth-layer .layer-1 {
     position: fixed;
@@ -522,12 +539,10 @@ input, textarea {
     #wrapper .fourth-layer .layer-1 .square-1 {
       width: 170px;
       height: 170px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .fourth-layer .layer-1 .square-2 {
       width: 170px;
       height: 170px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .fourth-layer .layer-2 {
     position: fixed;
@@ -541,12 +556,10 @@ input, textarea {
     #wrapper .fourth-layer .layer-2 .square-1 {
       width: 170px;
       height: 170px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .fourth-layer .layer-2 .square-2 {
       width: 170px;
       height: 170px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .fifth-layer .layer-1 {
     position: fixed;
@@ -560,12 +573,10 @@ input, textarea {
     #wrapper .fifth-layer .layer-1 .square-1 {
       width: 115px;
       height: 115px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .fifth-layer .layer-1 .square-2 {
       width: 115px;
       height: 115px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .fifth-layer .layer-2 {
     position: fixed;
@@ -579,12 +590,10 @@ input, textarea {
     #wrapper .fifth-layer .layer-2 .square-1 {
       width: 115px;
       height: 115px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .fifth-layer .layer-2 .square-2 {
       width: 115px;
       height: 115px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .sixth-layer .layer-1 {
     position: fixed;
@@ -598,12 +607,10 @@ input, textarea {
     #wrapper .sixth-layer .layer-1 .square-1 {
       width: 75px;
       height: 75px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .sixth-layer .layer-1 .square-2 {
       width: 75px;
       height: 75px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .sixth-layer .layer-2 {
     position: fixed;
@@ -617,12 +624,10 @@ input, textarea {
     #wrapper .sixth-layer .layer-2 .square-1 {
       width: 75px;
       height: 75px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .sixth-layer .layer-2 .square-2 {
       width: 75px;
       height: 75px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .seventh-layer .layer-1 {
     position: fixed;
@@ -636,12 +641,10 @@ input, textarea {
     #wrapper .seventh-layer .layer-1 .square-1 {
       width: 50px;
       height: 50px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .seventh-layer .layer-1 .square-2 {
       width: 50px;
       height: 50px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .seventh-layer .layer-2 {
     position: fixed;
@@ -655,12 +658,10 @@ input, textarea {
     #wrapper .seventh-layer .layer-2 .square-1 {
       width: 50px;
       height: 50px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .seventh-layer .layer-2 .square-2 {
       width: 50px;
       height: 50px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .eigth-layer .layer-1 {
     position: fixed;
@@ -674,12 +675,10 @@ input, textarea {
     #wrapper .eigth-layer .layer-1 .square-1 {
       width: 30px;
       height: 30px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .eigth-layer .layer-1 .square-2 {
       width: 30px;
       height: 30px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
   #wrapper .eigth-layer .layer-2 {
     position: fixed;
@@ -693,12 +692,10 @@ input, textarea {
     #wrapper .eigth-layer .layer-2 .square-1 {
       width: 30px;
       height: 30px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       position: absolute; }
     #wrapper .eigth-layer .layer-2 .square-2 {
       width: 30px;
       height: 30px;
-      border: 4px solid rgba(255, 255, 200, 0.8);
       transform: rotate(45deg); }
 
 @keyframes rotate {
@@ -716,7 +713,7 @@ input, textarea {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.9);
-  z-index: 1001;
+  z-index: 1010;
   display: none;
   vertical-align: middle; }
   #overlay-message p {

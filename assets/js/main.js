@@ -35,6 +35,45 @@ $(document).ready(function() {
 		$(".negative-layer-2 .layer-1, .negative-layer-2 .layer-2").css("animation-duration", value - 50 + "s");
 	}
 
+	//----------------------
+	// Background Gradient
+	//----------------------
+	var gradientColor1 = "#880800";
+	var gradientColor2 = "#001976";
+	var gradientColor3 = "#0D7600";
+	var gradientColor4 = "#C0C1C0";
+	var backgroundGradientSpeed = 2000;
+
+	var granimInstance = new Granim({
+	    element: '#background-gradient',
+	    name: 'radial-gradient',
+	    direction: 'radial',
+	    opacity: [1, 1],
+	    isPausedWhenNotInView: true,
+	    states : {
+	        "default-state": {
+	            gradients: [
+	                [gradientColor1, gradientColor2],
+	                [gradientColor3, gradientColor4]
+	            ],
+	            transitionSpeed: backgroundGradientSpeed
+	        }
+	    }
+	});
+granimInstance.pause();
+	setInterval(function() {
+		var colorValue1 = "#" + $(".background-gradient-picker-1").attr("value");
+		var colorValue2 = "#" + $(".background-gradient-picker-2").attr("value");
+		var colorValue3 = "#" + $(".background-gradient-picker-3").attr("value");
+		var colorValue4 = "#" + $(".background-gradient-picker-4").attr("value");
+		gradientColor1 = colorValue1;
+		gradientColor2 = colorValue2;
+		gradientColor3 = colorValue3;
+		gradientColor4 = colorValue4;
+	
+	}, 500);
+
+
 	//----------------
 	//  Editor Menu
 	//----------------
@@ -74,32 +113,46 @@ $(document).ready(function() {
 		}
 	});
 
+	$("#overlay-message").on("click", function(element) {
+		$(element).hide();
+	});
+
 	// 2.- Make menu draggable
 
 	// 3. - Shape Buttons
 	$(".shape-block-1").on("click", function(element) {
-		$(".shape-block-group .col-xs-6 button.active").removeClass("active");
+		$(".shape-block-group-1 .col-xs-6 button.active").removeClass("active");
+		$(".shape-block-group-2 .col-xs-6 button.active").removeClass("active");
 		$(".shape-block-1").toggleClass("active");
 	});
 	$(".shape-block-2").on("click", function(element) {
-		$(".shape-block-group .col-xs-6 button.active").removeClass("active");
+		$(".shape-block-group-1 .col-xs-6 button.active").removeClass("active");
+		$(".shape-block-group-2 .col-xs-6 button.active").removeClass("active");
 		$(".shape-block-2").toggleClass("active");
 	});
 	$(".shape-block-3").on("click", function(element) {
-		$(".shape-block-group .col-xs-6 button.active").removeClass("active");
+		$(".shape-block-group-1 .col-xs-6 button.active").removeClass("active");
+		$(".shape-block-group-2 .col-xs-6 button.active").removeClass("active");
 		$(".shape-block-3").toggleClass("active");
 	});
 	$(".shape-block-4").on("click", function(element) {
-		$(".shape-block-group .col-xs-6 button.active").removeClass("active");
+		$(".shape-block-group-1 .col-xs-6 button.active").removeClass("active");
+		$(".shape-block-group-2 .col-xs-6 button.active").removeClass("active");
 		$(".shape-block-4").toggleClass("active");
 	});
 
-	// 4.- Background Buttons
+	// 4.- Background Type Buttons
 	$(".background-block-1").on("click", function(element) {
+		$("#background-gradient").css("opacity", "0");
+		$(".background-gradient-picker-group").css("display", "none");
+		$("#background-color-picker").css("display", "block");
 		$(".background-block-group .col-xs-6 button.active").removeClass("active");
 		$(".background-block-1").toggleClass("active");
 	});
 	$(".background-block-2").on("click", function(element) {
+		$(".background-gradient-picker-group").css("display", "block");
+		$("#background-color-picker").css("display", "none");
+		$("#background-gradient").css("opacity", "1");
 		$(".background-block-group .col-xs-6 button.active").removeClass("active");
 		$(".background-block-2").toggleClass("active");
 	});
@@ -132,17 +185,23 @@ $(document).ready(function() {
 
 	//5. Background Color Picker
 	var bgColor = $("#background-color-picker").attr("value");
-	console.log(bgColor);
 	setInterval(function() {
 		bgColor = $("#background-color-picker").css("background-color");
 		$("body").css("background", "linear-gradient(0deg, rgba(0, 0, 0, 1), " + bgColor + ")");
 	}, 500);
 
 
+
+	//6. Geometry Color Picker
+	var geoColor = $("#geometry-color-picker").attr("value");
+	setInterval(function() {
+		geoColor = $("#geometry-color-picker").css("background-color");
+		$(".square-1, .square-2").css("border", "4px solid " + geoColor);
+	}, 500);
+
+
+	//7. Make menu draggable
 	$(".menu").draggable();
-
-
-
 
 
 
