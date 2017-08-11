@@ -6,11 +6,15 @@ $(document).ready(function() {
 	if (/Mobi/.test(navigator.userAgent)) {
 		isMobile = true; // mobile!
 		// Editor Mobile Center Fix 
-		$(".menu").css({
+		/*$(".menu").css({
 			"bottom": "auto",
 			"left": "50%",
 			"top": "50%",
 			"transform": "translate(-50%, -50%)"
+		});*/
+		$(".menu").css({
+			"bottom": "10px",
+			"left": "10px"
 		});
 	}
 
@@ -35,13 +39,19 @@ $(document).ready(function() {
 		$(".negative-layer-2 .layer-1, .negative-layer-2 .layer-2").css("animation-duration", value - 50 + "s");
 	}
 
+	function updateGradient(color1, color2, color3, color4) {
+		granimInstance.pause();
+		granimInstance.changeState("new-state");
+		granimInstance.play();
+	}
+
 	//----------------------
 	// Background Gradient
 	//----------------------
-	var gradientColor1 = "#880800";
-	var gradientColor2 = "#001976";
-	var gradientColor3 = "#0D7600";
-	var gradientColor4 = "#C0C1C0";
+	var gradientColor1 = "#C16B08";
+	var gradientColor2 = "#C1B702";
+	var gradientColor3 = "#20C199";
+	var gradientColor4 = "#C11E27";
 	var backgroundGradientSpeed = 2000;
 
 	var granimInstance = new Granim({
@@ -57,10 +67,17 @@ $(document).ready(function() {
 	                [gradientColor3, gradientColor4]
 	            ],
 	            transitionSpeed: backgroundGradientSpeed
+	        },
+	        "new-state": {
+	            gradients: [
+	                [gradientColor1, gradientColor2],
+	                [gradientColor3, gradientColor4]
+	            ],
+	            transitionSpeed: backgroundGradientSpeed
 	        }
 	    }
 	});
-granimInstance.pause();
+	/*
 	setInterval(function() {
 		var colorValue1 = "#" + $(".background-gradient-picker-1").attr("value");
 		var colorValue2 = "#" + $(".background-gradient-picker-2").attr("value");
@@ -70,9 +87,13 @@ granimInstance.pause();
 		gradientColor2 = colorValue2;
 		gradientColor3 = colorValue3;
 		gradientColor4 = colorValue4;
-	
-	}, 500);
-
+		updateGradient(gradientColor1, gradientColor2, gradientColor3, gradientColor4);
+		console.log("gradient1: " + gradientColor1);
+		console.log("gradient2: " + gradientColor2);
+		console.log("gradient3: " + gradientColor3);
+		console.log("gradient4: " + gradientColor4);
+	}, 60);
+	*/
 
 	//----------------
 	//  Editor Menu
@@ -188,7 +209,7 @@ granimInstance.pause();
 	setInterval(function() {
 		bgColor = $("#background-color-picker").css("background-color");
 		$("body").css("background", "linear-gradient(0deg, rgba(0, 0, 0, 1), " + bgColor + ")");
-	}, 500);
+	}, 60);
 
 
 
@@ -197,7 +218,7 @@ granimInstance.pause();
 	setInterval(function() {
 		geoColor = $("#geometry-color-picker").css("background-color");
 		$(".square-1, .square-2").css("border", "4px solid " + geoColor);
-	}, 500);
+	}, 60);
 
 
 	//7. Make menu draggable
