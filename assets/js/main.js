@@ -24,19 +24,21 @@ $(document).ready(function() {
 
 
 	function setShapeSpeed(value) {
-		$(".eigth-layer .layer-1, .eigth-layer .layer-2").css("animation-duration", value + "s");
-		$(".seventh-layer .layer-1, .seventh-layer .layer-2").css("animation-duration", value - 5 + "s");
-		console.log(value - 10 + "s");
-		$(".sixth-layer .layer-1, .sixth-layer .layer-2").css("animation-duration", value - 10 + "s");
-		console.log(value - 20 + "s");
-		$(".fifth-layer .layer-1, .fifth-layer .layer-2").css("animation-duration", value - 15 + "s");
-		$(".fourth-layer .layer-1, .fourth-layer .layer-2").css("animation-duration", value - 20 + "s");
-		$(".third-layer .layer-1, .third-layer .layer-2").css("animation-duration", value - 25 + "s");
-		$(".second-layer .layer-1, .second-layer .layer-2").css("animation-duration", value - 30 + "s");
-		$(".first-layer .layer-1, .first-layer .layer-2").css("animation-duration", value - 35 + "s");
-		$(".zero-layer .layer-1, .zero-layer .layer-2").css("animation-duration", value - 40 + "s");
-		$(".negative-layer-1 .layer-1, .negative-layer-1 .layer-2").css("animation-duration", value - 45 + "s");
-		$(".negative-layer-2 .layer-1, .negative-layer-2 .layer-2").css("animation-duration", value - 50 + "s");
+		var maxDuration = 180;
+		var updatedDuration = maxDuration - value;
+		console.log("Max Duration: " + maxDuration);
+		console.log("Current Duration: " + updatedDuration);
+		$(".eigth-layer .layer-1, .eigth-layer .layer-2").css("animation-duration", updatedDuration + "s");
+		$(".seventh-layer .layer-1, .seventh-layer .layer-2").css("animation-duration", updatedDuration + "s");
+		$(".sixth-layer .layer-1, .sixth-layer .layer-2").css("animation-duration", updatedDuration + "s");
+		$(".fifth-layer .layer-1, .fifth-layer .layer-2").css("animation-duration", updatedDuration + "s");
+		$(".fourth-layer .layer-1, .fourth-layer .layer-2").css("animation-duration", updatedDuration + "s");
+		$(".third-layer .layer-1, .third-layer .layer-2").css("animation-duration", updatedDuration + "s");
+		$(".second-layer .layer-1, .second-layer .layer-2").css("animation-duration", updatedDuration + "s");
+		$(".first-layer .layer-1, .first-layer .layer-2").css("animation-duration", updatedDuration + "s");
+		$(".zero-layer .layer-1, .zero-layer .layer-2").css("animation-duration", updatedDuration + "s");
+		$(".negative-layer-1 .layer-1, .negative-layer-1 .layer-2").css("animation-duration", updatedDuration + "s");
+		$(".negative-layer-2 .layer-1, .negative-layer-2 .layer-2").css("animation-duration", updatedDuration + "s");
 	}
 
 	function updateGradient(color1, color2, color3, color4) {
@@ -52,7 +54,7 @@ $(document).ready(function() {
 	var gradientColor2 = "#C1B702";
 	var gradientColor3 = "#20C199";
 	var gradientColor4 = "#C11E27";
-	var backgroundGradientSpeed = 500;
+	var backgroundGradientSpeed = 1500;
 
 	var granimInstance = new Granim({
 	    element: '#background-gradient',
@@ -103,7 +105,7 @@ $(document).ready(function() {
 	var hasDisplayedMessage = false;
 
 	// Initial Drivers
-	setShapeSpeed(130);
+	setShapeSpeed(75);
 
 	// 1.- Close button
 	$(".close-button").on("click", function(button) {
@@ -182,14 +184,14 @@ $(document).ready(function() {
 		//--- Create Shape Slider 
 		var shapeSpeedSlider = document.getElementById("shape-speed-draggable");
 		noUiSlider.create(shapeSpeedSlider, {
-			start: [125],
+			start: [75],
 			range: {
-				"min": [50],
-				"max": [200]
+				"min": [0],
+				"max": [150]
 			}
 		});
 		// Set Speeds
-		$("#shape-speed-draggable").on("mousedown mousemove click touchstart touchmove", function() {
+		shapeSpeedSlider.noUiSlider.on("update", function() {
 			setShapeSpeed(getSliderValue(shapeSpeedSlider));
 		});
 
@@ -197,10 +199,10 @@ $(document).ready(function() {
 		//--- Background speed
 		var bgSpeedSlider = document.getElementById("background-speed-draggable");
 		noUiSlider.create(bgSpeedSlider, {
-			start: [125],
+			start: [75],
 			range: {
-				"min": [50],
-				"max": [200]
+				"min": [0],
+				"max": [150]
 			}
 		});
 

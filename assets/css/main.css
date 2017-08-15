@@ -186,7 +186,7 @@ input, textarea {
     width: 100%;
     position: relative;
     z-index: 995;
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.3);
     border: none;
     border-radius: 6px; }
     .menu #background-speed-draggable .noUi-handle {
@@ -196,7 +196,7 @@ input, textarea {
     width: 100%;
     position: relative;
     z-index: 995;
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.3);
     border: none;
     border-radius: 6px; }
     .menu #shape-speed-draggable .noUi-handle {
@@ -338,7 +338,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotate;
-    animation-duration: 30s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .negative-layer-2 .layer-1 .square-1 {
@@ -355,7 +355,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotateOpposite;
-    animation-duration: 30s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .negative-layer-2 .layer-2 .square-1 {
@@ -372,7 +372,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotateOpposite;
-    animation-duration: 40s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .negative-layer-1 .layer-1 .square-1 {
@@ -389,7 +389,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotate;
-    animation-duration: 40s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .negative-layer-1 .layer-2 .square-1 {
@@ -406,7 +406,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotate;
-    animation-duration: 50s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .zero-layer .layer-1 .square-1 {
@@ -423,7 +423,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotateOpposite;
-    animation-duration: 50s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .zero-layer .layer-2 .square-1 {
@@ -440,7 +440,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotateOpposite;
-    animation-duration: 60s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .first-layer .layer-1 .square-1 {
@@ -457,7 +457,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotate;
-    animation-duration: 60s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .first-layer .layer-2 .square-1 {
@@ -474,7 +474,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotate;
-    animation-duration: 70s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .second-layer .layer-1 .square-1 {
@@ -491,7 +491,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotateOpposite;
-    animation-duration: 70s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .second-layer .layer-2 .square-1 {
@@ -508,7 +508,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotateOpposite;
-    animation-duration: 80s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .third-layer .layer-1 .square-1 {
@@ -525,7 +525,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotate;
-    animation-duration: 80s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .third-layer .layer-2 .square-1 {
@@ -542,7 +542,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotate;
-    animation-duration: 90s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .fourth-layer .layer-1 .square-1 {
@@ -559,7 +559,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotateOpposite;
-    animation-duration: 90s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .fourth-layer .layer-2 .square-1 {
@@ -576,7 +576,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotateOpposite;
-    animation-duration: 100s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .fifth-layer .layer-1 .square-1 {
@@ -593,7 +593,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotate;
-    animation-duration: 100s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .fifth-layer .layer-2 .square-1 {
@@ -610,7 +610,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotate;
-    animation-duration: 110s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .sixth-layer .layer-1 .square-1 {
@@ -627,7 +627,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotateOpposite;
-    animation-duration: 110s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .sixth-layer .layer-2 .square-1 {
@@ -644,7 +644,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotateOpposite;
-    animation-duration: 120s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .seventh-layer .layer-1 .square-1 {
@@ -661,7 +661,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotate;
-    animation-duration: 120s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .seventh-layer .layer-2 .square-1 {
@@ -678,7 +678,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotate;
-    animation-duration: 130s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .eigth-layer .layer-1 .square-1 {
@@ -695,7 +695,7 @@ input, textarea {
     top: 50%;
     left: 50%;
     animation-name: rotateOpposite;
-    animation-duration: 130s;
+    animation-duration: 125s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; }
     #wrapper .eigth-layer .layer-2 .square-1 {
