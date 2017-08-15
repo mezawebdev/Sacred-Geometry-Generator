@@ -52,7 +52,7 @@ $(document).ready(function() {
 	var gradientColor2 = "#C1B702";
 	var gradientColor3 = "#20C199";
 	var gradientColor4 = "#C11E27";
-	var backgroundGradientSpeed = 2000;
+	var backgroundGradientSpeed = 500;
 
 	var granimInstance = new Granim({
 	    element: '#background-gradient',
