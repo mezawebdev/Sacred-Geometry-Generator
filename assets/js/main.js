@@ -6,39 +6,55 @@ $(document).ready(function() {
 	if (/Mobi/.test(navigator.userAgent)) {
 		isMobile = true; // mobile!
 		// Editor Mobile Center Fix 
-		/*$(".menu").css({
+		$(".menu").css({
 			"bottom": "auto",
 			"left": "50%",
 			"top": "50%",
 			"transform": "translate(-50%, -50%)"
-		});*/
-		$(".menu").css({
+		});
+		/*$(".menu").css({
 			"bottom": "10px",
 			"left": "10px"
-		});
+		});*/
+	} else {
+		$(".menu").draggable();
 	}
 
 	function getSliderValue(slider) {
 		return slider.noUiSlider.get();
 	}
 
+	//----------------------
+	// Geometry Objects
+	//----------------------
+	var geomLayer8 = $(".eigth-layer .layer-1, .eigth-layer .layer-2");
+	var geomLayer7 = $(".seventh-layer .layer-1, .seventh-layer .layer-2");
+	var geomLayer6 = $(".sixth-layer .layer-1, .sixth-layer .layer-2");
+	var geomLayer5 = $(".fifth-layer .layer-1, .fifth-layer .layer-2");
+	var geomLayer4 = $(".fourth-layer .layer-1, .fourth-layer .layer-2");
+	var geomLayer3 = $(".third-layer .layer-1, .third-layer .layer-2");
+	var geomLayer2 = $(".second-layer .layer-1, .second-layer .layer-2");
+	var geomLayer1 = $(".first-layer .layer-1, .first-layer .layer-2");
+	var geomLayer0 = $(".zero-layer .layer-1, .zero-layer .layer-2");
+	var geomLayer01 = $(".negative-layer-1 .layer-1, .negative-layer-1 .layer-2");
+	var geomLayer02 = $(".negative-layer-2 .layer-1, .negative-layer-2 .layer-2");
 
 	function setShapeSpeed(value) {
 		var maxDuration = 180;
 		var updatedDuration = maxDuration - value;
 		console.log("Max Duration: " + maxDuration);
 		console.log("Current Duration: " + updatedDuration);
-		$(".eigth-layer .layer-1, .eigth-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".seventh-layer .layer-1, .seventh-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".sixth-layer .layer-1, .sixth-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".fifth-layer .layer-1, .fifth-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".fourth-layer .layer-1, .fourth-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".third-layer .layer-1, .third-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".second-layer .layer-1, .second-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".first-layer .layer-1, .first-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".zero-layer .layer-1, .zero-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".negative-layer-1 .layer-1, .negative-layer-1 .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".negative-layer-2 .layer-1, .negative-layer-2 .layer-2").css("animation-duration", updatedDuration + "s");
+		$(geomLayer8).css("animation-duration", updatedDuration + "s");
+		$(geomLayer7).css("animation-duration", updatedDuration + "s");
+		$(geomLayer6).css("animation-duration", updatedDuration + "s");
+		$(geomLayer5).css("animation-duration", updatedDuration + "s");
+		$(geomLayer4).css("animation-duration", updatedDuration + "s");
+		$(geomLayer3).css("animation-duration", updatedDuration + "s");
+		$(geomLayer2).css("animation-duration", updatedDuration + "s");
+		$(geomLayer1).css("animation-duration", updatedDuration + "s");
+		$(geomLayer0).css("animation-duration", updatedDuration + "s");
+		$(geomLayer01).css("animation-duration", updatedDuration + "s");
+		$(geomLayer02).css("animation-duration", updatedDuration + "s");
 	}
 
 	function updateGradient(color1, color2, color3, color4) {
@@ -185,13 +201,22 @@ $(document).ready(function() {
 		var shapeSpeedSlider = document.getElementById("shape-speed-draggable");
 		noUiSlider.create(shapeSpeedSlider, {
 			start: [75],
+			behaviour: "tap-drag",
 			range: {
 				"min": [0],
 				"max": [150]
 			}
 		});
 		// Set Speeds
+		shapeSpeedSlider.noUiSlider.on("set", function() {
+			setShapeSpeed(getSliderValue(shapeSpeedSlider));
+		});
+
 		shapeSpeedSlider.noUiSlider.on("update", function() {
+			setShapeSpeed(getSliderValue(shapeSpeedSlider));
+		});
+
+		shapeSpeedSlider.noUiSlider.on("start", function() {
 			setShapeSpeed(getSliderValue(shapeSpeedSlider));
 		});
 
@@ -200,6 +225,7 @@ $(document).ready(function() {
 		var bgSpeedSlider = document.getElementById("background-speed-draggable");
 		noUiSlider.create(bgSpeedSlider, {
 			start: [75],
+			behaviour: "tap-drag",
 			range: {
 				"min": [0],
 				"max": [150]
@@ -224,7 +250,7 @@ $(document).ready(function() {
 
 
 	//7. Make menu draggable
-	$(".menu").draggable();
+	
 
 
 
