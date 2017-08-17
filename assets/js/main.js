@@ -30,40 +30,23 @@ $(document).ready(function() {
 		console.log("Max Duration: " + maxDuration);
 		console.log("Current Duration: " + updatedDuration);
 		$(".eigth-layer .layer-1, .eigth-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".seventh-layer .layer-1, .seventh-layer .layer-2").css("animation-duration", updatedDuration + 10 + "s");
-		$(".sixth-layer .layer-1, .sixth-layer .layer-2").css("animation-duration", updatedDuration + 20 + "s");
-		$(".fifth-layer .layer-1, .fifth-layer .layer-2").css("animation-duration", updatedDuration + 30 + "s");
-		$(".fourth-layer .layer-1, .fourth-layer .layer-2").css("animation-duration", updatedDuration + 40 + "s");
-		$(".third-layer .layer-1, .third-layer .layer-2").css("animation-duration", updatedDuration + 50 + "s");
-		$(".second-layer .layer-1, .second-layer .layer-2").css("animation-duration", updatedDuration + 60 + "s");
-		$(".first-layer .layer-1, .first-layer .layer-2").css("animation-duration", updatedDuration + 70 + "s");
-		$(".zero-layer .layer-1, .zero-layer .layer-2").css("animation-duration", updatedDuration + 80 + "s");
-		$(".negative-layer-1 .layer-1, .negative-layer-1 .layer-2").css("animation-duration", updatedDuration + 90 + "s");
-		$(".negative-layer-2 .layer-1, .negative-layer-2 .layer-2").css("animation-duration", updatedDuration + 100 + "s");
+		$(".seventh-layer .layer-1, .seventh-layer .layer-2").css("animation-duration", updatedDuration + 100 + "s");
+		$(".sixth-layer .layer-1, .sixth-layer .layer-2").css("animation-duration", updatedDuration + 90 + "s");
+		$(".fifth-layer .layer-1, .fifth-layer .layer-2").css("animation-duration", updatedDuration + 80 + "s");
+		$(".fourth-layer .layer-1, .fourth-layer .layer-2").css("animation-duration", updatedDuration + 70 + "s");
+		$(".third-layer .layer-1, .third-layer .layer-2").css("animation-duration", updatedDuration + 60 + "s");
+		$(".second-layer .layer-1, .second-layer .layer-2").css("animation-duration", updatedDuration + 50 + "s");
+		$(".first-layer .layer-1, .first-layer .layer-2").css("animation-duration", updatedDuration + 40 + "s");
+		$(".zero-layer .layer-1, .zero-layer .layer-2").css("animation-duration", updatedDuration + 30 + "s");
+		$(".negative-layer-1 .layer-1, .negative-layer-1 .layer-2").css("animation-duration", updatedDuration + 20 + "s");
+		$(".negative-layer-2 .layer-1, .negative-layer-2 .layer-2").css("animation-duration", updatedDuration + 20 + "s");
 	}
 
 	function updateGradient(color1, color2, color3, color4, speed) {
-		delete granimInstance;
 		var maxSpeed = 20200;
 		var updatedSpeed = Math.floor(maxSpeed - speed);
-		//granimInstance.states["default-state"].transitionSpeed = maxSpeed - speed;
-		//console.log(granimInstance.states["default-state"].transitionSpeed);
-		var granimInstance = new Granim({
-		    element: '#background-gradient',
-		    name: 'radial-gradient',
-		    direction: 'radial',
-		    opacity: [1, 1],
-		    isPausedWhenNotInView: true,
-		    states : {
-		        "default-state": {
-		            gradients: [
-		                [gradientColor1, gradientColor2],
-		                [gradientColor3, gradientColor4]
-		            ],
-		            transitionSpeed: 400
-		        }
-		    }
-		});
+		granimInstance.states["default-state"].transitionSpeed = maxSpeed - speed;
+		console.log(granimInstance.states["default-state"].transitionSpeed);
 
 	}
 

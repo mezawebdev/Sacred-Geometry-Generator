@@ -90,16 +90,16 @@
 					<input type="button" class="jscolor color-picker" id="background-color-picker" onchange="updateSolidBackgroundColor(this.jscolor)" readonly="readonly" value="rgba(150, 0, 0, 1)">
 					<div class="background-gradient-picker-group">
 						<div class="col-xs-3">
-							<input type="button" class="jscolor background-gradient-picker-1" value="#C16B08"></input>
+							<input type="button" onchange="updateGradientBackgroundColor(this.jscolor, 'block-1')" class="jscolor background-gradient-picker-1" value="#C16B08"></input>
 						</div>
 						<div class="col-xs-3">
-							<input type="button" class="jscolor background-gradient-picker-2" value="#C1B702"></input>
+							<input type="button" onchange="updateGradientBackgroundColor(this.jscolor, 'block-2')" class="jscolor background-gradient-picker-2" value="#C1B702"></input>
 						</div>
 						<div class="col-xs-3">
-							<input type="button" class="jscolor background-gradient-picker-3" value="#20C199"></input>
+							<input type="button" onchange="updateGradientBackgroundColor(this.jscolor, 'block-3')" class="jscolor background-gradient-picker-3" value="#20C199"></input>
 						</div>
 						<div class="col-xs-3">
-							<input type="button" class="jscolor background-gradient-picker-4" value="#C11E27"></input>
+							<input type="button" onchange="updateGradientBackgroundColor(this.jscolor, 'block-4')" class="jscolor background-gradient-picker-4" value="#C11E27"></input>
 						</div>
 						<div class="overlay">COMING SOON</div>
 					</div>

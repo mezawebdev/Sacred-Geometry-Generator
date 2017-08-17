@@ -5,3 +5,11 @@ function updateGeometryColor(jscolor) {
 function updateSolidBackgroundColor(jscolor) {
 	$("body").css("background", "linear-gradient(0deg, rgba(0, 0, 0, 1), #" + jscolor + ")");
 }
+
+function updateGradientBackgroundColor(jscolor, block) {
+	switch(block) {
+		case "block-1":
+			
+			break;
+	}
+}
