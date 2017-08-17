@@ -157,6 +157,8 @@ input, textarea {
 
   .block-group .col-xs-6 button.active {
     background: rgba(255, 226, 0, 0.2);
+    border: 2px solid rgba(204, 197, 1, 0.6);
+    border-radius: 5px !important;
   }
 
   .block-group .col-xs-6:nth-child(2) {
@@ -209,6 +211,7 @@ input, textarea {
       text-align: center;
       color: rgba(255, 255, 255, 0.8);
       border-radius: 5px;
+      display: none;
     }
     .col-xs-3:nth-child(2), .col-xs-3:nth-child(4) {
       margin-left: 10px;
