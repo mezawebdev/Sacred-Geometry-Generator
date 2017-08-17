@@ -25,36 +25,46 @@ $(document).ready(function() {
 	}
 
 	function setShapeSpeed(value) {
-		var maxDuration = 180;
+		var maxDuration = 120;
 		var updatedDuration = maxDuration - value;
 		console.log("Max Duration: " + maxDuration);
 		console.log("Current Duration: " + updatedDuration);
 		$(".eigth-layer .layer-1, .eigth-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".seventh-layer .layer-1, .seventh-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".sixth-layer .layer-1, .sixth-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".fifth-layer .layer-1, .fifth-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".fourth-layer .layer-1, .fourth-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".third-layer .layer-1, .third-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".second-layer .layer-1, .second-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".first-layer .layer-1, .first-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".zero-layer .layer-1, .zero-layer .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".negative-layer-1 .layer-1, .negative-layer-1 .layer-2").css("animation-duration", updatedDuration + "s");
-		$(".negative-layer-2 .layer-1, .negative-layer-2 .layer-2").css("animation-duration", updatedDuration + "s");
+		$(".seventh-layer .layer-1, .seventh-layer .layer-2").css("animation-duration", updatedDuration + 10 + "s");
+		$(".sixth-layer .layer-1, .sixth-layer .layer-2").css("animation-duration", updatedDuration + 20 + "s");
+		$(".fifth-layer .layer-1, .fifth-layer .layer-2").css("animation-duration", updatedDuration + 30 + "s");
+		$(".fourth-layer .layer-1, .fourth-layer .layer-2").css("animation-duration", updatedDuration + 40 + "s");
+		$(".third-layer .layer-1, .third-layer .layer-2").css("animation-duration", updatedDuration + 50 + "s");
+		$(".second-layer .layer-1, .second-layer .layer-2").css("animation-duration", updatedDuration + 60 + "s");
+		$(".first-layer .layer-1, .first-layer .layer-2").css("animation-duration", updatedDuration + 70 + "s");
+		$(".zero-layer .layer-1, .zero-layer .layer-2").css("animation-duration", updatedDuration + 80 + "s");
+		$(".negative-layer-1 .layer-1, .negative-layer-1 .layer-2").css("animation-duration", updatedDuration + 90 + "s");
+		$(".negative-layer-2 .layer-1, .negative-layer-2 .layer-2").css("animation-duration", updatedDuration + 100 + "s");
 	}
 
 	function updateGradient(color1, color2, color3, color4, speed) {
+		delete granimInstance;
 		var maxSpeed = 20200;
-		var ran = Math.floor(Math.random() * 10000);
-		console.log("ran: " + ran);
 		var updatedSpeed = Math.floor(maxSpeed - speed);
-		console.log("Set Speed: " + updatedSpeed);
-		granimInstance.states["default-state"] = {
-			gradients: [
-		                [color1, color2],
-		                [color3, color4]
+		//granimInstance.states["default-state"].transitionSpeed = maxSpeed - speed;
+		//console.log(granimInstance.states["default-state"].transitionSpeed);
+		var granimInstance = new Granim({
+		    element: '#background-gradient',
+		    name: 'radial-gradient',
+		    direction: 'radial',
+		    opacity: [1, 1],
+		    isPausedWhenNotInView: true,
+		    states : {
+		        "default-state": {
+		            gradients: [
+		                [gradientColor1, gradientColor2],
+		                [gradientColor3, gradientColor4]
 		            ],
-		            transitionSpeed: ran
-		}
+		            transitionSpeed: 400
+		        }
+		    }
+		});
+
 	}
 
 
@@ -124,10 +134,6 @@ $(document).ready(function() {
 	});
 
 	//5. Background Solid Color Picker
-	setInterval(function() {
-		bgColor = $("#background-color-picker").css("background-color");
-		$("body").css("background", "linear-gradient(0deg, rgba(0, 0, 0, 1), " + bgColor + ")");
-	}, 60);
 
 	//----------------
 	//  Editor Menu
@@ -202,11 +208,11 @@ $(document).ready(function() {
 		//--- Create Shape Slider 
 		var shapeSpeedSlider = document.getElementById("shape-speed-draggable");
 		noUiSlider.create(shapeSpeedSlider, {
-			start: [75],
+			start: [50],
 			behaviour: "tap-drag",
 			range: {
 				"min": [0],
-				"max": [150]
+				"max": [100]
 			}
 		});
 		// Set Speeds
@@ -219,17 +225,6 @@ $(document).ready(function() {
 	
 
 
-
-	//6. Geometry Color Picker
-	var geoColor = $("#geometry-color-picker").attr("value");
-	setInterval(function() {
-		geoColor = $("#geometry-color-picker").css("background-color");
-		$(".square-1, .square-2").css("border", "4px solid " + geoColor);
-	}, 60);
-
-
-	//7. Make menu draggable
-	
 
 
 

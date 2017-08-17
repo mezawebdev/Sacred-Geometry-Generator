@@ -18,6 +18,9 @@
 </head>
 <body>
 	<!-- wrapper start -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery-ui.min.js"></script>
+		<script src="assets/js/functions.js"></script>
 		<canvas id="background-gradient"></canvas>
 		<div id="overlay-message">
 			<p>Click on screen to open menu</p>
@@ -61,7 +64,7 @@
 					<br />
 					<h4>Color</h4>
 					<br />
-					<input type="button" class="jscolor color-picker" id="geometry-color-picker" readonly="readonly" value="rgba(255, 255, 200, 0.8)">
+					<input type="button" class="jscolor color-picker" id="geometry-color-picker" onchange="updateGeometryColor(this.jscolor)" readonly="readonly" value="rgba(255, 255, 200, 0.8)">
 					<br />
 					<br />
 					<h4>Speed</h4>
@@ -84,7 +87,7 @@
 					<br />
 					<h4>Colors</h4>
 					<br />
-					<input type="button" class="jscolor color-picker" id="background-color-picker" readonly="readonly" value="rgba(150, 0, 0, 1)">
+					<input type="button" class="jscolor color-picker" id="background-color-picker" onchange="updateSolidBackgroundColor(this.jscolor)" readonly="readonly" value="rgba(150, 0, 0, 1)">
 					<div class="background-gradient-picker-group">
 						<div class="col-xs-3">
 							<input type="button" class="jscolor background-gradient-picker-1" value="#C16B08"></input>
@@ -368,8 +371,6 @@
 	  </div>
 	</div>
 	<!-- wrapper ends -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery-ui.min.js"></script>
 	<script src="assets/js/granim.min.js"></script>
 	<script src="assets/js/jscolor.min.js"></script>
 	<script src="assets/js/nouislider.min.js"></script>
