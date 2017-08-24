@@ -45,7 +45,9 @@ $(document).ready(function() {
 	function updateGradient(color1, color2, color3, color4, speed) {
 		var maxSpeed = 20200;
 		var updatedSpeed = Math.floor(maxSpeed - speed);
+		granimInstance.changeState("transitory-state");
 		granimInstance.states["default-state"].transitionSpeed = maxSpeed - speed;
+		granimInstance.changeState("default-state");
 		console.log(granimInstance.states["default-state"].transitionSpeed);
 
 	}
@@ -75,6 +77,13 @@ $(document).ready(function() {
 	                [gradientColor3, gradientColor4]
 	            ],
 	            transitionSpeed: backgroundGradientSpeed
+	        },
+	        "transitory-state": {
+	        	gradients: [
+	                ["#fff", "#fff"],
+	                ["#fff", "#fff"]
+	            ],
+	            transitionSpeed: 5000
 	        }
 	    }
 	});
@@ -188,20 +197,20 @@ $(document).ready(function() {
 	
 
 	//4. Speed Range Sliders
-		//--- Create Shape Slider 
-		var shapeSpeedSlider = document.getElementById("shape-speed-draggable");
-		noUiSlider.create(shapeSpeedSlider, {
-			start: [50],
-			behaviour: "tap-drag",
-			range: {
-				"min": [0],
-				"max": [100]
-			}
-		});
-		// Set Speeds
-		shapeSpeedSlider.noUiSlider.on("update", function() {
-			setShapeSpeed(getSliderValue(shapeSpeedSlider));
-		});
+	//----- Create Shape Slider 
+	var shapeSpeedSlider = document.getElementById("shape-speed-draggable");
+	noUiSlider.create(shapeSpeedSlider, {
+		start: [50],
+		behaviour: "tap-drag",
+		range: {
+			"min": [0],
+			"max": [100]
+		}
+	});
+	// Set Speeds
+	shapeSpeedSlider.noUiSlider.on("update", function() {
+		setShapeSpeed(getSliderValue(shapeSpeedSlider));
+	});
 
 
 

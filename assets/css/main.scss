@@ -201,18 +201,6 @@ input, textarea {
   .background-gradient-picker-group {
     margin-bottom: 30px;
     margin-top: 0px;
-    .overlay {
-      width: 120px;
-      margin-top: -30px;
-      margin-left: -8px;
-      padding: 65px 20px 65px 20px;
-      background: rgba(0, 0, 0, 0.9);
-      position: absolute;
-      z-index: 2000;
-      text-align: center;
-      color: rgba(255, 255, 255, 0.8);
-      border-radius: 5px;
-    }
     .col-xs-3:nth-child(2), .col-xs-3:nth-child(4) {
       margin-left: 10px;
     }
@@ -890,6 +878,20 @@ input, textarea {
       font-size: 5em;
     }
   }
+}
+
+.overlay {
+  width: 120px;
+  margin-top: -30px;
+  margin-left: -8px;
+  padding: 65px 20px 65px 20px;
+  background: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  z-index: 2000;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  display: none !important;
 }
 
 .coming-soon-overlay {
