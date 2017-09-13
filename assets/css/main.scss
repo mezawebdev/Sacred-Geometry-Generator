@@ -1,12 +1,5 @@
 @import "_reset.scss";
 
-@mixin center {
-  position: fixed;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-}
-
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans');
 
 // Device Dimensions
@@ -16,6 +9,9 @@ $xsmall-device: 480px;
 $gradientBg: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 50, 1));
 $blackBg: rgba(0, 0, 0, 1);
 $gradientBg2: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(150, 0, 0, 1));
+
+// Squares Of Life
+// Styles
 $defaultSettings: 4px solid rgba(255, 255, 200, 1);
 
 // Sizes
@@ -51,6 +47,53 @@ $seventh-layer-speed: 125s;
 $eigth-layer-speed: 125s;
 // 130s = 50
 
+
+// Flower Of Life
+// Styles
+$circleSize: 800px;
+$circleBorderRadius: $circleSize / 2;
+$borderStyle: 4px solid white;
+$zoom: 1.5;
+
+// Speed
+$layer-1-speed: 300s;
+$layer-2-speed: 300s;
+$layer-3-speed: 300s;
+$layer-4-speed: 290s;
+$layer-5-speed: 290s;
+$layer-6-speed: 290s;
+$layer-7-speed: 290s;
+$layer-8-speed: 290s;
+$layer-9-speed: 290s;
+
+
+
+@mixin circleFormat {
+  width: $circleSize;
+  height: $circleSize;
+  border-radius: $circleBorderRadius;
+  border: $borderStyle;
+}
+
+@mixin animationRight {
+  animation-name: flowerOfLifeRotateRight;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@mixin animationLeft {
+  animation-name: flowerOfLifeRotateLeft;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@mixin center {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
 html {
   height: 100%;
   width: 100%;
@@ -78,8 +121,6 @@ input, textarea {
   position: fixed;
 }
 
-
-
 //----------------
 //  Menu
 //----------------
@@ -93,9 +134,11 @@ input, textarea {
 	border-radius: 7px;
 	padding: 30px 20px 30px 20px;
 	font-size: 0.8em;
-	overflow: hidden;
+	overflow-y: hidden;
+  overflow-x: hidden;
   left: 20px;
   bottom: 20px;
+
   .top-bar {
     width: 100%;
     border-top-right-radius: 7px;
@@ -126,6 +169,92 @@ input, textarea {
       font-size: 0.9em;
     }
   }
+
+  #main-menu-slider {
+    width: 900px;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    left: -20px;
+    height: 210px;
+    .screen {
+      width: 300px;
+      display: inline-block;
+      float: left;
+      height: 100%;
+      padding: 20px;
+      button.go-back-button {
+        position: absolute;
+      }
+    }
+    .screen-1 {
+      .main-menu-option {
+        width: 100%;
+        height: 57px;
+        text-align: left;
+        //border: 1px solid rgba(0, 0, 0, 0.1);
+        //padding: 20px;
+        //border-radius: 5px;
+        //background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.1) 90%);
+        button {
+          width: 100%;
+          height: 100%;
+          border-radius: none !important;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          padding: 20px;
+          font-size: 1.1em;
+          font-weight: bold;
+          text-align: left;
+          background-color: transparent;
+          //background: linear-gradient(180deg, transparent, rgba(242, 244, 239, 0.5));
+          transition: background 0.25s ease-in-out;
+          span {
+            float: right;
+            color: rgba(0, 0, 0, 0.5);
+          }
+        }
+        button:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+        button:active {
+          background: rgba(255, 255, 255, 0.4);
+        }
+      }
+      #main-menu-option-1 {
+        button {
+          border-top: none;
+          border-left: none;
+          border-right: none;
+        }
+      }
+      #main-menu-option-2 {
+        button {
+          border: none;
+        }
+      }
+      #main-menu-option-3 {
+        button {
+          border-bottom: none;
+          border-left: none;
+          border-right: none;
+        }
+      }
+    }
+    .screen-2 {
+        
+    }
+    .screen-3 {
+      
+    }
+  }
+
+  .me {
+    a {
+      color: rgba(0, 0, 0, 0.5);
+    }
+    text-align: center;
+  }
+
 	h1 {
 		text-align: center;
 		line-height: 50px;
@@ -135,7 +264,7 @@ input, textarea {
   h3 {
     text-align: center;
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1em;
   }
 	.row {
 		margin: 0;
@@ -221,7 +350,9 @@ input, textarea {
     }
   }
 
-  #background-speed-draggable {
+
+
+  /*#background-speed-draggable {
     height: 30px;
     width: 100%;
     position: relative;
@@ -233,9 +364,9 @@ input, textarea {
       top: 1px;
       
     }
-  }
+  }*/
 
-  #shape-speed-draggable {
+  /*#shape-speed-draggable {
     height: 30px;
     width: 100%;
     position: relative;
@@ -246,7 +377,7 @@ input, textarea {
     .noUi-handle {
       top: 1px;
     }
-  }
+  }*/
 
   #credits {
     a {
@@ -254,143 +385,27 @@ input, textarea {
     }
   }
 
+}
 
+#editor {
+  
 }
 
 //----------------
 //  Geometry
 //----------------
-#wrapper {
+// Squares Of Life
+#squares-wrapper {
   @include center;
-  //display: none;
-  /*.negative-layer-5 {
-    .layer-1 {
-      @include center;
-      //animation-name: rotate;
-      animation-duration: $negative-2-layer-speed;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      .square-1 {
-        width: $negative-5-layer-size;
-        height: $negative-5-layer-size;
-        border: 4px solid white;
-        position: absolute;
-      }
-      .square-2 {
-        width: $negative-5-layer-size;
-        height: $negative-5-layer-size;
-        border: 4px solid white;
-        transform: rotate(45deg);
-      }
-    }
-    .layer-2 {
-      @include center;
-      //animation-name: rotateOpposite;
-      animation-duration: $negative-5-layer-speed;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      .square-1 {
-        width: $negative-5-layer-size;
-        height: $negative-5-layer-size;
-        border: 4px solid white;
-        position: absolute;
-      }
-      .square-2 {
-        width: $negative-5-layer-size;
-        height: $negative-5-layer-size;
-        border: 4px solid white;
-        transform: rotate(45deg);
-      }
-    }
-  }
-  .negative-layer-4 {
-    .layer-1 {
-      @include center;
-      animation-name: rotate;
-      animation-duration: $negative-4-layer-speed;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      .square-1 {
-        width: $negative-4-layer-size;
-        height: $negative-4-layer-size;
-        border: 4px solid white;
-        position: absolute;
-      }
-      .square-2 {
-        width: $negative-4-layer-size;
-        height: $negative-4-layer-size;
-        border: 4px solid white;
-        transform: rotate(45deg);
-      }
-    }
-    .layer-2 {
-      @include center;
-      animation-name: rotateOpposite;
-      animation-duration: $negative-4-layer-speed;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      .square-1 {
-        width: $negative-4-layer-size;
-        height: $negative-4-layer-size;
-        border: 4px solid white;
-        position: absolute;
-      }
-      .square-2 {
-        width: $negative-4-layer-size;
-        height: $negative-4-layer-size;
-        border: 4px solid white;
-        transform: rotate(45deg);
-      }
-    }
-  }
-  .negative-layer-3 {
-    .layer-1 {
-      @include center;
-      animation-name: rotateOpposite;
-      animation-duration: $negative-3-layer-speed;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      .square-1 {
-        width: $negative-3-layer-size;
-        height: $negative-3-layer-size;
-        border: 4px solid white;
-        position: absolute;
-      }
-      .square-2 {
-        width: $negative-3-layer-size;
-        height: $negative-3-layer-size;
-        border: 4px solid white;
-        transform: rotate(45deg);
-      }
-    }
-    .layer-2 {
-      @include center;
-      animation-name: rotate;
-      animation-duration: $negative-3-layer-speed;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      .square-1 {
-        width: $negative-3-layer-size;
-        height: $negative-3-layer-size;
-        border: 4px solid white;
-        position: absolute;
-      }
-      .square-2 {
-        width: $negative-3-layer-size;
-        height: $negative-3-layer-size;
-        border: 4px solid white;
-        transform: rotate(45deg);
-      }
-    }
-  }*/
+  display: none;
   .square-1, .square-2 {
     border: $defaultSettings;
-    opacity: 0.8;
+    opacity: 0.9;
   }
   .negative-layer-2 {
     .layer-1 {
       @include center;
-      animation-name: rotate;
+      animation-name: squaresOfLifeRotate;
       animation-duration: $negative-2-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -409,7 +424,7 @@ input, textarea {
     }
     .layer-2 {
       @include center;
-      animation-name: rotateOpposite;
+      animation-name: squaresOfLifeRotateOpposite;
       animation-duration: $negative-2-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -430,7 +445,7 @@ input, textarea {
   .negative-layer-1 {
     .layer-1 {
       @include center;
-      animation-name: rotateOpposite;
+      animation-name: squaresOfLifeRotateOpposite;
       animation-duration: $negative-1-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -449,7 +464,7 @@ input, textarea {
     }
     .layer-2 {
       @include center;
-      animation-name: rotate;
+      animation-name: squaresOfLifeRotate;
       animation-duration: $negative-1-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -470,7 +485,7 @@ input, textarea {
   .zero-layer {
     .layer-1 {
       @include center;
-      animation-name: rotate;
+      animation-name: squaresOfLifeRotate;
       animation-duration: $zero-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -489,7 +504,7 @@ input, textarea {
     }
     .layer-2 {
       @include center;
-      animation-name: rotateOpposite;
+      animation-name: squaresOfLifeRotateOpposite;
       animation-duration: $zero-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -510,7 +525,7 @@ input, textarea {
   .first-layer {
     .layer-1 {
       @include center;
-      animation-name: rotateOpposite;
+      animation-name: squaresOfLifeRotateOpposite;
       animation-duration: $first-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -529,7 +544,7 @@ input, textarea {
     }
     .layer-2 {
       @include center;
-      animation-name: rotate;
+      animation-name: squaresOfLifeRotate;
       animation-duration: $first-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -550,7 +565,7 @@ input, textarea {
   .second-layer {
     .layer-1 {
       @include center;
-      animation-name: rotate;
+      animation-name: squaresOfLifeRotate;
       animation-duration: $second-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -569,7 +584,7 @@ input, textarea {
     }
     .layer-2 {
       @include center;
-      animation-name: rotateOpposite;
+      animation-name: squaresOfLifeRotateOpposite;
       animation-duration: $second-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -590,7 +605,7 @@ input, textarea {
   .third-layer {
     .layer-1 {
       @include center;
-      animation-name: rotateOpposite;
+      animation-name: squaresOfLifeRotateOpposite;
       animation-duration: $third-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -609,7 +624,7 @@ input, textarea {
     }
     .layer-2 {
       @include center;
-      animation-name: rotate;
+      animation-name: squaresOfLifeRotate;
       animation-duration: $third-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -630,7 +645,7 @@ input, textarea {
   .fourth-layer {
     .layer-1 {
       @include center;
-      animation-name: rotate;
+      animation-name: squaresOfLifeRotate;
       animation-duration: $fourth-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -649,7 +664,7 @@ input, textarea {
     }
     .layer-2 {
       @include center;
-      animation-name: rotateOpposite;
+      animation-name: squaresOfLifeRotateOpposite;
       animation-duration: $fourth-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -670,7 +685,7 @@ input, textarea {
   .fifth-layer {
     .layer-1 {
       @include center;
-      animation-name: rotateOpposite;
+      animation-name: squaresOfLifeRotateOpposite;
       animation-duration: $fifth-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -689,7 +704,7 @@ input, textarea {
     }
     .layer-2 {
       @include center;
-      animation-name: rotate;
+      animation-name: squaresOfLifeRotate;
       animation-duration: $fifth-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -710,7 +725,7 @@ input, textarea {
   .sixth-layer {
     .layer-1 {
       @include center;
-      animation-name: rotate;
+      animation-name: squaresOfLifeRotate;
       animation-duration: $sixth-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -729,7 +744,7 @@ input, textarea {
     }
     .layer-2 {
       @include center;
-      animation-name: rotateOpposite;
+      animation-name: squaresOfLifeRotateOpposite;
       animation-duration: $sixth-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -750,7 +765,7 @@ input, textarea {
   .seventh-layer {
     .layer-1 {
       @include center;
-      animation-name: rotateOpposite;
+      animation-name: squaresOfLifeRotateOpposite;
       animation-duration: $seventh-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -769,7 +784,7 @@ input, textarea {
     }
     .layer-2 {
       @include center;
-      animation-name: rotate;
+      animation-name: squaresOfLifeRotate;
       animation-duration: $seventh-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -790,7 +805,7 @@ input, textarea {
   .eigth-layer {
     .layer-1 {
       @include center;
-      animation-name: rotate;
+      animation-name: squaresOfLifeRotate;
       animation-duration: $eigth-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -809,7 +824,7 @@ input, textarea {
     }
     .layer-2 {
       @include center;
-      animation-name: rotateOpposite;
+      animation-name: squaresOfLifeRotateOpposite;
       animation-duration: $eigth-layer-speed;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -829,11 +844,1394 @@ input, textarea {
   }
 }
 
+// Flower Of Life (Circles)
+.flower-wrapper {
+  display: none;
+  transform: translate(-50%, -50%) scale($zoom);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  opacity: 0.9;
+  .circle {
+
+  }
+  .circle-center {
+      @include center;
+      @include circleFormat;
+   }
+  .circle-group-1 {
+    @include center;
+    @include animationRight;
+    animation-duration: $layer-1-speed;
+    .circle-top {
+      @include center;
+      @include circleFormat;
+      margin-top: -50px;
+    }
+    .circle-right-top {
+      @include center;
+      @include circleFormat;
+      margin-left: 45px;
+      margin-top: -25px;
+    }
+    .circle-right-bottom {
+      @include center;
+      @include circleFormat;
+      margin-left: 45px;
+      margin-top: 25px;
+    }
+    .circle-bottom {
+      @include center;
+      @include circleFormat;
+      margin-top: 50px;
+    }
+    .circle-left-bottom {
+      @include center;
+      @include circleFormat;
+      margin-left: -45px;
+      margin-top: 25px;
+    }
+    .circle-left-top {
+      @include center;
+      @include circleFormat;
+      margin-left: -45px;
+      margin-top: -25px;
+    }
+  }
+  .circle-group-2 {
+    @include center;
+    @include animationLeft;
+    animation-duration: $layer-2-speed;
+    .circle-1 {
+      @include center;
+      @include circleFormat;
+      margin-top: -76px;
+      margin-left: 46px;
+    }
+    .circle-2 {
+      @include center;
+      @include circleFormat;
+      margin-top: -0px;
+      margin-left: 91px;
+    }
+    .circle-3 {
+      @include center;
+      @include circleFormat;
+      margin-top: 77px;
+      margin-left: 46px;
+    }
+    .circle-4 {
+      @include center;
+      @include circleFormat;
+      margin-top: 77px;
+      margin-left: -46px;
+    }
+    .circle-5 {
+      @include center;
+      @include circleFormat;
+      margin-top: 0px;
+      margin-left: -91px;
+    }
+    .circle-6 {
+      @include center;
+      @include circleFormat;
+      margin-top: -76px;
+      margin-left: -46px;
+    }
+  }
+  .circle-group-3 {
+    //display: none;
+    @include center;
+    @include animationRight;
+    animation-duration: $layer-3-speed;
+    .circle-1 {
+      @include center;
+      @include circleFormat;
+      margin-top: -104px; 
+    }
+    .circle-2 {
+      @include center;
+      @include circleFormat;
+      margin-top: -50px; 
+      margin-left: 90px;
+    }
+    .circle-3 {
+      @include center;
+      @include circleFormat;
+      margin-top: 52px; 
+      margin-left: 90px;
+    }
+    .circle-4 {
+      @include center;
+      @include circleFormat;
+      margin-top: 104px; 
+    }
+    .circle-5 {
+      @include center;
+      @include circleFormat;
+      margin-top: 52px; 
+      margin-left: -90px;
+    }
+    .circle-6 {
+      @include center;
+      @include circleFormat;
+      margin-top: -50px; 
+      margin-left: -90px;
+    }
+  }
+  .circle-group-4 {
+    @include center;
+    @include animationLeft;
+    animation-duration: $layer-4-speed;
+    //display: none;
+    .circle-1 {
+      @include center;
+      @include circleFormat;
+      margin-top: -128px;
+      margin-left: 45px;
+    }
+    .circle-2 {
+      @include center;
+      @include circleFormat;
+      margin-top: -102px;
+      margin-left: 90px;
+    }
+    .circle-3 {
+      @include center;
+      @include circleFormat;
+      margin-top: -75px;
+      margin-left: 138px;
+    }
+    .circle-4 {
+      @include center;
+      @include circleFormat;
+      margin-top: -23px;
+      margin-left: 138px;
+    }
+    .circle-5 {
+      @include center;
+      @include circleFormat;
+      margin-top: 28px;
+      margin-left: 138px;
+    }
+    .circle-6 {
+      @include center;
+      @include circleFormat;
+      margin-top: 80px;
+      margin-left: 134px;
+    }
+    .circle-7 {
+      @include center;
+      @include circleFormat;
+      margin-top: 105px;
+      margin-left: 90px;
+    }
+    .circle-8 {
+      @include center;
+      @include circleFormat;
+      margin-top: 131px;
+      margin-left: 44px;
+    }
+    .circle-9 {
+      @include center;
+      @include circleFormat;
+      margin-top: 154px;
+      margin-left: -5px;
+    }
+    .circle-10 {
+      @include center;
+      @include circleFormat;
+      margin-top: 130px;
+      margin-left: -48px;
+    }
+    .circle-11 {
+      @include center;
+      @include circleFormat;
+      margin-top: 102px;
+      margin-left: -94px;
+    }
+    .circle-12 {
+      @include center;
+      @include circleFormat;
+      margin-top: 74px;
+      margin-left: -139px;
+    }
+    .circle-13 {
+      @include center;
+      @include circleFormat;
+      margin-top: 24px;
+      margin-left: -137px;
+    }
+    .circle-14 {
+      @include center;
+      @include circleFormat;
+      margin-top: -28px;
+      margin-left: -138px;
+    }
+    .circle-15 {
+      @include center;
+      @include circleFormat;
+      margin-top: -80px;
+      margin-left: -135px;
+    }
+    .circle-16 {
+      @include center;
+      @include circleFormat;
+      margin-top: -105px;
+      margin-left: -90px;
+    }
+    .circle-17 {
+      @include center;
+      @include circleFormat;
+      margin-top: -130px;
+      margin-left: -43px;
+    }
+    .circle-18 {
+      @include center;
+      @include circleFormat;
+      margin-top: -156px;
+      margin-left: 0px;
+    }
+  }
+  .circle-group-5 {
+    @include center;
+    @include animationRight;
+    animation-duration: $layer-5-speed;
+    //display: none;
+    .circle-1 {
+      @include center;
+      @include circleFormat;
+      margin-top: -208px;
+      margin-left: 0px;
+    }
+    .circle-2 {
+      @include center;
+      @include circleFormat;
+      margin-top: -182px;
+      margin-left: 49px;
+    }
+    .circle-3 {
+      @include center;
+      @include circleFormat;
+      margin-top: -155px;
+      margin-left: 94px;
+    }
+    .circle-4 {
+      @include center;
+      @include circleFormat;
+      margin-top: -127px;
+      margin-left: 139px;
+    }
+    .circle-5 {
+      @include center;
+      @include circleFormat;
+      margin-top: -99px;
+      margin-left: 183px;
+    }
+    .circle-6 {
+      @include center;
+      @include circleFormat;
+      margin-top: -50px;
+      margin-left: 184px;
+    }
+    .circle-7 {
+      @include center;
+      @include circleFormat;
+      margin-top: 5px;
+      margin-left: 184px;
+    }
+    .circle-8 {
+      @include center;
+      @include circleFormat;
+      margin-top: 55px;
+      margin-left: 183px;
+    }
+    .circle-9 {
+      @include center;
+      @include circleFormat;
+      margin-top: 109px;
+      margin-left: 183px;
+    }
+    .circle-10 {
+      @include center;
+      @include circleFormat;
+      margin-top: 132px;
+      margin-left: 136px;
+    }
+    .circle-11 {
+      @include center;
+      @include circleFormat;
+      margin-top: 158px;
+      margin-left: 90px;
+    }
+    .circle-12 {
+      @include center;
+      @include circleFormat;
+      margin-top: 183px;
+      margin-left: 45px;
+    }
+    .circle-13 {
+      @include center;
+      @include circleFormat;
+      margin-top: 210px;
+      margin-left: 0px;
+    }
+    .circle-14 {
+      @include center;
+      @include circleFormat;
+      margin-top: 181px;
+      margin-left: -50px;
+    }
+    .circle-15 {
+      @include center;
+      @include circleFormat;
+      margin-top: 158px;
+      margin-left: -95px;
+    }
+    .circle-16 {
+      @include center;
+      @include circleFormat;
+      margin-top: 129px;
+      margin-left: -142px;
+      //display: none;
+    }
+    .circle-17 {
+      @include center;
+      @include circleFormat;
+      margin-top: 100px;
+      margin-left: -185px;
+      //display: none;
+    }
+    .circle-18 {
+      @include center;
+      @include circleFormat;
+      margin-top: 47px;
+      margin-left: -185px;
+    }
+    .circle-19 {
+      @include center;
+      @include circleFormat;
+      margin-top: -3px;
+      margin-left: -183px;
+    }
+    .circle-20 {
+      @include center;
+      @include circleFormat;
+      margin-top: -56px;
+      margin-left: -183px;
+    }
+    .circle-21 {
+      @include center;
+      @include circleFormat;
+      margin-top: -107px;
+      margin-left: -182px;
+    }
+    .circle-22 {
+      @include center;
+      @include circleFormat;
+      margin-top: -132px;
+      margin-left: -135px;
+    }
+    .circle-23 {
+      @include center;
+      @include circleFormat;
+      margin-top: -155px;
+      margin-left: -90px;
+    }
+    .circle-24 {
+      @include center;
+      @include circleFormat;
+      margin-top: -183px;
+      margin-left: -44px;
+    }
+  }
+  .circle-group-6 {
+    @include center;
+    @include animationLeft;
+    animation-duration: $layer-6-speed;
+    //display: none;
+    .circle-1 {
+      @include center;
+      @include circleFormat;
+      margin-top: -260px;
+    }
+    .circle-2 {
+      @include center;
+      @include circleFormat;
+      margin-top: -232px;
+      margin-left: 50px;
+    }
+    .circle-3 {
+      @include center;
+      @include circleFormat;
+      margin-top: -208px;
+      margin-left: 94px;
+    }
+    .circle-4 {
+      @include center;
+      @include circleFormat;
+      margin-top: -180px;
+      margin-left: 140px;
+    }
+    .circle-5 {
+      @include center;
+      @include circleFormat;
+      margin-top: -153px;
+      margin-left: 183px;
+    }
+    .circle-6 {
+      @include center;
+      @include circleFormat;
+      margin-top: -125px;
+      margin-left: 230px;
+    }
+    .circle-7 {
+      @include center;
+      @include circleFormat;
+      margin-top: -75px;
+      margin-left: 230px;
+    }
+    .circle-8 {
+      @include center;
+      @include circleFormat;
+      margin-top: -20px;
+      margin-left: 230px;
+    }
+    .circle-9 {
+      @include center;
+      @include circleFormat;
+      margin-top: 30px;
+      margin-left: 230px;
+    }
+    .circle-10 {
+      @include center;
+      @include circleFormat;
+      margin-top: 82px;
+      margin-left: 228px;
+    }
+    .circle-11 {
+      @include center;
+      @include circleFormat;
+      margin-top: 133px;
+      margin-left: 225px;
+    }
+    .circle-12 {
+      @include center;
+      @include circleFormat;
+      margin-top: 160px;
+      margin-left: 180px;
+    }
+    .circle-13 {
+      @include center;
+      @include circleFormat;
+      margin-top: 185px;
+      margin-left: 134px;
+    }
+    .circle-14 {
+      @include center;
+      @include circleFormat;
+      margin-top: 210px;
+      margin-left: 88px;
+    }
+    .circle-15 {
+      @include center;
+      @include circleFormat;
+      margin-top: 235px;
+      margin-left: 42px;
+    }
+    .circle-16 {
+      @include center;
+      @include circleFormat;
+      margin-top: 235px;
+      margin-left: 42px;
+    }
+    .circle-17 {
+      @include center;
+      @include circleFormat;
+      margin-top: 260px;
+      margin-left: -5px;
+    }
+    .circle-18 {
+      @include center;
+      @include circleFormat;
+      margin-top: 235px;
+      margin-left: -50px;
+    }
+    .circle-19 {
+      @include center;
+      @include circleFormat;
+      margin-top: 206px;
+      margin-left: -95px;
+    }
+    .circle-20 {
+      @include center;
+      @include circleFormat;
+      margin-top: 180px;
+      margin-left: -140px;
+    }
+    .circle-21 {
+      @include center;
+      @include circleFormat;
+      margin-top: 150px;
+      margin-left: -185px;
+    }
+    .circle-22 {
+      @include center;
+      @include circleFormat;
+      margin-top: 125px;
+      margin-left: -233px;
+    }
+    .circle-23 {
+      @include center;
+      @include circleFormat;
+      margin-top: 70px;
+      margin-left: -233px;
+    }
+    .circle-24 {
+      @include center;
+      @include circleFormat;
+      margin-top: 20px;
+      margin-left: -230px;
+    }
+    .circle-25 {
+      @include center;
+      @include circleFormat;
+      margin-top: -35px;
+      margin-left: -230px;
+    }
+    .circle-26 {
+      @include center;
+      @include circleFormat;
+      margin-top: -83px;
+      margin-left: -226px;
+    }
+    .circle-27 {
+      @include center;
+      @include circleFormat;
+      margin-top: -137px;
+      margin-left: -226px;
+    }
+    .circle-28 {
+      @include center;
+      @include circleFormat;
+      margin-top: -160px;
+      margin-left: -180px;
+    }
+    .circle-29 {
+      @include center;
+      @include circleFormat;
+      margin-top: -160px;
+      margin-left: -180px;
+    }
+    .circle-30 {
+      @include center;
+      @include circleFormat;
+      margin-top: -185px;
+      margin-left: -133px;
+    }
+    .circle-31 {
+      @include center;
+      @include circleFormat;
+      margin-top: -210px;
+      margin-left: -90px;
+    }
+    .circle-32 {
+      @include center;
+      @include circleFormat;
+      margin-top: -236px;
+      margin-left: -43px;
+    }
+  }
+  .circle-group-7 {
+    @include center;
+    @include animationRight;
+    animation-duration: $layer-6-speed;
+    //display: none;
+    .circle-1 {
+      @include center;
+      @include circleFormat;
+      margin-top: -312px;
+    }
+    .circle-2 {
+      @include center;
+      @include circleFormat;
+      margin-top: -285px;
+      margin-left: 50px;
+    }
+    .circle-3 {
+      @include center;
+      @include circleFormat;
+      margin-top: -259px;
+      margin-left: 93px;
+    }
+    .circle-4 {
+      @include center;
+      @include circleFormat;
+      margin-top: -230px;
+      margin-left: 143px;
+    }
+    .circle-5 {
+      @include center;
+      @include circleFormat;
+      margin-top: -205px;
+      margin-left: 187px;
+    }
+    .circle-6 {
+      @include center;
+      @include circleFormat;
+      margin-top: -178px;
+      margin-left: 233px;
+    }
+    .circle-7 {
+      @include center;
+      @include circleFormat;
+      margin-top: -147px;
+      margin-left: 278px;
+    }
+    .circle-8 {
+      @include center;
+      @include circleFormat;
+      margin-top: -97px;
+      margin-left: 278px;
+    }
+    .circle-9 {
+      @include center;
+      @include circleFormat;
+      margin-top: -44px;
+      margin-left: 278px;
+    }
+    .circle-10 {
+      @include center;
+      @include circleFormat;
+      margin-top: 4px;
+      margin-left: 278px;
+    }
+    .circle-11 {
+      @include center;
+      @include circleFormat;
+      margin-top: 58px;
+      margin-left: 278px;
+    }
+    .circle-12 {
+      @include center;
+      @include circleFormat;
+      margin-top: 108px;
+      margin-left: 275px;
+    }
+    .circle-13 {
+      @include center;
+      @include circleFormat;
+      margin-top: 162px;
+      margin-left: 274px;
+    }
+    .circle-14 {
+      @include center;
+      @include circleFormat;
+      margin-top: 186px;
+      margin-left: 227px;
+    }
+    .circle-15 {
+      @include center;
+      @include circleFormat;
+      margin-top: 213px;
+      margin-left: 181px;
+    }
+    .circle-16 {
+      @include center;
+      @include circleFormat;
+      margin-top: 236px;
+      margin-left: 135px;
+    }
+    .circle-17 {
+      @include center;
+      @include circleFormat;
+      margin-top: 263px;
+      margin-left: 90px;
+    }
+    .circle-18 {
+      @include center;
+      @include circleFormat;
+      margin-top: 286px;
+      margin-left: 42px;
+    }
+    // Center
+    .circle-19 {
+      @include center;
+      @include circleFormat;
+      margin-top: 312px;
+    }
+    .circle-20 {
+      @include center;
+      @include circleFormat;
+      margin-top: 286px;
+      margin-left: -50px;
+    }
+    .circle-21 {
+      @include center;
+      @include circleFormat;
+      margin-top: 263px;
+      margin-left: -95px;
+    }
+    .circle-22 {
+      @include center;
+      @include circleFormat;
+      margin-top: 232px;
+      margin-left: -140px;
+    }
+    .circle-23 {
+      @include center;
+      @include circleFormat;
+      margin-top: 205px;
+      margin-left: -186px;
+    }
+    .circle-24 {
+      @include center;
+      @include circleFormat;
+      margin-top: 176px;
+      margin-left: -233px;
+    }
+    .circle-25 {
+      @include center;
+      @include circleFormat;
+      margin-top: 150px;
+      margin-left: -278px;
+    }
+    .circle-26 {
+      @include center;
+      @include circleFormat;
+      margin-top: 97px;
+      margin-left: -278px;
+    }
+    .circle-27 {
+      @include center;
+      @include circleFormat;
+      margin-top: 45px;
+      margin-left: -278px;
+    }
+    .circle-28 {
+      @include center;
+      @include circleFormat;
+      margin-top: -7px;
+      margin-left: -278px;
+    }
+    .circle-29 {
+      @include center;
+      @include circleFormat;
+      margin-top: -60px;
+      margin-left: -275px;
+    }
+    .circle-30 {
+      @include center;
+      @include circleFormat;
+      margin-top: -112px;
+      margin-left: -275px;
+    }
+    .circle-31 {
+      @include center;
+      @include circleFormat;
+      margin-top: -163px;
+      margin-left: -270px;
+    }
+    .circle-32 {
+      @include center;
+      @include circleFormat;
+      margin-top: -189px;
+      margin-left: -224px;
+    }
+    .circle-33 {
+      @include center;
+      @include circleFormat;
+      margin-top: -212px;
+      margin-left: -178px;
+    }
+    .circle-34 {
+      @include center;
+      @include circleFormat;
+      margin-top: -236px;
+      margin-left: -133px;
+    }
+    .circle-35 {
+      @include center;
+      @include circleFormat;
+      margin-top: -260px;
+      margin-left: -88px;
+    }
+    .circle-36 {
+      @include center;
+      @include circleFormat;
+      margin-top: -286px;
+      margin-left: -42px;
+    }
+  }
+  .circle-group-8 {
+    @include center;
+    @include animationLeft;
+    animation-duration: $layer-8-speed;
+    //display: none;
+    .circle-1 {
+      @include center;
+      @include circleFormat;
+      margin-top: -362px;
+    }
+    .circle-2 {
+      @include center;
+      @include circleFormat;
+      margin-top: -335px;
+      margin-left: 50px;
+    }
+    .circle-3 {
+      @include center;
+      @include circleFormat;
+      margin-top: -309px;
+      margin-left: 93px;
+    }
+    .circle-4 {
+      @include center;
+      @include circleFormat;
+      margin-top: -280px;
+      margin-left: 143px;
+    }
+    .circle-5 {
+      @include center;
+      @include circleFormat;
+      margin-top: -255px;
+      margin-left: 187px;
+    }
+    .circle-6 {
+      @include center;
+      @include circleFormat;
+      margin-top: -228px;
+      margin-left: 233px;
+      //display: none;
+    }
+    .circle-7 {
+      @include center;
+      @include circleFormat;
+      margin-top: -199px;
+      margin-left: 278px;
+      //display: none;
+    }
+    .circle-8 {
+      @include center;
+      @include circleFormat;
+      margin-top: -170px;
+      margin-left: 324px;
+      //display: none;
+    }
+    .circle-9 {
+      @include center;
+      @include circleFormat;
+      margin-top: -120px;
+      margin-left: 324px;
+      //display: none;
+    }
+    .circle-10 {
+      @include center;
+      @include circleFormat;
+      margin-top: -70px;
+      margin-left: 324px;
+      //display: none;
+    }
+    .circle-11 {
+      @include center;
+      @include circleFormat;
+      margin-top: -18px;
+      margin-left: 320px;
+    }
+    .circle-12 {
+      @include center;
+      @include circleFormat;
+      margin-top: 35px;
+      margin-left: 320px;
+    }
+    .circle-13 {
+      @include center;
+      @include circleFormat;
+      margin-top: 85px;
+      margin-left: 320px;
+    }
+    .circle-14 {
+      @include center;
+      @include circleFormat;
+      margin-top: 138px;
+      margin-left: 318px;
+    }
+    .circle-15 {
+      @include center;
+      @include circleFormat;
+      margin-top: 188px;
+      margin-left: 317px;
+    }
+    .circle-16 {
+      @include center;
+      @include circleFormat;
+      margin-top: 210px;
+      margin-left: 272px;
+    }
+    .circle-17 {
+      @include center;
+      @include circleFormat;
+      margin-top: 237px;
+      margin-left: 227px;
+    }
+    .circle-18 {
+      @include center;
+      @include circleFormat;
+      margin-top: 263px;
+      margin-left: 182px;
+    }
+    .circle-19 {
+      @include center;
+      @include circleFormat;
+      margin-top: 286px;
+      margin-left: 136px;
+    }
+    .circle-20 {
+      @include center;
+      @include circleFormat;
+      margin-top: 312px;
+      margin-left: 90px;
+    }
+    .circle-21 {
+      @include center;
+      @include circleFormat;
+      margin-top: 338px;
+      margin-left: 45px;
+    }
+    // Bottom Center
+    .circle-22 {
+      @include center;
+      @include circleFormat;
+      margin-top: 365px;
+      margin-left: 0px;
+    }
+    .circle-23 {
+      @include center;
+      @include circleFormat;
+      margin-top: 338px;
+      margin-left: -45px;
+    }
+    .circle-24 {
+      @include center;
+      @include circleFormat;
+      margin-top: 312px;
+      margin-left: -95px;
+    }
+    .circle-25 {
+      @include center;
+      @include circleFormat;
+      margin-top: 282px;
+      margin-left: -140px;
+    }
+    .circle-26 {
+      @include center;
+      @include circleFormat;
+      margin-top: 253px;
+      margin-left: -187px;
+    }
+    .circle-27 {
+      @include center;
+      @include circleFormat;
+      margin-top: 230px;
+      margin-left: -230px;
+    }
+    .circle-28 {
+      @include center;
+      @include circleFormat;
+      margin-top: 200px;
+      margin-left: -277px;
+    }
+    .circle-29 {
+      @include center;
+      @include circleFormat;
+      margin-top: 175px;
+      margin-left: -324px;
+    }
+    .circle-30 {
+      @include center;
+      @include circleFormat;
+      margin-top: 123px;
+      margin-left: -323px;
+    }
+    .circle-31 {
+      @include center;
+      @include circleFormat;
+      margin-top: 75px;
+      margin-left: -323px;
+    }
+    .circle-32 {
+      @include center;
+      @include circleFormat;
+      margin-top: 18px;
+      margin-left: -323px;
+    }
+    .circle-33 {
+      @include center;
+      @include circleFormat;
+      margin-top: -29px;
+      margin-left: -320px;
+    }
+    .circle-34 {
+      @include center;
+      @include circleFormat;
+      margin-top: -85px;
+      margin-left: -320px;
+    }
+    .circle-35 {
+      @include center;
+      @include circleFormat;
+      margin-top: -135px;
+      margin-left: -320px;
+    }
+    .circle-36 {
+      @include center;
+      @include circleFormat;
+      margin-top: -188px;
+      margin-left: -315px;
+    }
+    .circle-37 {
+      @include center;
+      @include circleFormat;
+      margin-top: -213px;
+      margin-left: -271px;
+    }
+    .circle-38 {
+      @include center;
+      @include circleFormat;
+      margin-top: -240px;
+      margin-left: -223px;
+    }
+     .circle-39 {
+      @include center;
+      @include circleFormat;
+      margin-top: -262px;
+      margin-left: -179px;
+    }
+    .circle-40 {
+      @include center;
+      @include circleFormat;
+      margin-top: -290px;
+      margin-left: -133px;
+    }
+    .circle-41 {
+      @include center;
+      @include circleFormat;
+      margin-top: -312px;
+      margin-left: -89px;
+    }
+    .circle-42 {
+      @include center;
+      @include circleFormat;
+      margin-top: -339px;
+      margin-left: -40px;
+    }
+  }
+  .circle-group-9 {
+    @include center;
+    @include animationRight;
+    animation-duration: $layer-9-speed;
+    //display: none;
+    .circle-1 {
+      @include center;
+      @include circleFormat;
+      margin-top: -414px;
+    }
+    .circle-2 {
+      @include center;
+      @include circleFormat;
+      margin-top: -388px;
+      margin-left: 50px;
+    }
+    .circle-3 {
+      @include center;
+      @include circleFormat;
+      margin-top: -360px;
+      margin-left: 95px;
+    }
+    .circle-4 {
+      @include center;
+      @include circleFormat;
+      margin-top: -335px;
+      margin-left: 140px;
+    }
+    .circle-5 {
+      @include center;
+      @include circleFormat;
+      margin-top: -310px;
+      margin-left: 186px;
+    }
+    .circle-6 {
+      @include center;
+      @include circleFormat;
+      margin-top: -280px;
+      margin-left: 235px;
+      //display: none;
+    }
+    .circle-7 {
+      @include center;
+      @include circleFormat;
+      margin-top: -251px;
+      margin-left: 278px;
+      //display: none;
+    }
+    .circle-8 {
+      @include center;
+      @include circleFormat;
+      margin-top: -223px;
+      margin-left: 325px;
+      //display: none;
+    }
+    .circle-9 {
+      @include center;
+      @include circleFormat;
+      margin-top: -200px;
+      margin-left: 370px;
+      //display: none;
+    }
+    .circle-10 {
+      @include center;
+      @include circleFormat;
+      margin-top: -150px;
+      margin-left: 370px;
+      //display: none;
+    }
+    .circle-11 {
+      @include center;
+      @include circleFormat;
+      margin-top: -95px;
+      margin-left: 370px;
+    }
+    .circle-12 {
+      @include center;
+      @include circleFormat;
+      margin-top: -46px;
+      margin-left: 370px;
+    }
+    .circle-13 {
+      @include center;
+      @include circleFormat;
+      margin-top: 6px;
+      margin-left: 370px;
+    }
+    .circle-14 {
+      @include center;
+      @include circleFormat;
+      margin-top: 56px;
+      margin-left: 367px;
+    }
+    .circle-15 {
+      @include center;
+      @include circleFormat;
+      margin-top: 107px;
+      margin-left: 367px;
+    }
+    .circle-16 {
+      @include center;
+      @include circleFormat;
+      margin-top: 160px;
+      margin-left: 365px;
+    }
+    .circle-17 {
+      @include center;
+      @include circleFormat;
+      margin-top: 210px;
+      margin-left: 365px;
+    }
+    .circle-18 {
+      @include center;
+      @include circleFormat;
+      margin-top: 237px;
+      margin-left: 318px;
+    }
+    .circle-19 {
+      @include center;
+      @include circleFormat;
+      margin-top: 261px;
+      margin-left: 273px;
+    }
+    .circle-20 {
+      @include center;
+      @include circleFormat;
+      margin-top: 289px;
+      margin-left: 227px;
+    }
+    .circle-21 {
+      @include center;
+      @include circleFormat;
+      margin-top: 316px;
+      margin-left: 182px;
+    }
+    // Bottom Center
+    .circle-22 {
+      @include center;
+      @include circleFormat;
+      margin-top: 338px;
+      margin-left: 136px;
+    }
+    .circle-23 {
+      @include center;
+      @include circleFormat;
+      margin-top: 367px;
+      margin-left: 90px;
+    }
+    .circle-24 {
+      @include center;
+      @include circleFormat;
+      margin-top: 388px;
+      margin-left: 45px;
+    }
+    .circle-25 {
+      @include center;
+      @include circleFormat;
+      margin-top: 414px;
+      margin-left: -1px;
+    }
+    // LEFT HERE
+    .circle-26 {
+      @include center;
+      @include circleFormat;
+      margin-top: 389px;
+      margin-left: -48px;
+    }
+    .circle-27 {
+      @include center;
+      @include circleFormat;
+      margin-top: 365px;
+      margin-left: -95px;
+    }
+    .circle-28 {
+      @include center;
+      @include circleFormat;
+      margin-top: 335px;
+      margin-left: -140px;
+    }
+    .circle-29 {
+      @include center;
+      @include circleFormat;
+      margin-top: 310px;
+      margin-left: -188px;
+    }
+    .circle-30 {
+      @include center;
+      @include circleFormat;
+      margin-top: 280px;
+      margin-left: -230px;
+    }
+    .circle-31 {
+      @include center;
+      @include circleFormat;
+      margin-top: 253px;
+      margin-left: -278px;
+    }
+    .circle-32 {
+      @include center;
+      @include circleFormat;
+      margin-top: 227px;
+      margin-left: -323px;
+    }
+    .circle-33 {
+      @include center;
+      @include circleFormat;
+      margin-top: 200px;
+      margin-left: -369px;
+    }
+    .circle-34 {
+      @include center;
+      @include circleFormat;
+      margin-top: 150px;
+      margin-left: -369px;
+    }
+    .circle-35 {
+      @include center;
+      @include circleFormat;
+      margin-top: 97px;
+      margin-left: -369px;
+    }
+    .circle-36 {
+      @include center;
+      @include circleFormat;
+      margin-top: 47px;
+      margin-left: -369px;
+    }
+    .circle-37 {
+      @include center;
+      @include circleFormat;
+      margin-top: -07px;
+      margin-left: -369px;
+    }
+    .circle-38 {
+      @include center;
+      @include circleFormat;
+      margin-top: -57px;
+      margin-left: -367px;
+    }
+     .circle-39 {
+      @include center;
+      @include circleFormat;
+      margin-top: -111px;
+      margin-left: -365px;
+    }
+    .circle-40 {
+      @include center;
+      @include circleFormat;
+      margin-top: -160px;
+      margin-left: -365px;
+    }
+    .circle-41 {
+      @include center;
+      @include circleFormat;
+      margin-top: -213px;
+      margin-left: -363px;
+    }
+    .circle-42 {
+      @include center;
+      @include circleFormat;
+      margin-top: -238px;
+      margin-left: -316px;
+    }
+    .circle-43 {
+      @include center;
+      @include circleFormat;
+      margin-top: -264px;
+      margin-left: -270px;
+    }
+    .circle-44 {
+      @include center;
+      @include circleFormat;
+      margin-top: -290px;
+      margin-left: -224px;
+    }
+    .circle-45 {
+      @include center;
+      @include circleFormat;
+      margin-top: -316px;
+      margin-left: -178px;
+    }
+    .circle-46 {
+      @include center;
+      @include circleFormat;
+      margin-top: -340px;
+      margin-left: -132px;
+    }
+    .circle-47 {
+      @include center;
+      @include circleFormat;
+      margin-top: -362px;
+      margin-left: -87px;
+    }
+    .circle-48 {
+      @include center;
+      @include circleFormat;
+      margin-top: -389px;
+      margin-left: -38px;
+    }
+  }
+}
 
 //----------------
 //  Animations
 //----------------
-@keyframes rotate {
+@keyframes squaresOfLifeRotate {
   0% {
     transform: translate(-50%, -50%) rotate(0deg);
   }
@@ -842,11 +2240,29 @@ input, textarea {
   }
 }
 
-@keyframes rotateOpposite {
+@keyframes squaresOfLifeRotateOpposite {
   0% {
     transform: translate(-50%, -50%) rotate(360deg);
   }
   100%{
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+}
+
+@keyframes flowerOfLifeRotateRight {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes flowerOfLifeRotateLeft {
+  0% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+  100% {
     transform: translate(-50%, -50%) rotate(0deg);
   }
 }
