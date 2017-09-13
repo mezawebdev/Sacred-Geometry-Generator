@@ -185,6 +185,18 @@ input, textarea {
       padding: 20px;
       button.go-back-button {
         position: absolute;
+        background: none;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+      .content {
+          width: 100%;
+          height: 100%;
+        h2 {
+          text-align: center;
+          margin-left: -10px;
+          font-size: 1.1em;
+        }
       }
     }
     .screen-1 {
@@ -241,7 +253,29 @@ input, textarea {
       }
     }
     .screen-2 {
-        
+      .content-layers {
+        .layers {
+          width: 100%;
+          height: 110px;
+          background: red;
+          margin-top: 20px;
+        }
+        .layers-menu {
+          margin-top: 10px;
+          margin-left: -0px;
+          width: 101%;
+          button {
+            background: none;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 5px;
+            font-size: 0.8em;
+          }
+          button:nth-child(2) {
+            margin-left: 7px;
+            margin-right: 7px;
+          }
+        }
+      }
     }
     .screen-3 {
       

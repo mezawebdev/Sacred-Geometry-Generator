@@ -147,7 +147,17 @@ input, textarea {
       height: 100%;
       padding: 20px; }
       .menu #main-menu-slider .screen button.go-back-button {
-        position: absolute; }
+        position: absolute;
+        background: none;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 10px; }
+      .menu #main-menu-slider .screen .content {
+        width: 100%;
+        height: 100%; }
+        .menu #main-menu-slider .screen .content h2 {
+          text-align: center;
+          margin-left: -10px;
+          font-size: 1.1em; }
     .menu #main-menu-slider .screen-1 .main-menu-option {
       width: 100%;
       height: 57px;
@@ -180,6 +190,23 @@ input, textarea {
       border-bottom: none;
       border-left: none;
       border-right: none; }
+    .menu #main-menu-slider .screen-2 .content-layers .layers {
+      width: 100%;
+      height: 110px;
+      background: red;
+      margin-top: 20px; }
+    .menu #main-menu-slider .screen-2 .content-layers .layers-menu {
+      margin-top: 10px;
+      margin-left: -0px;
+      width: 101%; }
+      .menu #main-menu-slider .screen-2 .content-layers .layers-menu button {
+        background: none;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 5px;
+        font-size: 0.8em; }
+      .menu #main-menu-slider .screen-2 .content-layers .layers-menu button:nth-child(2) {
+        margin-left: 7px;
+        margin-right: 7px; }
   .menu .me {
     text-align: center; }
     .menu .me a {
