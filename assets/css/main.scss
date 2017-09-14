@@ -127,7 +127,7 @@ input, textarea {
 .menu {
 	position: fixed;
 	background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
 	width: 300px;
 	height: auto;
 	z-index: 900;
@@ -188,6 +188,7 @@ input, textarea {
         background: none;
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 10px;
+        transition: background 0.25s ease-in-out;
       }
       .content {
           width: 100%;
@@ -225,6 +226,14 @@ input, textarea {
             color: rgba(0, 0, 0, 0.5);
           }
         }
+        button:nth-child(1) {
+          border-top-right-radius: 7px;
+          border-top-left-radius: 7px;
+        }
+        button:nth-child(3) {
+          border-bottom-right-radius: 7px;
+          border-bottom-left-radius: 7px;
+        }
         button:hover {
           background: rgba(255, 255, 255, 0.2);
         }
@@ -257,22 +266,48 @@ input, textarea {
         .layers {
           width: 100%;
           height: 110px;
-          background: red;
+          border: 1px solid rgba(0, 0, 0, 0.2);
+          background: rgba(0, 0, 0, 0.1);
           margin-top: 20px;
+          overflow-y: scroll;
+          .layer {
+            height: 35px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            i {
+              color: rgba(0, 0, 0, 0.5);
+            }
+            span {
+              float: right;
+            }
+          }
+          .layer:hover {
+            cursor: move;
+
+          }
         }
         .layers-menu {
           margin-top: 10px;
-          margin-left: -0px;
+          margin-left: 0px;
           width: 101%;
           button {
             background: none;
             border: 1px solid rgba(0, 0, 0, 0.1);
             padding: 5px;
             font-size: 0.8em;
+            transition: background 0.25s ease-in-out;
+          }
+          button:hover {
+            background: rgba(255, 255, 255, 0.4);
+          }
+          button:active {
+            background: rgba(255, 255, 255, 0.8);
           }
           button:nth-child(2) {
-            margin-left: 7px;
-            margin-right: 7px;
+            margin-left: 9px;
+            margin-right: 9px;
           }
         }
       }

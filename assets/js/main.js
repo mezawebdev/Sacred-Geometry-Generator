@@ -236,6 +236,20 @@ function setBackgroundGradientColor(gradientColor1, gradientColor2, gradientColo
 	granimInstance.changeState("new-state");
 }
 
+function slideWindow(direction) {
+	switch (direction) {
+		case "left": 
+			$("#main-menu-slider").animate({
+				left: "-=300px"
+			});
+		break;
+		case "right": 
+			$("#main-menu-slider").animate({
+				right: "+=300px"
+			});
+		break;
+	}
+}
 
 //---------------------------------
 // 		Mobile: True/False
@@ -254,7 +268,9 @@ if (/Mobi/.test(navigator.userAgent)) {
 		"left": "10px"
 	});*/
 } else {
-	$(".menu").draggable();
+	$(".menu").draggable({
+		cancel: ".layer"
+	});
 }
 
 
@@ -277,7 +293,7 @@ $("#overlay-message").on("click", function(element) {
 });
 
 //----------------------//
-// 		Main
+// 		Main Menu
 //----------------------//
 /*	General */
 // Close button Handler
@@ -304,19 +320,31 @@ $("#editor .close-button").on("click", function(button) {
 						
 /*	Main Menu Screen	*/
 // Main Buttons
+// Layers
 $("#main-menu-option-1 button").on("click", function(element) {
+	$(".content-background").css("display", "none");
+	$(".content-options").css("display", "none");
+	$(".content-layers").css("display", "block");
 	$("#main-menu-slider").animate({
 		left: "-=300px"
 	}, 500);
 });			
 
+// Background
 $("#main-menu-option-2 button").on("click", function(element) {
+	$(".content-options").css("display", "none");
+	$(".content-layers").css("display", "none");
+	$(".content-background").css("display", "block");
 	$("#main-menu-slider").animate({
 		left: "-=300px"
 	}, 500);
 });	
 
+// Options
 $("#main-menu-option-3 button").on("click", function(element) {
+	$(".content-background").css("display", "none");
+	$(".content-layers").css("display", "none");
+	$(".content-options").css("display", "block");
 	$("#main-menu-slider").animate({
 		left: "-=300px"
 	}, 500);
@@ -328,6 +356,55 @@ $(".go-back-button").on("click", function() {
 		left: "+=300px"
 	}, 500);
 });
+
+//----------------------//
+// 	   Layers Window
+//----------------------//
+// Array Containing Layer Objects
+var layers = [];
+var layerSelected = false;
+
+// Layer Class
+class Layer {
+	constructor(name, order) {
+		this.name = name;
+		this.order = order;
+		this.htmlString = "<div class='layer' id='layer" + layers.length + "' draggable='true' onclick='onLayerClick(this)'><p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + this.name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p></div>";
+		this.htmlElement = null;
+	}
+
+	appendElement() {
+		$(".layers").append(this.htmlString);
+	}
+
+	returnOrder() {
+		return this.order;
+	}
+
+	updateOrder(newOrder) {
+		this.order = newOrder;
+	}
+}
+
+// Layer Functions
+function onLayerClick(element) {
+	layerSelected = true;
+	$(".layer").css("background-color", "rgba(255, 255, 255, 0.8)");
+	$(".layer").removeClass("active");
+	element.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+	element.className += " active";
+	
+}
+
+///* Layers Menu *///
+// New Layer Button Handler
+$(".button-new-layer").on("click", function() {
+	var layer = new Layer("Layer " + layers.length, layers.length);
+	layers.push(layer);
+	layers[layers.length - 1].appendElement();
+	layers[layers.length - 1].htmlElement;
+});
+
 
 //----------------------//
 // 	  Main: Geometry
