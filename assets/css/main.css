@@ -151,6 +151,7 @@ input, textarea {
         background: none;
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 10px;
+        padding: 5px 9px 5px 9px;
         transition: background 0.25s ease-in-out; }
       .menu #main-menu-slider .screen .content {
         width: 100%;

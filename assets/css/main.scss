@@ -177,6 +177,8 @@ input, textarea {
     padding: 0;
     left: -20px;
     height: 210px;
+    
+    // General Settings For Every Screen
     .screen {
       width: 300px;
       display: inline-block;
@@ -188,7 +190,11 @@ input, textarea {
         background: none;
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 10px;
+        padding: 5px 9px 5px 9px;
         transition: background 0.25s ease-in-out;
+      }
+      button.go-back-button:hover {
+
       }
       .content {
           width: 100%;
@@ -200,6 +206,8 @@ input, textarea {
         }
       }
     }
+
+    // Styles For Window Screen 1 (Main)
     .screen-1 {
       .main-menu-option {
         width: 100%;
