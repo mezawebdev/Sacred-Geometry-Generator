@@ -363,13 +363,14 @@ $(".go-back-button").on("click", function() {
 // Array Containing Layer Objects
 var layers = [];
 var layerSelected = false;
+var layerCount = 0;
 
 // Layer Class
 class Layer {
 	constructor(id, name) {
 		this.id = id;
 		this.name = name;
-		this.htmlString = "<div class='layer' id='" + layers.length + "' draggable='true' onclick='onLayerClick(this)'><p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + this.name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p></div>";
+		this.htmlString = "<div class='layer' id='" + id + "' draggable='true' onclick='onLayerClick(this)'><p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p></div>";
 		this.jQueryElement = null;
 	}
 
@@ -377,50 +378,84 @@ class Layer {
 		$(".layers").append(this.htmlString);
 	}
 
-	returnOrder() {
-		return this.order;
+	setId(id) {
+		this.id = id;
+		$(this.jQueryElement).attr("id", id);
 	}
 
-	updateOrder(newOrder) {
-		this.order = newOrder;
+	setName(name) {
+		this.name = name;
+		$(this.jQueryElement).html("<p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p>");
+	}
+
+	setHTMLString(id, name) {
+		this.htmlString = "<div class='layer' id='" + id + "' draggable='true' onclick='onLayerClick(this)'><p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p></div>";
 	}
 }
 
 // Layer Functions
 function onLayerClick(element) {
 	layerSelected = true;
-	$(".layer").css("background-color", "rgba(255, 255, 255, 0.8)");
+
+	// Change background color and remove active class for every
+	// layer except the one clicked
 	$(".layer").removeClass("active");
-	element.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
-	element.className += " active";	
+
+	// Set background color and active class for layer clicked
+	element.className += " active";
 }
 
-function deleteLayer(element) {
-	var id = parseInt($(element).attr("id"), 10);
-	console.log(id);
+function getId() {
+	var tempArray = [];
+	var newId;
+
+	// Loop through main layers array, store each id property
+	// in new temporary array
 	for (var i = 0; i < layers.length; i++) {
-		if (layers[i].id === i) {
+		tempArray.push(layers[i].id);
+	}
+
+	// Return max num in temp array
+	return getMaxOfArray(tempArray) + 1;
+}
+
+function getMaxOfArray(numArray) {
+  return Math.max.apply(null, numArray);
+}
+
+function poopLayer(id) {
+	console.log(id);
+	$("#" + id).remove();
+	for (var i = 0; i < layers.length; i++) {
+		console.log("hi");
+		if (layers[i].id === parseInt(id)) {
+			console.log("conditioned met");
 			layers.splice(i, 1);
 		}
 	}
-	$(element).remove();
 }
 
-///* Layers Menu *///
+// HANDLERS
 // New Layer Button Handler
 $(".button-new-layer").on("click", function() {
-	var layer = new Layer(layers.length, "Layer " + layers.length);
-	layers.push(layer);
-	layers[layers.length - 1].appendElement();
-	layers[layers.length - 1].jQueryElement = $(".layers .layer:last-child");
+		var layer = new Layer(0, "Layer");
+		layers.push(layer);
+		layers[layers.length - 1].id = getId();
+		layers[layers.length - 1].name = "Layer " + layers[layers.length - 1].id;
+		layers[layers.length - 1].appendElement();
+		layers[layers.length - 1].jQueryElement = $(".layers .layer:last-child");
+		layers[layers.length - 1].setId(layers[layers.length - 1].id);
+		layers[layers.length - 1].setName(layers[layers.length - 1].name);
+		layers[layers.length - 1].setHTMLString(layers[layers.length - 1].id, layers[layers.length - 1].name)
+		layerCount++;
 });
 
 // Copy Layer Button Handler
 
-// Delete Layer Buton Handler
-// Deletes layer with active class
+// Delete Layer Button
 $(".button-delete-layer").on("click", function() {
-	deleteLayer($(".layer.active"));
+	var id = $(".layer.active").attr("id");
+	poopLayer(id);
 });
 
 

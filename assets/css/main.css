@@ -3252,4 +3252,7 @@ input, textarea {
   z-index: 1002;
   pointer-events: none; }
 
+.active {
+  background: rgba(255, 255, 255, 0.5) !important; }
+
 /*# sourceMappingURL=main.css.map */
