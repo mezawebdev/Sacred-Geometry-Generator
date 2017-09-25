@@ -19,1354 +19,1357 @@
 </head>
 <body>
 	<!-- wrapper start -->
-		<canvas id="background-gradient"></canvas>
-		<div id="overlay-message">
-			<p>Click on screen to open menu</p>
+	<canvas id="background-gradient"></canvas>
+	<div id="overlay-message">
+		<p>Click on screen to open menu</p>
+	</div>
+	<div id="overlay-button">
+	</div>
+	<!-- Editor Menu -->
+	<div class="menu" id="editor" onmousedown='onWindowClick(this)'>
+		<div class="top-bar">
+			<button class="close-button"><span class="glyphicon glyphicon-remove"></span></button><p>Fractal System v0.97</p>
 		</div>
-		<div id="overlay-button">
-		</div>
-		<!-- Editor Menu -->
-		<div class="menu" id="editor">
-			<div class="top-bar">
-				<button class="close-button"><span class="glyphicon glyphicon-remove"></span></button><p>Fractal System v0.97</p>
-			</div>
-			<h1>Fractal System v0.97</h1>
-			<!-- Main Menu Content -->
-			<div id="main-menu-slider">
-				<!-- Screen 1 -->
-				<div id="main-menu-options" class="screen screen-1">
-					<div id="main-menu-option-1" class="main-menu-option">
-						<button><i class="fa fa-clone" aria-hidden="true"></i> &nbsp;Layers <span><i class="fa fa-angle-right" aria-hidden="true"></i></span></button>
-					
-					</div>
-					<div id="main-menu-option-2" class="main-menu-option">
-						<button><i class="fa fa-picture-o" aria-hidden="true"></i> &nbsp;Background <span><i class="fa fa-angle-right" aria-hidden="true"></i></span></button>
-					
-					</div>
-					<div id="main-menu-option-3" class="main-menu-option">
-						<button><i class="fa fa-cogs" aria-hidden="true"></i> &nbsp;Options <span><i class="fa fa-angle-right" aria-hidden="true"></i></span></button>
-					
-					</div>
+		<h1>Fractal System v0.97</h1>
+		<!-- Main Menu Content -->
+		<div id="main-menu-slider">
+			<!-- Screen 1 -->
+			<div id="main-menu-options" class="screen screen-1">
+				<div id="main-menu-option-1" class="main-menu-option">
+					<button><i class="icon fa fa-clone" aria-hidden="true"></i> &nbsp;Layers <span><i class="fa fa-angle-right" aria-hidden="true"></i></span></button>
+				
 				</div>
+				<div id="main-menu-option-2" class="main-menu-option">
+					<button><i class="icon fa fa-picture-o" aria-hidden="true"></i> &nbsp;Background <span><i class="fa fa-angle-right" aria-hidden="true"></i></span></button>
+				
+				</div>
+				<div id="main-menu-option-3" class="main-menu-option">
+					<button><i class="icon fa fa-cogs" aria-hidden="true"></i> &nbsp;Options <span><i class="fa fa-angle-right" aria-hidden="true"></i></span></button>
+				
+				</div>
+			</div>
 
-				<!-- Screen 2 -->
-				<div class="screen screen-2">
-					<button class="go-back-button"><span><i class="fa fa-angle-left" aria-hidden="true"></i></span></button>
-					<div class="content content-layers">
-						<h2><i class="fa fa-clone" aria-hidden="true"></i> &nbsp;Layers</h2>
-						<div class="layers">
-							<!--
-							<div class="layer" draggable="true" onclick="this.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';">
-								<p>
-									<i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;Layer 
-									<span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
-								</p> 
-							</div>
-							-->
+			<!-- Screen 2 -->
+			<div class="screen screen-2">
+				<button class="go-back-button"><span><i class="fa fa-angle-left" aria-hidden="true"></i></span></button>
+				<div class="content content-layers">
+					<h2><i class="fa fa-clone" aria-hidden="true"></i> &nbsp;Layers</h2>
+					<div class="layers">
+						<!--
+						<div class="layer" draggable="true" onclick="this.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';">
+							<p>
+								<i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;Layer 
+								<span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+							</p> 
 						</div>
-						<div class="layers-menu">
-							<button class="button-new-layer"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;New Layer</button>
-							<button class="button-copy-layer"><i class="fa fa-clone" aria-hidden="true"></i>&nbsp;Copy Layer</button>
-							<button class="button-delete-layer"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Delete Layer</button>
-						</div>
+						-->
 					</div>
-					<div class="content content-background">
-					</div>
-					<div class="content content-options">
+					<div class="layers-menu">
+						<button class="button-new-layer"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;New Layer</button>
+						<button class="button-copy-layer"><i class="fa fa-clone" aria-hidden="true"></i>&nbsp;Copy Layer</button>
+						<button class="button-delete-layer"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Delete Layer</button>
 					</div>
 				</div>
-				<!-- Screen 3 -->
-				<div class="screen screen-3">
-					<button class="go-back-button"><span><i class="fa fa-angle-left" aria-hidden="true"></i></span></button>
-					<h1>screen 3</h1>
+				<div class="content content-background">
+				</div>
+				<div class="content content-options">
 				</div>
 			</div>
-			<br />
-			<div class="me">
-				<a href="http://alexmeza.me"><em>@mezawebdev</em></a>
+			<!-- Screen 3 -->
+			<div class="screen screen-3">
+				<button class="go-back-button"><span><i class="fa fa-angle-left" aria-hidden="true"></i></span></button>
+				<h1>screen 3</h1>
 			</div>
-			<!--
-			<div class="row">
-				<div class="col-xs-6">
-					<h3>Presets</h3>
-					<br />
-					<div class="row block-group shape-block-group-1">
-						<div class="col-xs-6">
-							<button class="shape-block-1 active"></button>
-						</div>
-						<div class="col-xs-6">
-							<button class="shape-block-2"></button>
-						</div>
-					</div>
-				-->
-					<!--
-					<div class="row block-group shape-block-group-2">
-						<div class="col-xs-6">
-							<div class="coming-soon-overlay">
-								<p>COMING<br /> SOON</p>
-							</div>
-							<button class="shape-block-3"></button>
-						</div>
-						<div class="col-xs-6">
-							<div class="coming-soon-overlay">
-								<p>COMING<br /> SOON</p>
-							</div>
-							<button class="shape-block-4"></button>
-						</div>
-					</div>-->
-					<!--
-					<br />
-					<h3>Geometry</h3>
-					<br />
-					<div class="row block-group geometry-block-group">
-						<div class="col-xs-6">
-							<button class="geometry-block-1 active"><span></span>
-							</button>
-						</div>
-						<div class="col-xs-6">
-							<button class="geometry-block-2">
-							</button>
-						</div>
-					</div>
-					
-				</div>
-				<div class="col-xs-6">
-					<h3>Background</h3>
-					<br />
-					<div class="row block-group background-block-group">
-						<div class="col-xs-6">
-							<button class="background-block-1">
-							</button>
-						</div>
-						<div class="col-xs-6">
-							<button class="background-block-2 active">
-							</button>
-						</div>
-					</div>
-					<br />
-					<h3>BG Colors</h3>
-					<br />
-					<input type="button" class="jscolor color-picker" id="background-color-picker" onchange="updateSolidBackgroundColor(this.jscolor)" readonly="readonly" value="rgba(150, 0, 0, 1)">
-					<div class="background-gradient-picker-group">
-						<div class="col-xs-3">
-							<input type="button" onchange="updateGradientBackgroundColor(this.jscolor, 'block-1')" class="jscolor background-gradient-picker-1" value="#C16B08"></input>
-						</div>
-						<div class="col-xs-3">
-							<input type="button" onchange="updateGradientBackgroundColor(this.jscolor, 'block-2')" class="jscolor background-gradient-picker-2" value="#C1B702"></input>
-						</div>
-						<div class="col-xs-3">
-							<input type="button" onchange="updateGradientBackgroundColor(this.jscolor, 'block-3')" class="jscolor background-gradient-picker-3" value="#20C199"></input>
-						</div>
-						<div class="col-xs-3">
-							<input type="button" onchange="updateGradientBackgroundColor(this.jscolor, 'block-4')" class="jscolor background-gradient-picker-4" value="#C11E27"></input>
-						</div>
-						<div class="overlay">COMING SOON</div>
-					</div>
-					<br />
-					<br />
-					<h3>BG Speed</h3>
-					<br />
-					<div id="background-speed-draggable"></div>
-					<br />
-					<br />
-					<div id="credits">
-						<a href="http://alexmeza.me"><em>@mezawebdev</em></a>
-					</div>
-				</div>
-			</div>
-		-->
+		</div>
+		<br />
+		<div class="me">
+			<a href="http://alexmeza.me"><em>@mezawebdev</em></a>
 		</div>
 		<!--
-		<div class="menu" id="squares-editor">
-			<div class="top-bar"><button class="close-button"><span class="glyphicon glyphicon-remove"></span></button><p>Square</p></div>
-			<br />
-			<div class="row">
-				<div class="col-xs-6">
-					<h3>Color</h3>
-					<br />
-					<input type="button" class="jscolor color-picker" id="geometry-color-picker" onchange="updateGeometryColor(this.jscolor, 'square')" readonly="readonly" value="rgba(255, 255, 200, 0.8)">
-					<br />
-					<br />
-					<h3>Speed</h3>
-					<br />
-					<div id="squares-speed-draggable"></div>
-					<br />
-					<br />
-					<h3>Size</h3>
-					<br />
-					<div id="squares-size-draggable"></div>
-					
+		<div class="row">
+			<div class="col-xs-6">
+				<h3>Presets</h3>
+				<br />
+				<div class="row block-group shape-block-group-1">
+					<div class="col-xs-6">
+						<button class="shape-block-1 active"></button>
+					</div>
+					<div class="col-xs-6">
+						<button class="shape-block-2"></button>
+					</div>
 				</div>
-				<div class="col-xs-6">
-					<h3>Thickness</h3>
-					<br />
-					<div id="squares-thickness-draggable"></div>
-					<br />
-					<br />
-					<h3>Zoom</h3>
-					<br />
-					<div id="squares-zoom-draggable"></div>
-					<br />
-					<br />
-					<h3>Transparency</h3>
-					<br />
-					<div id="squares-opacity-draggable"></div>
+			-->
+				<!--
+				<div class="row block-group shape-block-group-2">
+					<div class="col-xs-6">
+						<div class="coming-soon-overlay">
+							<p>COMING<br /> SOON</p>
+						</div>
+						<button class="shape-block-3"></button>
+					</div>
+					<div class="col-xs-6">
+						<div class="coming-soon-overlay">
+							<p>COMING<br /> SOON</p>
+						</div>
+						<button class="shape-block-4"></button>
+					</div>
+				</div>-->
+				<!--
+				<br />
+				<h3>Geometry</h3>
+				<br />
+				<div class="row block-group geometry-block-group">
+					<div class="col-xs-6">
+						<button class="geometry-block-1 active"><span></span>
+						</button>
+					</div>
+					<div class="col-xs-6">
+						<button class="geometry-block-2">
+						</button>
+					</div>
+				</div>
+				
+			</div>
+			<div class="col-xs-6">
+				<h3>Background</h3>
+				<br />
+				<div class="row block-group background-block-group">
+					<div class="col-xs-6">
+						<button class="background-block-1">
+						</button>
+					</div>
+					<div class="col-xs-6">
+						<button class="background-block-2 active">
+						</button>
+					</div>
+				</div>
+				<br />
+				<h3>BG Colors</h3>
+				<br />
+				<input type="button" class="jscolor color-picker" id="background-color-picker" onchange="updateSolidBackgroundColor(this.jscolor)" readonly="readonly" value="rgba(150, 0, 0, 1)">
+				<div class="background-gradient-picker-group">
+					<div class="col-xs-3">
+						<input type="button" onchange="updateGradientBackgroundColor(this.jscolor, 'block-1')" class="jscolor background-gradient-picker-1" value="#C16B08"></input>
+					</div>
+					<div class="col-xs-3">
+						<input type="button" onchange="updateGradientBackgroundColor(this.jscolor, 'block-2')" class="jscolor background-gradient-picker-2" value="#C1B702"></input>
+					</div>
+					<div class="col-xs-3">
+						<input type="button" onchange="updateGradientBackgroundColor(this.jscolor, 'block-3')" class="jscolor background-gradient-picker-3" value="#20C199"></input>
+					</div>
+					<div class="col-xs-3">
+						<input type="button" onchange="updateGradientBackgroundColor(this.jscolor, 'block-4')" class="jscolor background-gradient-picker-4" value="#C11E27"></input>
+					</div>
+					<div class="overlay">COMING SOON</div>
+				</div>
+				<br />
+				<br />
+				<h3>BG Speed</h3>
+				<br />
+				<div id="background-speed-draggable"></div>
+				<br />
+				<br />
+				<div id="credits">
+					<a href="http://alexmeza.me"><em>@mezawebdev</em></a>
 				</div>
 			</div>
 		</div>
+	-->
+	</div>
+	<!--
+	<div class="menu" id="squares-editor">
+		<div class="top-bar"><button class="close-button"><span class="glyphicon glyphicon-remove"></span></button><p>Square</p></div>
+		<br />
+		<div class="row">
+			<div class="col-xs-6">
+				<h3>Color</h3>
+				<br />
+				<input type="button" class="jscolor color-picker" id="geometry-color-picker" onchange="updateGeometryColor(this.jscolor, 'square')" readonly="readonly" value="rgba(255, 255, 200, 0.8)">
+				<br />
+				<br />
+				<h3>Speed</h3>
+				<br />
+				<div id="squares-speed-draggable"></div>
+				<br />
+				<br />
+				<h3>Size</h3>
+				<br />
+				<div id="squares-size-draggable"></div>
+				
+			</div>
+			<div class="col-xs-6">
+				<h3>Thickness</h3>
+				<br />
+				<div id="squares-thickness-draggable"></div>
+				<br />
+				<br />
+				<h3>Zoom</h3>
+				<br />
+				<div id="squares-zoom-draggable"></div>
+				<br />
+				<br />
+				<h3>Transparency</h3>
+				<br />
+				<div id="squares-opacity-draggable"></div>
+			</div>
+		</div>
+	</div>
 
-		<div class="menu" id="circles-editor">
-			<div class="top-bar"><button class="close-button"><span class="glyphicon glyphicon-remove"></span></button><p>Circle</p></div>
-			<br />
-			<div class="row">
-				<div class="col-xs-6">
-					<h3>Color</h3>
-					<br />
-					<input type="button" class="jscolor color-picker" id="geometry-color-picker" onchange="updateGeometryColor(this.jscolor, 'circle')" readonly="readonly" value="rgba(255, 255, 200, 0.8)">
-					<br />
-					<br />
-					<h3>Speed</h3>
-					<br />
-					<div id="circles-speed-draggable"></div>
-					<br />
-					<br />
-					<h3>Size</h3>
-					<br />
-					<div id="circles-size-draggable"></div>
-					
-				</div>
-				<div class="col-xs-6">
-					<h3>Thickness</h3>
-					<br />
-					<div id="circles-thickness-draggable"></div>
-					<br />
-					<br />
-					<h3>Zoom</h3>
-					<br />
-					<div id="circles-zoom-draggable"></div>
-					<br />
-					<br />
-					<h3>Transparency</h3>
-					<br />
-					<div id="circles-opacity-draggable"></div>
-				</div>
+	<div class="menu" id="circles-editor">
+		<div class="top-bar"><button class="close-button"><span class="glyphicon glyphicon-remove"></span></button><p>Circle</p></div>
+		<br />
+		<div class="row">
+			<div class="col-xs-6">
+				<h3>Color</h3>
+				<br />
+				<input type="button" class="jscolor color-picker" id="geometry-color-picker" onchange="updateGeometryColor(this.jscolor, 'circle')" readonly="readonly" value="rgba(255, 255, 200, 0.8)">
+				<br />
+				<br />
+				<h3>Speed</h3>
+				<br />
+				<div id="circles-speed-draggable"></div>
+				<br />
+				<br />
+				<h3>Size</h3>
+				<br />
+				<div id="circles-size-draggable"></div>
+				
+			</div>
+			<div class="col-xs-6">
+				<h3>Thickness</h3>
+				<br />
+				<div id="circles-thickness-draggable"></div>
+				<br />
+				<br />
+				<h3>Zoom</h3>
+				<br />
+				<div id="circles-zoom-draggable"></div>
+				<br />
+				<br />
+				<h3>Transparency</h3>
+				<br />
+				<div id="circles-opacity-draggable"></div>
 			</div>
 		</div>
+	</div>
 -->
-		<!-- Squares Of Life -->
-		<div id="squares-wrapper">
-			<div class="negative-layer-2">
-			    <div class="layer-1">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  <div class="layer-2">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  </div>
-			  <div class="negative-layer-1">
-			    <div class="layer-1">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  <div class="layer-2">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  </div>
-			  <div class="zero-layer">
-			    <div class="layer-1">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  <div class="layer-2">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  </div>
-			  <div class="first-layer">
-			    <div class="layer-1">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  <div class="layer-2">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  </div>
-			  <div class="second-layer">
-			    <div class="layer-1">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  <div class="layer-2">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  </div>
-			  <div class="third-layer">
-			    <div class="layer-1">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  <div class="layer-2">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  </div>
-			  <div class="fourth-layer">
-			    <div class="layer-1">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  <div class="layer-2">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  </div>
-			  <div class="fifth-layer">
-			    <div class="layer-1">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  <div class="layer-2">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  </div>
-			  <div class="sixth-layer">
-			    <div class="layer-1">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  <div class="layer-2">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  </div>
-			  <div class="seventh-layer">
-			    <div class="layer-1">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  <div class="layer-2">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  </div>
-			  <div class="eigth-layer">
-			    <div class="layer-1">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-			  <div class="layer-2">
-			    <div class="square-1">
-			      
-			    </div>
-			    <div class="square-2">
-			      
-			    </div>
-			  </div>
-		  	</div>
+	<!-- Squares Of Life -->
+	<!--
+	<div id="squares-wrapper">
+		<div class="negative-layer-2">
+		    <div class="layer-1">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  <div class="layer-2">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  </div>
+		  <div class="negative-layer-1">
+		    <div class="layer-1">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  <div class="layer-2">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  </div>
+		  <div class="zero-layer">
+		    <div class="layer-1">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  <div class="layer-2">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  </div>
+		  <div class="first-layer">
+		    <div class="layer-1">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  <div class="layer-2">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  </div>
+		  <div class="second-layer">
+		    <div class="layer-1">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  <div class="layer-2">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  </div>
+		  <div class="third-layer">
+		    <div class="layer-1">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  <div class="layer-2">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  </div>
+		  <div class="fourth-layer">
+		    <div class="layer-1">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  <div class="layer-2">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  </div>
+		  <div class="fifth-layer">
+		    <div class="layer-1">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  <div class="layer-2">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  </div>
+		  <div class="sixth-layer">
+		    <div class="layer-1">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  <div class="layer-2">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  </div>
+		  <div class="seventh-layer">
+		    <div class="layer-1">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  <div class="layer-2">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  </div>
+		  <div class="eigth-layer">
+		    <div class="layer-1">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
+		  <div class="layer-2">
+		    <div class="square-1">
+		      
+		    </div>
+		    <div class="square-2">
+		      
+		    </div>
+		  </div>
 	  	</div>
+  	</div> -->
 
-	  	<!-- Flowers Of Life -->
-	  	<div class="flower-wrapper">
-		  <!-- Center -->
-		  <div class="circle-center circle"></div>
-		  <!-- Layer 1 -->
-		  <div class="circle-group-1">
-		    <div class="circle-top circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-right-top circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-right-bottom circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-bottom circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-left-bottom circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-left-top circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		  </div>
-		  
-		  <!-- Layer 2 -->
-		  <div class="circle-group-2">
-		    <div class="circle-1 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-2 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-3 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-4 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-5 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-6 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		  </div>
-		  
-		  <!-- Layer 3 -->
-		  <div class="circle-group-3">
-		    <div class="circle-1 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-2 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-3 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-4 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-5 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-6 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		  </div>
-		  
-		  <!-- Layer 4 -->
-		  <div class="circle-group-4">
-		    <div class="circle-1 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-2 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-3 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-4 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-5 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-6 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-7 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-8 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-9 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-10 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-11 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-12 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-13 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-14 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-15 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-16 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-17 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-18 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		  </div>
-		  
-		  <!-- Layer 5 -->
-		  <div class="circle-group-5">
-		    <div class="circle-1 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-2 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-3 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-4 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-5 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-6 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-7 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-8 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-9 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-10 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-11 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-12 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-13 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-14 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-15 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-16 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-17 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-18 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-19 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-20 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-21 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-22 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-23 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-24 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		  </div>
-		  
-		  <!-- Layer 6 -->
-		  <div class="circle-group-6">
-		    <div class="circle-1 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-2 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-3 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-4 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-5 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-6 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-7 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-8 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-9 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-10 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-11 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-12 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-13 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-14 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-15 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-16 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-17 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-18 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-19 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-20 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-21 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-22 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-23 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-24 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-25 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-26 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-27 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-28 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-29 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-30 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-31 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-32 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		  </div>
-		  
-		  <!-- Layer 7 -->
-		  <div class="circle-group-7">
-		    <div class="circle-1 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-2 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-3 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-4 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-5 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-6 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-7 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-8 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-9 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-10 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-11 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-12 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-13 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-14 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-15 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-16 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-17 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-18 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-19 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-20 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-21 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-22 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-23 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-24 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-25 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-26 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-27 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-28 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-29 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-30 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-31 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-32 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-33 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-34 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-35 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-36 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		  </div>
-		  
-		  <!-- Layer 8 -->
-		  <div class="circle-group-8">
-		    <div class="circle-1 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-2 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-3 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-4 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-5 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-6 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-7 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-8 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-9 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-10 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-11 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-12 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-13 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-14 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-15 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-16 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-17 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-18 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-19 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-20 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-21 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-22 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-23 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-24 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-25 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-26 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-27 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-28 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-29 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-30 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-31 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-32 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-33 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-34 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-35 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-36 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-37 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-38 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-39 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-40 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-41 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-42 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		  </div>
-		  
-		  
-		  <div class="circle-group-9">
-		    <div class="circle-1 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-2 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-3 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-4 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-5 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-6 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-7 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-8 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-9 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-10 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-11 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-12 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-13 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-14 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-15 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-16 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-17 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-18 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-19 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-20 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-21 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-22 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-23 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-24 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-25 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-26 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-27 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-28 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-29 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-30 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-31 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-32 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-33 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-34 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-35 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-36 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-37 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-38 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-39 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-40 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-41 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-42 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-43 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-44 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-45 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-46 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-47 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		    <div class="circle-48 circle">
-		      <div class="dot">
-		      </div>
-		    </div>
-		  </div>
-		</div>
+  	<!-- Flowers Of Life -->
+  	<div class="flower-wrapper">
+	  <!-- Center -->
+	  <div class="circle-center circle"></div>
+	  <!-- Layer 1 -->
+	  <div class="circle-group-1">
+	    <div class="circle-top circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-right-top circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-right-bottom circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-bottom circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-left-bottom circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-left-top circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	  </div>
+	  
+	  <!-- Layer 2 -->
+	  <div class="circle-group-2">
+	    <div class="circle-1 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-2 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-3 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-4 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-5 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-6 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	  </div>
+	  
+	  <!-- Layer 3 -->
+	  <div class="circle-group-3">
+	    <div class="circle-1 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-2 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-3 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-4 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-5 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-6 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	  </div>
+	  
+	  <!-- Layer 4 -->
+	  <div class="circle-group-4">
+	    <div class="circle-1 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-2 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-3 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-4 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-5 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-6 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-7 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-8 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-9 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-10 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-11 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-12 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-13 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-14 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-15 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-16 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-17 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-18 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	  </div>
+	  
+	  <!-- Layer 5 -->
+	  <div class="circle-group-5">
+	    <div class="circle-1 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-2 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-3 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-4 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-5 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-6 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-7 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-8 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-9 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-10 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-11 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-12 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-13 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-14 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-15 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-16 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-17 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-18 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-19 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-20 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-21 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-22 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-23 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-24 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	  </div>
+	  
+	  <!-- Layer 6 -->
+	  <div class="circle-group-6">
+	    <div class="circle-1 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-2 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-3 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-4 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-5 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-6 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-7 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-8 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-9 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-10 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-11 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-12 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-13 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-14 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-15 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-16 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-17 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-18 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-19 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-20 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-21 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-22 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-23 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-24 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-25 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-26 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-27 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-28 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-29 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-30 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-31 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-32 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	  </div>
+	  
+	  <!-- Layer 7 -->
+	  <div class="circle-group-7">
+	    <div class="circle-1 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-2 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-3 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-4 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-5 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-6 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-7 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-8 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-9 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-10 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-11 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-12 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-13 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-14 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-15 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-16 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-17 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-18 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-19 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-20 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-21 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-22 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-23 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-24 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-25 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-26 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-27 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-28 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-29 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-30 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-31 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-32 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-33 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-34 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-35 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-36 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	  </div>
+	  
+	  <!-- Layer 8 -->
+	  <div class="circle-group-8">
+	    <div class="circle-1 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-2 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-3 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-4 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-5 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-6 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-7 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-8 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-9 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-10 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-11 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-12 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-13 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-14 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-15 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-16 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-17 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-18 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-19 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-20 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-21 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-22 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-23 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-24 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-25 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-26 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-27 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-28 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-29 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-30 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-31 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-32 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-33 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-34 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-35 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-36 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-37 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-38 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-39 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-40 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-41 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-42 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	  </div>
+	  
+	  
+	  <div class="circle-group-9">
+	    <div class="circle-1 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-2 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-3 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-4 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-5 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-6 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-7 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-8 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-9 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-10 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-11 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-12 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-13 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-14 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-15 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-16 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-17 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-18 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-19 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-20 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-21 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-22 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-23 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-24 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-25 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-26 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-27 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-28 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-29 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-30 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-31 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-32 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-33 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-34 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-35 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-36 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-37 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-38 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-39 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-40 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-41 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-42 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-43 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-44 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-45 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-46 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-47 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	    <div class="circle-48 circle">
+	      <div class="dot">
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="layer-windows">
+
 	</div>
 	<!-- wrapper ends -->
 	<script src="assets/js/jquery.min.js"></script>

@@ -42,6 +42,28 @@ var tapScreenDuration = 1500;
 */
 
 //---------------------------------
+// 		Mobile: True/False
+//---------------------------------
+if (/Mobi/.test(navigator.userAgent)) {
+	isMobile = true; // mobile!
+	// Editor Mobile Center Fix 
+	$(".menu").css({
+		"bottom": "auto",
+		"left": "50%",
+		"top": "50%",
+		"transform": "translate(-50%, -50%)"
+	});
+	/*$(".menu").css({
+		"bottom": "10px",
+		"left": "10px"
+	});*/
+} else {
+	$(".menu").draggable({
+		cancel: ".layer"
+	});
+}
+
+//---------------------------------
 // 		Global Functions
 //---------------------------------
 function getSliderValue(slider) {
@@ -251,29 +273,6 @@ function slideWindow(direction) {
 	}
 }
 
-//---------------------------------
-// 		Mobile: True/False
-//---------------------------------
-if (/Mobi/.test(navigator.userAgent)) {
-	isMobile = true; // mobile!
-	// Editor Mobile Center Fix 
-	$(".menu").css({
-		"bottom": "auto",
-		"left": "50%",
-		"top": "50%",
-		"transform": "translate(-50%, -50%)"
-	});
-	/*$(".menu").css({
-		"bottom": "10px",
-		"left": "10px"
-	});*/
-} else {
-	$(".menu").draggable({
-		cancel: ".layer"
-	});
-}
-
-
 //---------------------------------//
 // 			Editor Windows
 //---------------------------------//
@@ -292,10 +291,6 @@ $("#overlay-message").on("click", function(element) {
 	$(element).hide();
 });
 
-//----------------------//
-// 		Main Menu
-//----------------------//
-/*	General */
 // Close button Handler
 $("#editor .close-button").on("click", function(button) {
 	if (! hasDisplayedMessage) {
@@ -357,21 +352,62 @@ $(".go-back-button").on("click", function() {
 	}, 500);
 });
 
+$(".menu").on("click", function(element) {
+	$(element).addClass("active-win");
+});
+
 //----------------------//
-// 	   Layers Window
+// 	   Layer Window
 //----------------------//
-// Array Containing Layer Objects
 var layers = [];
+var windows = [];
 var layerSelected = false;
 var layerCount = 0;
+var windowCount = 0;
 
-// Layer Class
+
+/* WINDOW CLASS */
+class Window {
+	constructor(id, layer) {
+		this.id = "window" + id;
+		this.layer = layer;
+		this.htmlString = "<div class='menu' layer='" + this.layer + "' id='" + this.id + "' onmousedown='onWindowClick(this)'><div class='top-bar'><button class='close-button' onclick='closeWindow(this)'><span class='glyphicon glyphicon-remove'></span></button><p>" + this.layer + "</p></div></div>";
+		this.jQueryElement = null;
+		this.opened = true;
+	}
+
+	appendElement() {
+		$(".layer-windows").append(this.htmlString);
+	}
+
+	setId(id) {
+		this.id = id;
+		$(this.jQueryElement).attr("id", "window" + id);
+	}
+
+	setName(name) {
+		this.name = name;
+		$(this.jQueryElement).html("<p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p>");
+		$(this.jQueryElement).attr("name", this.name);
+	}
+
+	setHTMLString(id, name) {
+		this.htmlString = "<div class='layer' id='" + id + "' draggable='true' onclick='onLayerClick(this)' name='" + name + "'><p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p></div>";
+	}
+
+	close() {
+		$(this.jQueryElement).fadeOut();
+	}
+}
+
+/* LAYER CLASS */
 class Layer {
 	constructor(id, name) {
 		this.id = id;
 		this.name = name;
-		this.htmlString = "<div class='layer' id='" + id + "' draggable='true' onclick='onLayerClick(this)'><p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p></div>";
+		this.htmlString = "<div class='layer' id='" + id + "' draggable='true' onclick='onLayerClick(this)' name='" + this.name +  "'><p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p></div>";
 		this.jQueryElement = null;
+		this.layerWindowElement = null;
 	}
 
 	appendElement() {
@@ -386,14 +422,17 @@ class Layer {
 	setName(name) {
 		this.name = name;
 		$(this.jQueryElement).html("<p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p>");
+		$(this.jQueryElement).attr("name", this.name);
 	}
 
 	setHTMLString(id, name) {
-		this.htmlString = "<div class='layer' id='" + id + "' draggable='true' onclick='onLayerClick(this)'><p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p></div>";
+		this.htmlString = "<div class='layer' id='" + id + "' draggable='true' onclick='onLayerClick(this)' name='" + name + "'><p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p></div>";
 	}
+
+
 }
 
-// Layer Functions
+/* LAYER FUNCTIONS */
 function onLayerClick(element) {
 	layerSelected = true;
 
@@ -435,7 +474,34 @@ function poopLayer(id) {
 	}
 }
 
-// HANDLERS
+function goToLayer(domObject, arrayObject) {
+
+}
+
+
+
+/* WINDOW FUNCTIONS */
+function closeWindow(element) {
+	var currentWindow = findWindow($(element).attr("layer"));
+	console.log(currentWindow);
+	windows[findWindow($(element).attr("layer"))].close();
+}
+
+function findWindow(layerName) {
+	for (var i = 0; i < windows.length; i++) {
+		if (windows[i].layer === layerName) {
+			return i;
+		}
+	}
+}
+
+function onWindowClick(element) {
+	$(".menu").removeClass("active-win");
+	$(element).addClass("active-win");
+}
+
+
+/* HANDLERS */
 // New Layer Button Handler
 $(".button-new-layer").on("click", function() {
 		var layer = new Layer(0, "Layer");
@@ -446,11 +512,55 @@ $(".button-new-layer").on("click", function() {
 		layers[layers.length - 1].jQueryElement = $(".layers .layer:last-child");
 		layers[layers.length - 1].setId(layers[layers.length - 1].id);
 		layers[layers.length - 1].setName(layers[layers.length - 1].name);
-		layers[layers.length - 1].setHTMLString(layers[layers.length - 1].id, layers[layers.length - 1].name)
+		layers[layers.length - 1].setHTMLString(layers[layers.length - 1].id, layers[layers.length - 1].name);
+		$(".layers .layer").removeClass("active");
+		$(layers[layers.length - 1].jQueryElement).addClass("active");
 		layerCount++;
+
+		var iwindow = new Window(windowCount, layers[layers.length - 1].name);
+		windows.push(iwindow);
+		windows[windows.length - 1].appendElement();
+		windows[windows.length - 1].jQueryElement = $(".layer-windows .menu:last-child");
+		if (! isMobile) {
+			$(windows[windows.length - 1].jQueryElement).css("left", "350px");
+		}
+		$(".menu").draggable();
+		$(".menu").on("click", function(element) {
+			$(element).toggleClass("active-win");
+		});
+		windowCount++;
 });
 
 // Copy Layer Button Handler
+$(".button-copy-layer").on("click", function() {
+	// Get Layer Attributes
+	var  activeLayer = $(".layer.active");
+	var id = getId();
+	var name = $(activeLayer).attr("name") + " Copy";
+
+	// Create Layer Copy
+	var layer = new Layer(id, name);
+	layers.push(layer);
+	layers[layers.length - 1].appendElement();
+	layers[layers.length - 1].jQueryElement = $(".layers .layer:last-child");
+	layers[layers.length - 1].setId(id);
+	layers[layers.length - 1].setName(name);
+	layers[layers.length - 1].setHTMLString(id, name);
+
+	// Create new window
+	var iwindow = new Window(windowCount, layers[layers.length - 1].name);
+	windows.push(iwindow);
+	windows[windows.length - 1].appendElement();
+	windows[windows.length - 1].jQueryElement = $("body .menu:last-child");
+	if (! isMobile) {
+		$(windows[windows.length - 1].jQueryElement).css("left", "350px");
+	}
+	$(".menu").draggable();
+	$(".menu").on("click", function(element) {
+		$(element).toggleClass("active-win");
+	});
+	windowCount++;
+});
 
 // Delete Layer Button
 $(".button-delete-layer").on("click", function() {

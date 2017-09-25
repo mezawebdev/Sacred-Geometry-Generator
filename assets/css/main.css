@@ -178,26 +178,45 @@ input, textarea {
         .menu #main-menu-slider .screen-1 .main-menu-option button span {
           float: right;
           color: rgba(0, 0, 0, 0.5); }
-      .menu #main-menu-slider .screen-1 .main-menu-option button:nth-child(1) {
-        border-top-right-radius: 7px;
-        border-top-left-radius: 7px; }
-      .menu #main-menu-slider .screen-1 .main-menu-option button:nth-child(3) {
-        border-bottom-right-radius: 7px;
-        border-bottom-left-radius: 7px; }
       .menu #main-menu-slider .screen-1 .main-menu-option button:hover {
-        background: rgba(255, 255, 255, 0.2); }
-      .menu #main-menu-slider .screen-1 .main-menu-option button:active {
         background: rgba(255, 255, 255, 0.4); }
+      .menu #main-menu-slider .screen-1 .main-menu-option button:active {
+        background: rgba(255, 255, 255, 0.6); }
     .menu #main-menu-slider .screen-1 #main-menu-option-1 button {
       border-top: none;
       border-left: none;
-      border-right: none; }
+      border-right: none;
+      border-top-right-radius: 7px;
+      border-top-left-radius: 7px; }
+      .menu #main-menu-slider .screen-1 #main-menu-option-1 button i.icon {
+        padding: 4px 4px;
+        background: #E8424F;
+        color: white;
+        width: 22px;
+        height: 22px;
+        border-radius: 3px; }
     .menu #main-menu-slider .screen-1 #main-menu-option-2 button {
       border: none; }
+      .menu #main-menu-slider .screen-1 #main-menu-option-2 button i.icon {
+        padding: 4px 3px;
+        background: #4A84B8;
+        color: white;
+        width: 22px;
+        height: 22px;
+        border-radius: 3px; }
     .menu #main-menu-slider .screen-1 #main-menu-option-3 button {
       border-bottom: none;
       border-left: none;
-      border-right: none; }
+      border-right: none;
+      border-bottom-right-radius: 7px;
+      border-bottom-left-radius: 7px; }
+    .menu #main-menu-slider .screen-1 #main-menu-option-3 i.icon {
+      padding: 4px 3px;
+      background: #00CB52;
+      color: white;
+      width: 22px;
+      height: 22px;
+      border-radius: 3px; }
     .menu #main-menu-slider .screen-2 .content-layers .layers {
       width: 100%;
       height: 110px;
@@ -306,6 +325,9 @@ input, textarea {
         font-size: 0; }
   .menu #credits a {
     color: rgba(0, 0, 0, 0.6); }
+
+.menu.active-win {
+  z-index: 100000 !important; }
 
 #squares-wrapper {
   position: fixed;
