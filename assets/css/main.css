@@ -190,7 +190,7 @@ input, textarea {
       border-top-left-radius: 7px; }
       .menu #main-menu-slider .screen-1 #main-menu-option-1 button i.icon {
         padding: 4px 4px;
-        background: #E8424F;
+        background: rgba(0, 208, 101, 0.9);
         color: white;
         width: 22px;
         height: 22px;
@@ -199,7 +199,7 @@ input, textarea {
       border: none; }
       .menu #main-menu-slider .screen-1 #main-menu-option-2 button i.icon {
         padding: 4px 3px;
-        background: #4A84B8;
+        background: rgba(90, 151, 197, 0.9);
         color: white;
         width: 22px;
         height: 22px;
@@ -212,7 +212,7 @@ input, textarea {
       border-bottom-left-radius: 7px; }
     .menu #main-menu-slider .screen-1 #main-menu-option-3 i.icon {
       padding: 4px 3px;
-      background: #00CB52;
+      background: rgba(239, 91, 97, 0.9);
       color: white;
       width: 22px;
       height: 22px;
@@ -243,6 +243,7 @@ input, textarea {
       .menu #main-menu-slider .screen-2 .content-layers .layers-menu button {
         background: none;
         border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
         padding: 5px;
         font-size: 0.8em;
         transition: background 0.25s ease-in-out; }
@@ -250,13 +251,25 @@ input, textarea {
         background: rgba(255, 255, 255, 0.4); }
       .menu #main-menu-slider .screen-2 .content-layers .layers-menu button:active {
         background: rgba(255, 255, 255, 0.8); }
+      .menu #main-menu-slider .screen-2 .content-layers .layers-menu button:nth-child(1) {
+        background: rgba(0, 208, 101, 0.9);
+        color: rgba(255, 255, 255, 0.9); }
       .menu #main-menu-slider .screen-2 .content-layers .layers-menu button:nth-child(2) {
         margin-left: 9px;
-        margin-right: 9px; }
-  .menu .me {
-    text-align: center; }
-    .menu .me a {
-      color: rgba(0, 0, 0, 0.5); }
+        margin-right: 9px;
+        background: rgba(90, 151, 197, 0.9);
+        color: rgba(255, 255, 255, 0.9); }
+      .menu #main-menu-slider .screen-2 .content-layers .layers-menu button:nth-child(3) {
+        background: rgba(239, 91, 97, 0.9);
+        color: rgba(255, 255, 255, 0.9); }
+  .menu .me a {
+    color: rgba(0, 0, 0, 0.5);
+    float: left;
+    font-size: 0.5em; }
+  .menu .me span {
+    float: right;
+    font-size: 0.6em;
+    color: rgba(0, 0, 0, 0.5); }
   .menu h1 {
     text-align: center;
     line-height: 50px;

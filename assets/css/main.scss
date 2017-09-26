@@ -10,6 +10,12 @@ $gradientBg: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 50, 1));
 $blackBg: rgba(0, 0, 0, 1);
 $gradientBg2: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(150, 0, 0, 1));
 
+// Main UI Styles
+$green: rgba(0, 208, 101, 0.9);
+$blue: rgba(90, 151, 197, 0.9);
+$red: rgba(239, 91, 97, 0.9);
+
+
 // Squares Of Life
 // Styles
 $defaultSettings: 4px solid rgba(255, 255, 200, 1);
@@ -250,7 +256,7 @@ input, textarea {
           border-top-left-radius: 7px;
           i.icon {
             padding: 4px 4px;
-            background: #E8424F;
+            background: $green;
             color: rgba(255, 255, 255, 1);
             width: 22px;
             height: 22px;
@@ -263,7 +269,7 @@ input, textarea {
           border: none;
           i.icon {
             padding: 4px 3px;
-            background: #4A84B8;
+            background: $blue;
             color: rgba(255, 255, 255, 1);
             width: 22px;
             height: 22px;
@@ -281,7 +287,7 @@ input, textarea {
         }
         i.icon {
             padding: 4px 3px;
-            background: #00CB52;
+            background: $red;
             color: rgba(255, 255, 255, 1);
             width: 22px;
             height: 22px;
@@ -324,6 +330,7 @@ input, textarea {
           button {
             background: none;
             border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
             padding: 5px;
             font-size: 0.8em;
             transition: background 0.25s ease-in-out;
@@ -334,9 +341,19 @@ input, textarea {
           button:active {
             background: rgba(255, 255, 255, 0.8);
           }
+          button:nth-child(1) {
+            background: $green;
+            color: rgba(255, 255, 255, 0.9);
+          }
           button:nth-child(2) {
             margin-left: 9px;
             margin-right: 9px;
+            background: $blue;
+            color: rgba(255, 255, 255, 0.9);
+          }
+          button:nth-child(3) {
+            background: $red;
+            color: rgba(255, 255, 255, 0.9);
           }
         }
       }
@@ -350,8 +367,14 @@ input, textarea {
   .me {
     a {
       color: rgba(0, 0, 0, 0.5);
+      float: left;
+      font-size: 0.5em;
     }
-    text-align: center;
+    span {
+      float: right;
+      font-size: 0.6em;
+      color: rgba(0, 0, 0 , 0.5);
+    }
   }
 
 	h1 {

@@ -352,9 +352,6 @@ $(".go-back-button").on("click", function() {
 	}, 500);
 });
 
-$(".menu").on("click", function(element) {
-	$(element).addClass("active-win");
-});
 
 //----------------------//
 // 	   Layer Window
@@ -365,41 +362,6 @@ var layerSelected = false;
 var layerCount = 0;
 var windowCount = 0;
 
-
-/* WINDOW CLASS */
-class Window {
-	constructor(id, layer) {
-		this.id = "window" + id;
-		this.layer = layer;
-		this.htmlString = "<div class='menu' layer='" + this.layer + "' id='" + this.id + "' onmousedown='onWindowClick(this)'><div class='top-bar'><button class='close-button' onclick='closeWindow(this)'><span class='glyphicon glyphicon-remove'></span></button><p>" + this.layer + "</p></div></div>";
-		this.jQueryElement = null;
-		this.opened = true;
-	}
-
-	appendElement() {
-		$(".layer-windows").append(this.htmlString);
-	}
-
-	setId(id) {
-		this.id = id;
-		$(this.jQueryElement).attr("id", "window" + id);
-	}
-
-	setName(name) {
-		this.name = name;
-		$(this.jQueryElement).html("<p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p>");
-		$(this.jQueryElement).attr("name", this.name);
-	}
-
-	setHTMLString(id, name) {
-		this.htmlString = "<div class='layer' id='" + id + "' draggable='true' onclick='onLayerClick(this)' name='" + name + "'><p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p></div>";
-	}
-
-	close() {
-		$(this.jQueryElement).fadeOut();
-	}
-}
-
 /* LAYER CLASS */
 class Layer {
 	constructor(id, name) {
@@ -408,6 +370,27 @@ class Layer {
 		this.htmlString = "<div class='layer' id='" + id + "' draggable='true' onclick='onLayerClick(this)' name='" + this.name +  "'><p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p></div>";
 		this.jQueryElement = null;
 		this.layerWindowElement = null;
+		this.iWindow = {
+			layer: this.id,
+			layerName: this.name,
+			htmlString: "<div class='menu' layer='" + this.layer + "' onmousedown='onWindowClick(this)'><div class='top-bar'><button class='close-button' layer='" + this.layer + "' onclick='hideWindow(this.getAttribute('layer'))'><span class='glyphicon glyphicon-remove'></span></button><p>" + this.layerName + "</p></div></div>",
+			element: null,
+			appendElement: function() {
+				$(".layer-windows").append(this.htmlString);
+			},
+			updateHTMLString: function() {
+				this.htmlString = "<div class='menu' layer='" + this.layer + "' onmousedown='onWindowClick(this)'><div class='top-bar'><button class='close-button' layer='" + this.layer + "' onclick='hideWindow(" + this.layer + ")'><span class='glyphicon glyphicon-remove'></span></button><p>" + this.layerName + "</p></div></div>"
+			},
+			hide: function() {
+				$(this.element).fadeOut(250);
+			},
+			show: function() {
+				$(this.element).fadeIn(250);
+			},
+			removeElement: function() {
+				$(this.element).remove();
+			}
+		}
 	}
 
 	appendElement() {
@@ -416,11 +399,13 @@ class Layer {
 
 	setId(id) {
 		this.id = id;
+		this.iWindow.layer = id;
 		$(this.jQueryElement).attr("id", id);
 	}
 
 	setName(name) {
 		this.name = name;
+		this.iWindow.layerName = name;
 		$(this.jQueryElement).html("<p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p>");
 		$(this.jQueryElement).attr("name", this.name);
 	}
@@ -429,19 +414,90 @@ class Layer {
 		this.htmlString = "<div class='layer' id='" + id + "' draggable='true' onclick='onLayerClick(this)' name='" + name + "'><p><i class='fa fa-file-text-o' aria-hidden='true'></i>&nbsp;&nbsp;" + name + "<span><i class='fa fa-angle-right' aria-hidden='true'></i></span></p></div>";
 	}
 
-
+	removeElement() {
+		$(this.jQueryElement).remove();
+	}
 }
 
-/* LAYER FUNCTIONS */
+/* Layer Global Functions */
+function newLayer() {
+	var layer = new Layer(0, "Layer");
+	layers.push(layer);
+	layers[layers.length - 1].id = getId();
+	layers[layers.length - 1].name = "Layer " + layers[layers.length - 1].id;
+	layers[layers.length - 1].appendElement();
+	layers[layers.length - 1].jQueryElement = $(".layers .layer:last-child");
+	layers[layers.length - 1].setId(layers[layers.length - 1].id);
+	layers[layers.length - 1].setName(layers[layers.length - 1].name);
+	layers[layers.length - 1].setHTMLString(layers[layers.length - 1].id, layers[layers.length - 1].name);
+	$(".layers .layer").removeClass("active");
+	$(layers[layers.length - 1].jQueryElement).addClass("active");
+
+	// iWindow Creation
+	layers[layers.length - 1].iWindow.updateHTMLString();
+	layers[layers.length - 1].iWindow.appendElement();
+	layers[layers.length - 1].iWindow.element = $(".layer-windows .menu:last-child");
+	if (! isMobile) {
+		$(layers[layers.length - 1].iWindow.element).css("left", "335px");
+	}
+	$(".menu").draggable();
+
+	layerCount++;
+	windowCount++;
+}
+
+function copyLayer() {
+	// Get Layer Attributes
+	var  activeLayer = $(".layer.active");
+	var id = getId();
+	var name = $(activeLayer).attr("name") + " Copy";
+
+	// Create Layer Copy
+	var layer = new Layer(id, name);
+	layers.push(layer);
+	layers[layers.length - 1].appendElement();
+	layers[layers.length - 1].jQueryElement = $(".layers .layer:last-child");
+	layers[layers.length - 1].setId(id);
+	layers[layers.length - 1].setName(name);
+	layers[layers.length - 1].setHTMLString(id, name);
+
+	// iWindow Creation
+	layers[layers.length - 1].iWindow.updateHTMLString();
+	layers[layers.length - 1].iWindow.appendElement();
+	layers[layers.length - 1].iWindow.element = $(".layer-windows .menu:last-child");
+	if (! isMobile) {
+		$(layers[layers.length - 1].iWindow.element).css("left", "335px");
+	}
+	$(".menu").draggable();
+	
+	layerCount++;
+	windowCount++;
+}
+
+function poopLayer(id) {
+	console.log(id);
+	layers[getLayerIndexById(id)].removeElement();
+	layers[getLayerIndexById(id)].iWindow.removeElement();
+	layers.splice(getLayerIndexById(id), 1);
+	layerCount--;
+}
+
 function onLayerClick(element) {
 	layerSelected = true;
+	var id = $(element).attr("id");
 
-	// Change background color and remove active class for every
-	// layer except the one clicked
-	$(".layer").removeClass("active");
+	if ($(element).hasClass("active")) {
+		layers[getLayerIndexById(id)].iWindow.show();
+		$(".menu").removeClass("active-win");
+		$(layers[getLayerIndexById(id)].iWindow.element).addClass("active-win");
+	} else {
+		// Change background color and remove active class for every
+		// layer except the one clicked
+		$(".layer").removeClass("active");
 
-	// Set background color and active class for layer clicked
-	element.className += " active";
+		// Set background color and active class for layer clicked
+		element.className += " active";
+	}
 }
 
 function getId() {
@@ -462,37 +518,17 @@ function getMaxOfArray(numArray) {
   return Math.max.apply(null, numArray);
 }
 
-function poopLayer(id) {
-	console.log(id);
-	$("#" + id).remove();
+function getLayerIndexById(id) {
 	for (var i = 0; i < layers.length; i++) {
-		console.log("hi");
 		if (layers[i].id === parseInt(id)) {
-			console.log("conditioned met");
-			layers.splice(i, 1);
-		}
-	}
-}
-
-function goToLayer(domObject, arrayObject) {
-
-}
-
-
-
-/* WINDOW FUNCTIONS */
-function closeWindow(element) {
-	var currentWindow = findWindow($(element).attr("layer"));
-	console.log(currentWindow);
-	windows[findWindow($(element).attr("layer"))].close();
-}
-
-function findWindow(layerName) {
-	for (var i = 0; i < windows.length; i++) {
-		if (windows[i].layer === layerName) {
 			return i;
 		}
 	}
+}
+
+/* Window Global Functions */
+function hideWindow(layerID) {
+	layers[getLayerIndexById(layerID)].iWindow.hide();
 }
 
 function onWindowClick(element) {
@@ -500,66 +536,17 @@ function onWindowClick(element) {
 	$(element).addClass("active-win");
 }
 
-
 /* HANDLERS */
 // New Layer Button Handler
 $(".button-new-layer").on("click", function() {
-		var layer = new Layer(0, "Layer");
-		layers.push(layer);
-		layers[layers.length - 1].id = getId();
-		layers[layers.length - 1].name = "Layer " + layers[layers.length - 1].id;
-		layers[layers.length - 1].appendElement();
-		layers[layers.length - 1].jQueryElement = $(".layers .layer:last-child");
-		layers[layers.length - 1].setId(layers[layers.length - 1].id);
-		layers[layers.length - 1].setName(layers[layers.length - 1].name);
-		layers[layers.length - 1].setHTMLString(layers[layers.length - 1].id, layers[layers.length - 1].name);
-		$(".layers .layer").removeClass("active");
-		$(layers[layers.length - 1].jQueryElement).addClass("active");
-		layerCount++;
-
-		var iwindow = new Window(windowCount, layers[layers.length - 1].name);
-		windows.push(iwindow);
-		windows[windows.length - 1].appendElement();
-		windows[windows.length - 1].jQueryElement = $(".layer-windows .menu:last-child");
-		if (! isMobile) {
-			$(windows[windows.length - 1].jQueryElement).css("left", "350px");
-		}
-		$(".menu").draggable();
-		$(".menu").on("click", function(element) {
-			$(element).toggleClass("active-win");
-		});
-		windowCount++;
+	newLayer();
+	//newWindowSecond();
 });
 
 // Copy Layer Button Handler
 $(".button-copy-layer").on("click", function() {
-	// Get Layer Attributes
-	var  activeLayer = $(".layer.active");
-	var id = getId();
-	var name = $(activeLayer).attr("name") + " Copy";
-
-	// Create Layer Copy
-	var layer = new Layer(id, name);
-	layers.push(layer);
-	layers[layers.length - 1].appendElement();
-	layers[layers.length - 1].jQueryElement = $(".layers .layer:last-child");
-	layers[layers.length - 1].setId(id);
-	layers[layers.length - 1].setName(name);
-	layers[layers.length - 1].setHTMLString(id, name);
-
-	// Create new window
-	var iwindow = new Window(windowCount, layers[layers.length - 1].name);
-	windows.push(iwindow);
-	windows[windows.length - 1].appendElement();
-	windows[windows.length - 1].jQueryElement = $("body .menu:last-child");
-	if (! isMobile) {
-		$(windows[windows.length - 1].jQueryElement).css("left", "350px");
-	}
-	$(".menu").draggable();
-	$(".menu").on("click", function(element) {
-		$(element).toggleClass("active-win");
-	});
-	windowCount++;
+	copyLayer();
+	//copyWindow();
 });
 
 // Delete Layer Button
